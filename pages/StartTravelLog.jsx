@@ -4,6 +4,7 @@ import StartTravelLogTop from "../entities/StartLog/ui/StartTravelLogTop";
 import StartTravelLogBottom from "../entities/StartLog/ui/StartTravelLogBottom";
 
 export default function StartTravelLog() {
+    
     return (
         <StartTravelLogLayout>
             <StartTravelLogTop/>

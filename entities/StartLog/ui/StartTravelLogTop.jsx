@@ -1,11 +1,26 @@
 import styled from "styled-components/native";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Modal } from "react-native";
+import { useRef, useState } from "react";
 
 // image
 import addCountryImg from '../../../assets/add-country.png';
 import BACK from '../../../assets/back.png';
+import SearchCountryModal from "../../../shared/component/SearchCountryModal";
 
 export default function StartTravelLogTop() {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const countryNameRef = useRef("도시 추가");
+
+    const toggleSearchCountryModal = () => {
+        setIsModalVisible(!isModalVisible);
+    };
+
+    const handleSelectCountry = (city) => {
+        countryNameRef.current = city; // 선택된 도시로 텍스트 변경
+        // 강제로 다시 렌더링하도록 상태 업데이트를 트리거
+        setIsModalVisible(false); // 모달 닫기
+    };
+
     return (
         <StartTravelLogTopLayout>
             <BackImage source={BACK} />
@@ -14,8 +29,17 @@ export default function StartTravelLogTop() {
                 <CountryImgSelectButton>
                     <Image source={addCountryImg} />
                 </CountryImgSelectButton>
-                <SearchCountryButton><SearchCountryText>도시 추가</SearchCountryText></SearchCountryButton>
+                <SearchCountryButton onPress={toggleSearchCountryModal}>
+                    <SearchCountryText>{countryNameRef.current}</SearchCountryText>
+                </SearchCountryButton>
             </SettingCountryContainer>
+
+            <Modal visible={isModalVisible} transparent={true} animationType="fade">
+                <SearchCountryModal
+                    onClose={toggleSearchCountryModal}
+                    onSelectCountry={handleSelectCountry}
+                />
+            </Modal>
         </StartTravelLogTopLayout>
     )
 }
@@ -56,6 +80,7 @@ const CountryImgSelectButton = styled.TouchableOpacity`
 
 const SearchCountryButton = styled.TouchableOpacity`
 margin-top: 15px;
+
 `;
 
 const SearchCountryText = styled.Text`
