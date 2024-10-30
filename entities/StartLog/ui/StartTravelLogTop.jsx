@@ -6,17 +6,18 @@ import { useRef, useState } from "react";
 import addCountryImg from '../../../assets/add-country.png';
 import BACK from '../../../assets/back.png';
 import SearchCountryModal from "../../../shared/component/SearchCountryModal";
+import CountryImagePicker from "./CountryImagePicker";
 
 export default function StartTravelLogTop() {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const countryNameRef = useRef("도시 추가");
+    const [selectedCity, setSelectedCity] = useState('도시 추가'); // 선택된 도시 상태
 
     const toggleSearchCountryModal = () => {
         setIsModalVisible(!isModalVisible);
     };
 
     const handleSelectCountry = (city) => {
-        countryNameRef.current = city; // 선택된 도시로 텍스트 변경
+        setSelectedCity(city);
         // 강제로 다시 렌더링하도록 상태 업데이트를 트리거
         setIsModalVisible(false); // 모달 닫기
     };
@@ -26,11 +27,15 @@ export default function StartTravelLogTop() {
             <BackImage source={BACK} />
             <StartTravelLogTitle>여행 기록 시작하기</StartTravelLogTitle>
             <SettingCountryContainer>
-                <CountryImgSelectButton>
-                    <Image source={addCountryImg} />
-                </CountryImgSelectButton>
+                {selectedCity != '도시 추가' ? (
+                    <CountryImagePicker/>
+                ) : (
+                    <SearchCountryButton onPress={toggleSearchCountryModal}>
+                        <Image source={addCountryImg} />
+                    </SearchCountryButton>
+                )}
                 <SearchCountryButton onPress={toggleSearchCountryModal}>
-                    <SearchCountryText>{countryNameRef.current}</SearchCountryText>
+                    <SearchCountryText>{selectedCity}</SearchCountryText>
                 </SearchCountryButton>
             </SettingCountryContainer>
 
@@ -72,10 +77,6 @@ width: 100%;
 flex-direction: column;
 align-items: center;
 margin-top: 24px;
-`;
-
-const CountryImgSelectButton = styled.TouchableOpacity`
-
 `;
 
 const SearchCountryButton = styled.TouchableOpacity`
