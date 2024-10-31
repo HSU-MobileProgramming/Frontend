@@ -1,0 +1,64 @@
+{
+    "countries": [
+        {
+            "id": 1, 
+            "city": "도쿄",
+            "country": "일본",
+            "image": "https://i.namu.wiki/i/xcPOfYEqn6noovJcH9KABmYxkj7f2NiSP_47upUcF7A__mVvO393NgAFWOD88uEyJjSFX1_Yx5v1TT_ErSjLkw.svg"
+        },
+        {
+            "id": 2,
+            "city": "후쿠오카",
+            "country": "일본",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg"
+          },
+          {
+            "id": 3,
+            "city": "오사카",
+            "country": "일본",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg"
+          },
+          {
+            "id": 4,
+            "city": "하노이",
+            "country": "베트남",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg"
+          },
+          {
+            "id": 5,
+            "city": "다낭",
+            "country": "베트남",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Australia.svg"
+          },
+          {
+            "id": 6,
+            "city": "상하이",
+            "country": "중국",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg"
+          },
+          {
+            "id": 7,
+            "city": "베이징",
+            "country": "중국",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Flag_of_the_United_Kingdom.svg"
+          },
+          {
+            "id": 8,
+            "city": "뉴욕",
+            "country": "미국",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Flag_of_Thailand.svg"
+          },
+          {
+            "id": 9,
+            "city": "벤쿠버",
+            "country": "미국",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Flag_of_Thailand.svg"
+          },
+          {
+            "id": 10,
+            "city": "파리",
+            "country": "프랑스",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Flag_of_Thailand.svg"
+          }
+    ]
+}

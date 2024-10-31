@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 //페이지
 import World from "./pages/World";
 import Splash from "./pages/Splash";
+import StartTravelLog from "./pages/StartTravelLog";
 const Stack = createStackNavigator();
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       >
         <Stack.Screen name="Splash" component={Splash}/>
         <Stack.Screen name="World" component={World}/>
+        <Stack.Screen name="StartTravelLog" component={StartTravelLog}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
