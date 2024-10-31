@@ -8,7 +8,7 @@ import BACK from '../../../assets/back.png';
 import SearchCountryModal from "../../../shared/component/SearchCountryModal";
 import CountryImagePicker from "./CountryImagePicker";
 
-export default function StartTravelLogTop() {
+export default function StartTravelLogTop({onSelectedCountry}) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedCity, setSelectedCity] = useState('도시 추가'); // 선택된 도시 상태
 
@@ -20,6 +20,7 @@ export default function StartTravelLogTop() {
         setSelectedCity(city);
         // 강제로 다시 렌더링하도록 상태 업데이트를 트리거
         setIsModalVisible(false); // 모달 닫기
+        onSelectedCountry(selectedCity);
     };
 
     return (
@@ -52,7 +53,7 @@ export default function StartTravelLogTop() {
 const StartTravelLogTopLayout = styled.View`
 background-color : #fff;
 width:100%;
-height: 26.8%;
+height: 29%;
 
 `;
 
@@ -89,4 +90,5 @@ color: var(--Black-1, #393939);
 font-size: 20px;
 font-weight: 700;
 line-height: 28px;
+
 `;

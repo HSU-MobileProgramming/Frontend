@@ -1,15 +1,16 @@
 import styled from "styled-components/native";
-import { View, Text,Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import StartTravelLogTop from "../entities/StartLog/ui/StartTravelLogTop";
 import StartTravelLogBottom from "../entities/StartLog/ui/StartTravelLogBottom";
+import { useState } from "react";
 
 export default function StartTravelLog() {
-    
+    const [isSelectedCountry, setIsSelectedCountry] = useState('');
     return (
-        <StartTravelLogLayout>
-            <StartTravelLogTop/>
-            <StartTravelLogBottom/>
-        </StartTravelLogLayout>
+            <StartTravelLogLayout>
+                <StartTravelLogTop onSelectedCountry={setIsSelectedCountry}/>
+                <StartTravelLogBottom onSelectedCountry={isSelectedCountry}/>
+            </StartTravelLogLayout>
     )
 }
 

@@ -10,7 +10,7 @@ import calendarGrey from '../../../assets/calendar-grey.png';
 import calendarPurple from '../../../assets/calendar-purple.png';
 import downArrow from '../../../assets/down-arrow.png';
 
-export default function SelectDate({ text }) {
+export default function SelectDate({ text, onDateChange }) {
     const [date, setDate] = useState(null);
     const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
@@ -34,15 +34,14 @@ export default function SelectDate({ text }) {
                 onConfirm={(date) => {
                     setIsDatePickerVisible(false);
                     setDate(date);
+                    onDateChange(date.toLocaleDateString());
                 }}
                 onCancel={() => {
                     setIsDatePickerVisible(false);
                 }}
                 display={Platform.OS === 'ios' ? 'inline' : 'default'}
             />
-
         </Pressable>
-
     )
 }
 
