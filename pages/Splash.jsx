@@ -12,9 +12,6 @@ export default function Splash() {
     <MainLayout colors={['#498FFF', '#BAB4E2','#FFD7C7']} locations={[0,0.6,1]}> 
       
       <Logo/>
-
-      <Line/>
-
       <ButtonSection/>
       
     </MainLayout>
@@ -23,6 +20,6 @@ export default function Splash() {
 
 const MainLayout = styled(LinearGradient)`
 height : 100%;
-align-items : center;
 background-color : #fff;
+justify-content : space-around;
 `;

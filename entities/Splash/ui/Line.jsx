@@ -6,9 +6,9 @@ import yellowpuzzle from '../../../assets/yellowpuzzle.png'
 import mintpuzzle from '../../../assets/mintpuzzle.png'
 import pinkpuzzle from '../../../assets/pinkpuzzle.png'
 
-export default function Line() {
+export default function Line({opacity}) {
   return (
-    <MainLayout>
+    <MainLayout opacity={opacity}>
         <StyledLine marginRight="20px"/>
         <StyledImage source={whitepuzzle}/>
         <StyledImage source={yellowpuzzle}/>
@@ -23,6 +23,8 @@ export default function Line() {
 const MainLayout = styled.View`
 flex-direction : row;
 align-items : center;
+opacity : ${({ opacity }) => opacity || '1'};
+
 `;
 
 const StyledLine = styled.View`
