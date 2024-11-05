@@ -1,14 +1,15 @@
 import styled from "styled-components"
+
 export default function StandardButton({ text, marginBottom,marginTop,onPress, backgroundColor, width, height , borderRadius, color, fontSize}) {
     return (
       <StyledButton 
         marginBottom={marginBottom} 
         marginTop={marginTop}
-        onPress={onPress} 
         backgroundColor={backgroundColor}
         width={width}
         height={height}
         borderRadius={borderRadius}
+        onPress={onPress}
         >
   
         {/* 버튼에 들어갈 텍스트 */}
@@ -30,11 +31,11 @@ export default function StandardButton({ text, marginBottom,marginTop,onPress, b
   `;
   
   const ButtonText = styled.Text`
-     color: ${({ color }) => color || '#fff'};
+    color: ${({ color }) => color || '#fff'};
     font-size: ${({fontSize}) => fontSize || '16px'};
     font-weight: 600;
     justify-content:center;
     alien-items:center;
-    margin-top: ${({marginTop}) => marginTop || '4px'};
+    margin-top: ${({marginTop}) => marginTop || '0px'};
   `;
   
