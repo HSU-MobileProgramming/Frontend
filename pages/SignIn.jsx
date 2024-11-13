@@ -1,13 +1,14 @@
 import styled from "styled-components"
 import { Text } from "react-native"
+import TopBar from "../shared/component/TopBar"
 export default function SignIn() {
   return (
     <MainLayout>
-        <Text>
-            로그인
-        </Text>
+      <TopBar text="Log In"/>
     </MainLayout>
   )
 }
 
-const MainLayout = styled.View``
+const MainLayout = styled.View`
+
+`

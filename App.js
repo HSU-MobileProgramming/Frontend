@@ -8,9 +8,10 @@ import Splash from "./pages/Splash";
 import StartTravelLog from "./pages/StartTravelLog";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
-const Stack = createStackNavigator();
+import ProfileSetting from "./pages/ProfileSetting";
 
 function App() {
+  const Stack = createStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -22,6 +23,7 @@ function App() {
         <Stack.Screen name="StartTravelLog" component={StartTravelLog}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="SignIn" component={SignIn}/>
+        <Stack.Screen name="ProfileSetting" component={ProfileSetting}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
