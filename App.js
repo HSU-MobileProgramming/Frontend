@@ -6,9 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import World from "./pages/World";
 import Splash from "./pages/Splash";
 import StartTravelLog from "./pages/StartTravelLog";
-const Stack = createStackNavigator();
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import ProfileSetting from "./pages/ProfileSetting";
 
 function App() {
+  const Stack = createStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -18,6 +21,9 @@ function App() {
         <Stack.Screen name="Splash" component={Splash}/>
         <Stack.Screen name="World" component={World}/>
         <Stack.Screen name="StartTravelLog" component={StartTravelLog}/>
+        <Stack.Screen name="SignUp" component={SignUp}/>
+        <Stack.Screen name="SignIn" component={SignIn}/>
+        <Stack.Screen name="ProfileSetting" component={ProfileSetting}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
