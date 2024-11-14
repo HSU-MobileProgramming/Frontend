@@ -14,7 +14,10 @@ export default function ProfileSelect() {
 }
 
 
-const MainLayout = styled.View``
+const MainLayout = styled.View`
+align-items : center;
+margin-bottom : 50px;
+`
 
 const StyledImage = styled.Image`
 width: 198.649px;

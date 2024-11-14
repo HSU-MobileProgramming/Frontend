@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-export default function StandardInput({type, placeholder}) {
+export default function StandardInput({type, placeholder,isShow,marginBottom}) {
     const [isFocus, setIsFocus] = useState(false);
   return (
-    <MainLayout>
-        <Title>{type}</Title>
+    <MainLayout marginBottom={marginBottom}>
+      { isShow && <Title>{type}</Title> }
         <StyledInput 
             placeholder={isFocus ? "" : placeholder}
             onFocus={()=>setIsFocus(true)}
@@ -18,6 +18,7 @@ export default function StandardInput({type, placeholder}) {
 const MainLayout = styled.View`
 height : 79px;
 justify-content : space-between;
+margin-bottom : ${({ marginBottom }) => marginBottom || '0px'};
 `
 const Title = styled.Text`
 color: #1F1F1F;

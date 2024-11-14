@@ -4,7 +4,17 @@ import styled from 'styled-components'
 import InputSection from '../entities/ProfileSetting/InputSection'
 import TopBar from '../shared/component/TopBar'
 import ProfileSelect from '../entities/ProfileSetting/ProfileSelect'
+import StandardButton from '../shared/component/StandardButton'
+
+import { useNavigation } from '@react-navigation/native'
 export default function ProfileSetting() {
+
+  const navigation = useNavigation();
+
+  const onPressButton = () => {
+    navigation.navigate("SignIn")
+  }
+
   return (
     <MainLayout>
 
@@ -13,6 +23,8 @@ export default function ProfileSetting() {
         <ProfileSelect/>
 
         <InputSection/>
+
+        <StandardButton text="시작하기" onPress={onPressButton}/>
       
     </MainLayout>
   )
