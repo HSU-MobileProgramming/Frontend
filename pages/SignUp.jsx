@@ -27,4 +27,5 @@ export default function SignUp() {
 const MainLayout = styled.View`
 padding : 0 21px 0 21px;
 height : 100%;
+background-color : #F8F8F8;
 `

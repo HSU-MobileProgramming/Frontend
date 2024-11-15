@@ -18,7 +18,5 @@ const StyledText = styled.Text`
 color: #5C95FB;
 font-family: Pretendard;
 font-size: 20px;
-font-style: normal;
 font-weight: 600;
-line-height: normal;
 `
