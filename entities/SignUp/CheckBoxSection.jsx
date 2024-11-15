@@ -27,5 +27,4 @@ margin-bottom : 70px;
 
 const Line = styled.View`
 border : 1px solid #EAEAEA;
-margin-bottom :
 `

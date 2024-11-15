@@ -22,11 +22,8 @@ margin-bottom : ${({ marginBottom }) => marginBottom || '0px'};
 `
 const Title = styled.Text`
 color: #1F1F1F;
-font-family: Pretendard;
 font-size: 16px;
-font-style: normal;
 font-weight: 600;
-line-height: normal;
 `
 const StyledInput = styled.TextInput`
 padding-left : 11px;

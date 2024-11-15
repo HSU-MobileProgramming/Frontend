@@ -19,8 +19,6 @@ const StyledText = styled.Text`
 color: ${({color}) => color || '#393939'};
 font-family: Pretendard;
 font-size: ${({fontSize}) => fontSize || '28px'};
-font-style: normal;
 font-weight: ${({fontWeight}) => fontWeight || '700'};
-line-height: normal;
 margin-bottom : ${({marginBottom}) => marginBottom || '0px'};
 `

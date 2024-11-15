@@ -1,6 +1,6 @@
 import {View, Text} from 'react-native';
 import styled from "styled-components/native";
-import { LinearGradient } from 'expo-linear-gradient';
+// import { LinearGradient } from 'expo-linear-gradient';
 
 //컴포넌트
 import Logo from '../entities/Splash/ui/Logo'
@@ -18,8 +18,9 @@ export default function Splash() {
   )
 }
 
-const MainLayout = styled(LinearGradient)`
+const MainLayout = styled.View`
 height : 100%;
-background-color : #fff;
+background-color : #5C95FB;
 justify-content : space-around;
+
 `;
