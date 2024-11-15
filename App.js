@@ -9,6 +9,8 @@ import StartTravelLog from "./pages/StartTravelLog";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ProfileSetting from "./pages/ProfileSetting";
+import Search from "./pages/Search";
+import MyPage from "./pages/MyPage";
 
 function App() {
   const Stack = createStackNavigator();
@@ -24,6 +26,8 @@ function App() {
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="SignIn" component={SignIn}/>
         <Stack.Screen name="ProfileSetting" component={ProfileSetting}/>
+        <Stack.Screen name="Search" component={Search}/>
+        <Stack.Screen name="MyPage" component={MyPage}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
