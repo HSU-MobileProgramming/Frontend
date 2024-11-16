@@ -27,7 +27,7 @@ export default function MyPage() {
 
       <NavigationBar mypage />
 
-      {isModal && <Modal/> }
+      {isModal && <Modal setIsModal={setIsModal}/> }
 
     </MainLayout>
   )
