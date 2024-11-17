@@ -24,11 +24,17 @@ width: 100%;
 height: 235px;
 `;
 
+
 const GradientBackground = styled.View`
 width: 100%;
 height: 100%;
-background-color: #5C95FB;
+background-color: #5c95fb;
 border-bottom-right-radius: 25%;
+shadow-color: #000;
+shadow-offset: 0px 8.575px;
+shadow-opacity: 0.2;
+shadow-radius: 21.438px; /* 42.876 / 2 */
+elevation: 10; /* Android 그림자 효과 */
 `;
 
 const HeaderIcon1 = styled(HEADERICON1)`
@@ -46,8 +52,8 @@ right: 0;
 const HeaderPuzzleIcon = styled.Image`
 position: absolute;
 top: 108px;
-right: 40px;
-width: 100px;
-height: 100px;
+right: 34px;
+width: 140px;
+height: 110px;
 
 `;
