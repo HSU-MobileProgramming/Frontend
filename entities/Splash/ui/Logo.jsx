@@ -1,7 +1,9 @@
 import styled from 'styled-components'
+import { Platform } from 'react-native';
 import LOGO from '../../../assets/logo.png'
 import PUZZLE from '../../../assets/puzzle.png'
 import PUZZLE2 from '../../../assets/puzzle2.png'
+
 import Line from './Line'
 import { View } from 'react-native'
 export default function Logo() {
@@ -9,7 +11,7 @@ export default function Logo() {
         <MainLayout>
             <Line opacity="0"/>
 
-            <BackImg source={PUZZLE}/>
+            <BackImg source={PUZZLE}/> 
             <PuzzleImg source={PUZZLE2}/>
 
             <Title>

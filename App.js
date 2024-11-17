@@ -9,21 +9,24 @@ import StartTravelLog from "./pages/StartTravelLog";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ProfileSetting from "./pages/ProfileSetting";
+import DetailTravelLog from "./pages/DetailTravelLog";
 
 function App() {
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Splash" //초기 경로 설정
+        initialRouteName="DetailTravelLog" //초기 경로 설정
         screenOptions={{ headerShown: false, animationEnabled: false }} //모든 스크린에서 헤더를 숨김
       >
         <Stack.Screen name="Splash" component={Splash}/>
         <Stack.Screen name="World" component={World}/>
-        <Stack.Screen name="StartTravelLog" component={StartTravelLog}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="SignIn" component={SignIn}/>
         <Stack.Screen name="ProfileSetting" component={ProfileSetting}/>
+        <Stack.Screen name="StartTravelLog" component={StartTravelLog}/>
+        <Stack.Screen name="DetailTravelLog" component={DetailTravelLog}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
