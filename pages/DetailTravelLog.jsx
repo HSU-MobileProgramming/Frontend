@@ -16,6 +16,7 @@ import TICKET from '../assets/ticket.svg';
 import CARDDECOSKYBLUE from '../assets/card-deco-skyblue.svg';
 import CARDDECOPINK from '../assets/card-deco-pink.svg';
 import CARDDECOMINT from '../assets/card-deco-mint.svg';
+import RecordOptionCard from "../entities/DetailTravelLog/RecordOptionCard";
 
 
 
@@ -32,6 +33,7 @@ export default function DetailTravelLog() {
             descriptionText1: '지금 어디에 있나요?',
             descriptionText2: '사진으로 지금 이순간을 카메라에 담아보세요!',
             puzzleImage: <PUZZLESKYBLUE/>,
+            borderColor: '#5C95FB'
         },
         {
             recordName: '메모',
@@ -40,6 +42,7 @@ export default function DetailTravelLog() {
             descriptionText1: '어떤 생각을 하고 있나요?',
             descriptionText2: '지금 이순간의 느낌을 글로 남겨보세요!',
             puzzleImage: <PUZZLEPINK/>,
+            borderColor: '#FAAEC4'
         },
         {
             recordName: '티켓',
@@ -48,7 +51,18 @@ export default function DetailTravelLog() {
             descriptionText1: '추억이 담긴 티켓을 있나요?',
             descriptionText2: '티켓을 추가해 소중한 추억을 간직하세요!',
             puzzleImage: <PUZZLEMINT/>,
+            borderColor: '#9BE4DE'
+        },
+        {
+            recordName: '티켓',
+            recordImage: <TICKET/>,
+            decoImage: <CARDDECOMINT/>,
+            descriptionText1: '추억이 담긴 티켓을 있나요?',
+            descriptionText2: '티켓을 추가해 소중한 추억을 간직하세요!',
+            puzzleImage: <PUZZLEMINT/>,
+            borderColor: '#9BE4DE'
         }
+
     ])
     const snapToOffsets = useMemo(() => Array.from(Array(logData.length)).map((_, index) => index * offset),
         [logData],
@@ -91,6 +105,16 @@ export default function DetailTravelLog() {
                             <Indicator key={i} index={`indicator_${i}`} focused={i === page} />
                         ))}
                     </IndicatorWrapper>
+                </View>
+                <View style={{ marginTop: 20, flexDirection: "row", justifyContent:'space-between' }}>
+                        {logData.map((data, i) => (
+                            <RecordOptionCard
+                            key={i}
+                            recordName={data.recordName}
+                            recordImage={data.recordImage}
+                            borderColor={data.borderColor}
+                            />
+                        ))}
                 </View>
             </View>
         </MainLayout>

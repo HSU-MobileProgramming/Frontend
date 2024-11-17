@@ -20,7 +20,11 @@ export default function RecordDescriptionCard({recordImage, decoImage, descripti
 const MainLayout = styled.View`
 width: ${(props) => props.size || '264px'};
 height: 148px;
+border-radius: 10px;
 background-color: #FFF;
+shadow-color: #000;
+shadow-offset: 0px 0px;
+shadow-opacity: 0.05;
 padding: 14px;
 `;
 
