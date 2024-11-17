@@ -17,6 +17,7 @@ import CARDDECOSKYBLUE from '../assets/card-deco-skyblue.svg';
 import CARDDECOPINK from '../assets/card-deco-pink.svg';
 import CARDDECOMINT from '../assets/card-deco-mint.svg';
 import RecordOptionCard from "../entities/DetailTravelLog/RecordOptionCard";
+import StandardButton from "../shared/component/StandardButton";
 
 
 
@@ -116,6 +117,13 @@ export default function DetailTravelLog() {
                             />
                         ))}
                 </View>
+                <StandardButton
+                text='여행 종료'
+                color='#FD2D69'
+                backgroundColor='#FD2D691A'
+                width='100%'
+                marginTop='20px'
+                />
             </View>
         </MainLayout>
     )

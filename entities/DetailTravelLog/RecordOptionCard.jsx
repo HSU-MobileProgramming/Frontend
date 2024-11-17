@@ -7,11 +7,7 @@ export default function RecordOptionCard({ recordName, recordImage, borderColor 
             <MainLayout borderColor={borderColor}>
                 <RecordImage>{recordImage}</RecordImage>
                 <Text>{recordName}</Text>
-
-
-
             </MainLayout>
-
         </OptionCardTouchable>
     )
 }
