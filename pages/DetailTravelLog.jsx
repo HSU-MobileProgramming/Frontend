@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { View, Text, TouchableOpacity, Dimensions } from "react-native";
+import { View, Text, TouchableOpacity, Modal } from "react-native";
 import DetailTravelLogHeader from "../entities/DetailTravelLog/DetailTravelLogHeader";
 import CurrentRecords from "../entities/DetailTravelLog/CurrentRecords";
 import { useMemo, useState } from "react";
@@ -18,6 +18,7 @@ import CARDDECOPINK from '../assets/card-deco-pink.svg';
 import CARDDECOMINT from '../assets/card-deco-mint.svg';
 import RecordOptionCard from "../entities/DetailTravelLog/RecordOptionCard";
 import StandardButton from "../shared/component/StandardButton";
+import EndTravelModal from "../entities/DetailTravelLog/EndTravelModal";
 
 
 
@@ -25,42 +26,43 @@ export default function DetailTravelLog() {
     const margin = 25;
     const offset = 264 + margin;
     const [page, setPage] = useState(0);
+    const [isClickEndTravel, setIsClickEndTravel] = useState(false);
 
     const logData = useMemo(() => [
         {
             recordName: '사진',
-            recordImage: <PHOTO/>,
+            recordImage: <PHOTO />,
             decoImage: <CARDDECOSKYBLUE />,
             descriptionText1: '지금 어디에 있나요?',
             descriptionText2: '사진으로 지금 이순간을 카메라에 담아보세요!',
-            puzzleImage: <PUZZLESKYBLUE/>,
+            puzzleImage: <PUZZLESKYBLUE />,
             borderColor: '#5C95FB'
         },
         {
             recordName: '메모',
-            recordImage: <MEMO/>,
-            decoImage: <CARDDECOPINK/>,
+            recordImage: <MEMO />,
+            decoImage: <CARDDECOPINK />,
             descriptionText1: '어떤 생각을 하고 있나요?',
             descriptionText2: '지금 이순간의 느낌을 글로 남겨보세요!',
-            puzzleImage: <PUZZLEPINK/>,
+            puzzleImage: <PUZZLEPINK />,
             borderColor: '#FAAEC4'
         },
         {
             recordName: '티켓',
-            recordImage: <TICKET/>,
-            decoImage: <CARDDECOMINT/>,
+            recordImage: <TICKET />,
+            decoImage: <CARDDECOMINT />,
             descriptionText1: '추억이 담긴 티켓을 있나요?',
             descriptionText2: '티켓을 추가해 소중한 추억을 간직하세요!',
-            puzzleImage: <PUZZLEMINT/>,
+            puzzleImage: <PUZZLEMINT />,
             borderColor: '#9BE4DE'
         },
         {
             recordName: '티켓',
-            recordImage: <TICKET/>,
-            decoImage: <CARDDECOMINT/>,
+            recordImage: <TICKET />,
+            decoImage: <CARDDECOMINT />,
             descriptionText1: '추억이 담긴 티켓을 있나요?',
             descriptionText2: '티켓을 추가해 소중한 추억을 간직하세요!',
-            puzzleImage: <PUZZLEMINT/>,
+            puzzleImage: <PUZZLEMINT />,
             borderColor: '#9BE4DE'
         }
 
@@ -68,6 +70,8 @@ export default function DetailTravelLog() {
     const snapToOffsets = useMemo(() => Array.from(Array(logData.length)).map((_, index) => index * offset),
         [logData],
     );
+
+
     return (
         <MainLayout>
             <DetailTravelLogHeader />
@@ -107,24 +111,31 @@ export default function DetailTravelLog() {
                         ))}
                     </IndicatorWrapper>
                 </View>
-                <View style={{ marginTop: 20, flexDirection: "row", justifyContent:'space-between' }}>
-                        {logData.map((data, i) => (
-                            <RecordOptionCard
+                <View style={{ marginTop: 20, flexDirection: "row", justifyContent: 'space-between' }}>
+                    {logData.map((data, i) => (
+                        <RecordOptionCard
                             key={i}
                             recordName={data.recordName}
                             recordImage={data.recordImage}
                             borderColor={data.borderColor}
-                            />
-                        ))}
+                        />
+                    ))}
                 </View>
                 <StandardButton
-                text='여행 종료'
-                color='#FD2D69'
-                backgroundColor='#FD2D691A'
-                width='100%'
-                marginTop='20px'
+                    text='여행 종료'
+                    color='#FD2D69'
+                    backgroundColor='#FD2D691A'
+                    width='100%'
+                    marginTop='20px'
+                    onPress={() => setIsClickEndTravel(true)}
                 />
             </View>
+            <Modal visible={isClickEndTravel} transparent={true} animationType="fade">
+                <EndTravelModal
+                    onClose={() => setIsClickEndTravel(false)}
+                />
+            </Modal>
+
         </MainLayout>
     )
 }
