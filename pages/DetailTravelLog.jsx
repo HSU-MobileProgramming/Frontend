@@ -135,6 +135,7 @@ export default function DetailTravelLog() {
                     onClose={() => setIsClickEndTravel(false)}
                 />
             </Modal>
+            {/* 깃허브 피알용 주석 */}
 
         </MainLayout>
     )
