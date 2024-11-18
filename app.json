@@ -12,8 +12,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#F8F8F8"
     },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.travelpieces"
     },
     "android": {
       "adaptiveIcon": {

@@ -9,10 +9,10 @@ import ButtonSection from '../entities/Splash/ui/ButtonSection';
 
 export default function Splash() {
   return (
-    <MainLayout colors={['#498FFF', '#BAB4E2','#FFD7C7']} locations={[0,0.6,1]}> 
+    <MainLayout> 
       
       <Logo/>
-      <ButtonSection/>
+      {/* <ButtonSection/> */}
       
     </MainLayout>
   )
