@@ -12,6 +12,7 @@ import ProfileSetting from "./pages/ProfileSetting";
 import DetailTravelLog from "./pages/DetailTravelLog";
 import Search from "./pages/Search";
 import MyPage from "./pages/MyPage";
+import MyLog from "./pages/MyLog";
 
 
 function App() {
@@ -27,11 +28,12 @@ function App() {
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="SignIn" component={SignIn}/>
         <Stack.Screen name="ProfileSetting" component={ProfileSetting}/>
+        <Stack.Screen name="MyLog" component={MyLog}/>
         <Stack.Screen name="StartTravelLog" component={StartTravelLog}/>
         <Stack.Screen name="DetailTravelLog" component={DetailTravelLog}/>
         <Stack.Screen name="Search" component={Search}/>
         <Stack.Screen name="MyPage" component={MyPage}/>
-
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

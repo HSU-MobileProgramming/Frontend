@@ -13,7 +13,7 @@ import colorcompass from '../../assets/colorcompass.png'
 import colorbookmark from '../../assets/colorbookmark.png'
 import colorperson from '../../assets/colorperson.png'
 
-export default function NavigationBar({ world, myrecord, search, mypage }) {
+export default function NavigationBar({ world, mylog, search, mypage }) {
 
   const navigation = useNavigation();
 
@@ -24,6 +24,8 @@ export default function NavigationBar({ world, myrecord, search, mypage }) {
       navigation.navigate("Search");
     } else if (tab === "mypage") {
       navigation.navigate("MyPage");
+    } else if (tab === "mylog") {
+      navigation.navigate("MyLog");
     }
   };
 
@@ -46,15 +48,15 @@ export default function NavigationBar({ world, myrecord, search, mypage }) {
       }
 
       {
-        myrecord ?
+        mylog ?
           (
-            <WrapTap>
+            <WrapTap onPress={() => handleTabPress("mylog")}>
               <StyledImg source={colorbookmark} />
               <StyledText color="#5C95FB">나의 기록</StyledText>
             </WrapTap>
           ) :
           (
-            <WrapTap>
+            <WrapTap onPress={() => handleTabPress("mylog")}>
               <StyledImg source={bookmark} />
               <StyledText color="#A7A7A7">나의 기록</StyledText>
             </WrapTap>
