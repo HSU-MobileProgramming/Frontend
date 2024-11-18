@@ -1,14 +1,14 @@
 import styled from "styled-components/native";
 import { View, Text, TextInput } from "react-native";
 
-export default function InputMemo({height, textCount}) {
+export default function InputMemo({height, placeholder}) {
     return (
         <MainLayout>
             <MemoText>메모</MemoText>
             <MemoTextInput
             multiline={true} // textarea 기능 활성화
             numberOfLines={4} 
-            placeholder={`| 메모를 작성하세요 (${textCount || 30}자 이내)`}
+            placeholder={placeholder || '| 사진에 대해 설명해주세요! (30자 이내)'}
             height={height}
             />
         </MainLayout>
@@ -16,7 +16,7 @@ export default function InputMemo({height, textCount}) {
 }
 
 const MainLayout = styled.View`
-margin: 30px;
+
 `;
 
 const MemoText = styled.Text`
