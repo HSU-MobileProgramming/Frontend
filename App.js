@@ -10,6 +10,9 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ProfileSetting from "./pages/ProfileSetting";
 import DetailTravelLog from "./pages/DetailTravelLog";
+import Search from "./pages/Search";
+import MyPage from "./pages/MyPage";
+
 
 function App() {
   const Stack = createStackNavigator();
@@ -26,6 +29,8 @@ function App() {
         <Stack.Screen name="ProfileSetting" component={ProfileSetting}/>
         <Stack.Screen name="StartTravelLog" component={StartTravelLog}/>
         <Stack.Screen name="DetailTravelLog" component={DetailTravelLog}/>
+        <Stack.Screen name="Search" component={Search}/>
+        <Stack.Screen name="MyPage" component={MyPage}/>
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -33,5 +38,3 @@ function App() {
 }
 
 export default App;
-
-
