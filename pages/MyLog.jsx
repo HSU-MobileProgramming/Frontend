@@ -9,9 +9,10 @@ export default function MyLog() {
     const navigation = useNavigation();
     const handleTouchableBtn = (name) => {
         if(name === "addlog") {
-            navigation.navigate("StartTravelLog");
+            navigation.navigate("AddTravelLog");
         }
     }
+    
     return (
         <MainLayout>
             <MapView/>

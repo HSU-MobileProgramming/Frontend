@@ -21,7 +21,7 @@ export default function DetailTravelLogHeader() {
 
 const MainLayout = styled.View`
 width: 100%;
-height: 235px;
+height: 230px;
 `;
 
 

@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import RecordDescriptionCard from "../entities/DetailTravelLog/RecordDescriptionCard";
 import Indicator from "../entities/DetailTravelLog/Indicator";
+import NavigationBar from "../shared/component/NavigationBar";
 
 import PUZZLEMINT from '../assets/puzzle-mint.svg';
 import PUZZLEPINK from '../assets/puzzle-pink.svg';
@@ -16,6 +17,7 @@ import TICKET from '../assets/ticket.svg';
 import CARDDECOSKYBLUE from '../assets/card-deco-skyblue.svg';
 import CARDDECOPINK from '../assets/card-deco-pink.svg';
 import CARDDECOMINT from '../assets/card-deco-mint.svg';
+
 import RecordOptionCard from "../entities/DetailTravelLog/RecordOptionCard";
 import StandardButton from "../shared/component/StandardButton";
 import EndTravelModal from "../entities/DetailTravelLog/EndTravelModal";
@@ -30,7 +32,7 @@ export default function DetailTravelLog() {
 
     const logData = useMemo(() => [
         {
-            recordName: '사진',
+            recordType: '사진',
             recordImage: <PHOTO />,
             decoImage: <CARDDECOSKYBLUE />,
             descriptionText1: '지금 어디에 있나요?',
@@ -39,7 +41,7 @@ export default function DetailTravelLog() {
             borderColor: '#5C95FB'
         },
         {
-            recordName: '메모',
+            recordType: '메모',
             recordImage: <MEMO />,
             decoImage: <CARDDECOPINK />,
             descriptionText1: '어떤 생각을 하고 있나요?',
@@ -48,7 +50,7 @@ export default function DetailTravelLog() {
             borderColor: '#FAAEC4'
         },
         {
-            recordName: '티켓',
+            recordType: '티켓',
             recordImage: <TICKET />,
             decoImage: <CARDDECOMINT />,
             descriptionText1: '추억이 담긴 티켓을 있나요?',
@@ -57,7 +59,7 @@ export default function DetailTravelLog() {
             borderColor: '#9BE4DE'
         },
         {
-            recordName: '티켓',
+            recordType: '티켓',
             recordImage: <TICKET />,
             decoImage: <CARDDECOMINT />,
             descriptionText1: '추억이 담긴 티켓을 있나요?',
@@ -76,11 +78,11 @@ export default function DetailTravelLog() {
         <MainLayout>
             <DetailTravelLogHeader />
             <View style={{ marginHorizontal: 21, marginVertical: 0 }}>
-                <View style={{ marginTop: 30 }}>
+                <View style={{ marginTop: 20 }}>
                     <TitleText>기록 현황</TitleText>
                     <CurrentRecords />
                 </View>
-                <View style={{ marginTop: 30 }}>
+                <View style={{ marginTop: 20 }}>
                     <TitleText>기록 남기기</TitleText>
                     <FlatList
                         data={logData}
@@ -111,13 +113,15 @@ export default function DetailTravelLog() {
                         ))}
                     </IndicatorWrapper>
                 </View>
+                {/* 사진, 메모, 티켓 버튼 */}
                 <View style={{ marginTop: 20, flexDirection: "row", justifyContent: 'space-between' }}>
                     {logData.map((data, i) => (
                         <RecordOptionCard
                             key={i}
-                            recordName={data.recordName}
+                            recordType={data.recordType}
                             recordImage={data.recordImage}
                             borderColor={data.borderColor}
+                            decoImage={data.decoImage}
                         />
                     ))}
                 </View>
@@ -127,6 +131,7 @@ export default function DetailTravelLog() {
                     backgroundColor='#FD2D691A'
                     width='100%'
                     marginTop='20px'
+                    marginBottom='20px'
                     onPress={() => setIsClickEndTravel(true)}
                 />
             </View>
@@ -135,7 +140,7 @@ export default function DetailTravelLog() {
                     onClose={() => setIsClickEndTravel(false)}
                 />
             </Modal>
-            {/* 깃허브 피알용 주석 */}
+            <NavigationBar mylog />
 
         </MainLayout>
     )
@@ -151,7 +156,7 @@ const TitleText = styled.Text`
 color: #5C95FB;
 font-size: 16px;
 font-weight: 600;
-margin-bottom: 20px;
+margin-bottom: 15px;
 
 `;
 

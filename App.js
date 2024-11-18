@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 //페이지
 import World from "./pages/World";
 import Splash from "./pages/Splash";
-import StartTravelLog from "./pages/StartTravelLog";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ProfileSetting from "./pages/ProfileSetting";
@@ -13,6 +12,8 @@ import DetailTravelLog from "./pages/DetailTravelLog";
 import Search from "./pages/Search";
 import MyPage from "./pages/MyPage";
 import MyLog from "./pages/MyLog";
+import AddTravelLog from "./pages/AddTravelLog";
+import CreateTravelPiece from "./pages/CreateTravelPiece";
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MyPage" //초기 경로 설정
+        initialRouteName="DetailTravelLog" //초기 경로 설정
         screenOptions={{ headerShown: false, animationEnabled: false }} //모든 스크린에서 헤더를 숨김
       >
         <Stack.Screen name="Splash" component={Splash}/>
@@ -29,11 +30,12 @@ function App() {
         <Stack.Screen name="SignIn" component={SignIn}/>
         <Stack.Screen name="ProfileSetting" component={ProfileSetting}/>
         <Stack.Screen name="MyLog" component={MyLog}/>
-        <Stack.Screen name="StartTravelLog" component={StartTravelLog}/>
+        <Stack.Screen name="AddTravelLog" component={AddTravelLog}/>
         <Stack.Screen name="DetailTravelLog" component={DetailTravelLog}/>
         <Stack.Screen name="Search" component={Search}/>
         <Stack.Screen name="MyPage" component={MyPage}/>
-        
+        <Stack.Screen name="CreateTravelPiece" component={CreateTravelPiece}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
