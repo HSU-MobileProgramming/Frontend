@@ -1,11 +1,16 @@
 import styled from "styled-components/native";
 import { View, Text } from "react-native";
 import ComponentTopBar from "../../shared/component/ComponentTopBar";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CreatePieceTop({recordType, recordImage, decoImage}) {
+    const navigation = useNavigation();
+    const goToDetailTravelLog = () => {
+        navigation.navigate("DetailTravelLog");
+    }
     return (
         <MainLayout>
-            <ComponentTopBar/>
+            <ComponentTopBar onPress={() => goToDetailTravelLog()}/>
             <TitleText>{recordType} 추가</TitleText>
             <DescriptionText>{recordType}을 추가한 후{"\n"}설명을 작성해보세요!</DescriptionText>
             <RecordImage>{recordImage}</RecordImage>

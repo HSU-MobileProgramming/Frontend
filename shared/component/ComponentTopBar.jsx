@@ -1,19 +1,19 @@
 import styled from "styled-components/native"
-import { View, Image } from "react-native"
+import { View, Image, TouchableOpacity } from "react-native"
 
 import BACK from '../../assets/back.png';
 import PUZZLEMINT from '../../assets/puzzle-mint.svg';
 import PUZZLEPINK from '../../assets/puzzle-pink.svg';
 import PUZZLESKYBLUE from '../../assets/puzzle-skyblue.svg';
 
-export default function ComponentTopBar() {
+export default function ComponentTopBar({onPress}) {
     return (
         <MainLayout>
-            <BackImage source={BACK}/>
+            <TouchableOpacity onPress={onPress}><BackImage source={BACK}/></TouchableOpacity>
             <PuzzleContainer>
-                <PUZZLESKYBLUE/>
-                <PUZZLEPINK/>
-                <PUZZLEMINT/>
+            <PuzzleImageBox><PUZZLESKYBLUE/></PuzzleImageBox>
+                <PuzzleImageBox><PUZZLEPINK/></PuzzleImageBox>
+                <PuzzleImageBox><PUZZLEMINT/></PuzzleImageBox>
             </PuzzleContainer>
         </MainLayout>
     )
@@ -37,4 +37,9 @@ flex-direction: row;
 flex: 1;
 justify-content: center; /* 가로 중앙 정렬 */
 align-items: center; /* 수직 중앙 정렬 */
+`;
+
+const PuzzleImageBox = styled.View`
+width: 21px;
+height: 21px;
 `;
