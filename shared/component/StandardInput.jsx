@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import glasses from '../../assets/glasses.png'
 
-export default function StandardInput({type, placeholder,isShow,marginBottom,height,width,opacity}) {
+export default function StandardInput({type, placeholder,isShow,marginBottom,height,width,opacity,onSubmitEditing,returnKeyType}) {
     const [isFocus, setIsFocus] = useState(false);
   return (
     <MainLayout marginBottom={marginBottom}>
@@ -15,6 +15,8 @@ export default function StandardInput({type, placeholder,isShow,marginBottom,hei
             height={height}
             width={width}
             isFocus={isFocus}
+            onSubmitEditing={onSubmitEditing}
+            returnKeyType={returnKeyType}
         />
         <GlassesImg source={glasses} opacity={opacity}/>
     </MainLayout>
@@ -22,7 +24,6 @@ export default function StandardInput({type, placeholder,isShow,marginBottom,hei
 }
 
 const MainLayout = styled.View`
-height : 79px;
 justify-content : space-between;
 margin-bottom : ${({ marginBottom }) => marginBottom || '0px'};
 `
