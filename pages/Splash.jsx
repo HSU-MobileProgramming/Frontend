@@ -12,7 +12,7 @@ export default function Splash() {
     <MainLayout> 
       
       <Logo/>
-      {/* <ButtonSection/> */}
+      <ButtonSection/>
       
     </MainLayout>
   )
