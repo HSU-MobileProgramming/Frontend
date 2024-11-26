@@ -1,41 +1,56 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
-import RNTextDetector from 'rn-text-detector';
-
+import React, {useEffect, useState} from 'react';
+import {Button, StyleSheet, Text, View, Image} from 'react-native';
+// import ImagePicker from 'react-native-image-crop-picker';
 import * as ImagePicker from 'expo-image-picker';
-// import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-export default function TicketPiece() {
+import ProgressCircle from 'react-native-progress/Circle';
+import TesseractOcr, {LANG_ENGLISH, LEVEL_WORD} from 'react-native-tesseract-ocr';
+
+
+const DEFAULT_HEIGHT = 500;
+const DEFAULT_WITH = 600;
+const defaultPickerOptions = {
+  cropping: true,
+  height: DEFAULT_HEIGHT,
+  width: DEFAULT_WITH,
+};
+
+function TicketPiece() {
   const [response, setResponse] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [imgSrc, setImgSrc] = useState(null);
   const [text, setText] = useState('');
-  const [state, setState] = useState({
-    loading: false,
-    image: null,
-    textRecognition: null,
-    toast: {
-      message: "",
-      isVisible: false,
-    },
-  });
+ 
 
   useEffect(() => {
-    console.log("RNTextDetector:", RNTextDetector);
-   
-    if (state.toast.isVisible) {
-      console.log("Toast message:", state.toast.message);
-      // 추가적으로 Toast를 화면에 표시하거나 다른 로직을 처리
+    if(imgSrc != null) {
+      console.log(TesseractOcr);
     }
-  
-    if (state.image) {
-      console.log("New image loaded:", state.image);
-      // 이미지가 변경되었을 때 로직 추가
+  },[imgSrc])
+
+  const recognizeTextFromImage = async (path) => {
+    setIsLoading(true);
+
+    try {
+      const tessOptions = { level: LEVEL_WORD };
+      const recognizedText = await TesseractOcr.recognizeTokens(
+        path,
+        LANG_ENGLISH,
+        tessOptions,
+      );
+      setText(recognizedText);
+    } catch (err) {
+      console.error(err);
+      setText('');
     }
 
-  }, [state]);
-  const handleTakePhoto = async () => {
+    setIsLoading(false);
+    setProgress(0);
+  };
+  const handleTakeChoosePhoto = async () => {
     try {
-        const result = await ImagePicker.launchCameraAsync({
-            saveToPhotos: true,
+        const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ['images'], // 사진만 선택
             //allowsEditing: true, // 편집 허용
             quality: 1, // 원본 품질 유지
@@ -43,192 +58,75 @@ export default function TicketPiece() {
 
         if (!result.canceled) {
             setResponse(result); // 전체 응답 저장
-            setSelectedImage(result.assets[0].uri); // 선택된 이미지 URI 저장
-            onImageSelect(result)
+            setImgSrc(result.assets[0].uri); // 선택된 이미지 URI 저장
+            await recognizeTextFromImage(result.assets[0].uri);
+
         } else {
             console.log("Image selection canceled");
         }
-
 
     } catch (error) {
         console.error("ImagePicker Error:", error);
     }
 }
+  const recognizeFromPicker = async (options = defaultPickerOptions) => {
+    // try {
+    //   const image = await ImagePicker.openPicker(options);
+    //   setImgSrc({uri: image.path});
+    //   await recognizeTextFromImage(image.path);
+    // } catch (err) {
+    //   if (err.message !== 'User cancelled image selection') {
+    //     console.error(err);
+    //   }
+    // }
+  };
 
-  const handleTakeChoosePhoto = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ['images'], // 사진만 선택
-        //allowsEditing: true, // 편집 허용
-        quality: 1, // 원본 품질 유지
-      });
-
-      if (!result.canceled) {
-        setResponse(result); // 전체 응답 저장
-        setSelectedImage(result.assets[0].uri); // 선택된 이미지 URI 저장
-        onImageSelect(result)
-      } else {
-        console.log("Image selection canceled");
-      }
-
-    } catch (error) {
-      console.error("ImagePicker Error:", error);
-    }
-  }
-
-  // async function onPress(type) {
-  //   setState({ ...state, loading: true });
-  //   if (type === "capture") {
-  //     try {
-  //       const result = await ImagePicker.launchCameraAsync({
-  //         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-  //         allowsEditing: true,
-  //         quality: 1,
-  //       });
-  //       onImageSelect(result);
-
-  //     } catch (error) {
-  //       console.error("ImagePicker Error:", error);
-  //     }
-  //   } else {
-  //     launchImageLibrary({ mediaType: "image" }, onImageSelect);
-  //   }
-  // }
-
-  async function onImageSelect(media) {
-    try {
-      if (!media) {
-        setState({ ...state, loading: false });
-        return;
-      }
-  
-      if (media && media.assets) {
-        const file = media.assets[0].uri;
-  
-        // 텍스트 인식 시도
-        const textRecognition = await RNTextDetector.detectFromUri
-        const INFLIGHT_IT = "Inflight IT";
-  
-        // 텍스트 인식 결과에서 매칭되는 항목 찾기
-        const matchText = textRecognition.findIndex((item) =>
-          item.text.match(INFLIGHT_IT)
-        );
-  
-        setState({
-          ...state,
-          textRecognition,
-          image: file,
-          toast: {
-            message: matchText > -1 ? "Ohhh i love this company!!" : "",
-            isVisible: matchText > -1,
-          },
-          loading: false,
-        });
-      }
-    } catch (error) {
-      console.error("Error in onImageSelect:", error);
-  
-      // 에러 발생 시 상태 업데이트
-      setState({
-        ...state,
-        loading: false,
-        toast: {
-          message: "An error occurred while processing the image.",
-          isVisible: true,
-        },
-      });
-    }
-  }
-  async function onImageSelect(media) {
-    try {
-      if (!media) {
-        setState({ ...state, loading: false });
-        return;
-      }
-  
-      if (media && media.assets) {
-        const file = media.assets[0].uri;
-  
-        // 텍스트 인식 시도
-        const textRecognition = await RNTextDetector.detectFromUri(file);
-        const INFLIGHT_IT = "Inflight IT";
-  
-        // 텍스트 인식 결과에서 매칭되는 항목 찾기
-        const matchText = textRecognition.findIndex((item) =>
-          item.text.match(INFLIGHT_IT)
-        );
-  
-        setState({
-          ...state,
-          textRecognition,
-          image: file,
-          toast: {
-            message: matchText > -1 ? "Ohhh i love this company!!" : "",
-            isVisible: matchText > -1,
-          },
-          loading: false,
-        });
-      }
-    } catch (error) {
-      console.error("Error in onImageSelect:", error);
-  
-      // 에러 발생 시 상태 업데이트
-      setState({
-        ...state,
-        loading: false,
-        toast: {
-          message: "An error occurred while processing the image.",
-          isVisible: true,
-        },
-      });
-    }
-  }
-    
-
+  const recognizeFromCamera = async (options = defaultPickerOptions) => {
+    // try {
+    //   const image = await ImagePicker.openCamera(options);
+    //   setImgSrc({uri: image.path});
+    //   await recognizeTextFromImage(image.path);
+    // } catch (err) {
+    //   if (err.message !== 'User cancelled image selection') {
+    //     console.error(err);
+    //   }
+    // }
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.title}>RN OCR SAMPLE</Text>
-        <View style={getSpace(20)}>
-          <TouchableOpacity style={[styles.button, styles.shadow]}
-            onPress={() => handleTakePhoto()}>
-            <Text>Take Photo</Text>
-          </TouchableOpacity>
-          <View style={getSpace(20)}>
-            <TouchableOpacity
-              style={[styles.button, styles.shadow]}
-              onPress={() => handleTakeChoosePhoto()}
-            >
-              <Text>Pick a Photo</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={getSpace(50)}>
-            <View loading={state.loading}>
-              <View style={{ alignItems: "center" }}>
-                <Image style={[styles.image, styles.shadow]}
-                  source={{ uri: state.image }} />
-              </View>
-              {!!state.textRecognition &&
-                state.textRecognition.map((item, i) => (
-                  <Text key={i} style={getSpace(10)}>
-                    {item.text}
-                  </Text>
-                ))}
-              {/* {!!state.textRecognition &&
-                state.textRecognition.map(
-                  (item: { text: string }, i: number) => (
-                    <Text key={i} style={getSpace(10)}>
-                      {item.text}
-                    </Text>
-                  ))} */}
-            </View>
-          </View>
+      <Text style={styles.title}>Tesseract OCR example</Text>
+      <Text style={styles.instructions}>Select an image source:</Text>
+      <View style={styles.options}>
+        <View style={styles.button}>
+          <Button
+            disabled={isLoading}
+            title="Camera"
+            onPress={() => {
+              handleTakeChoosePhoto();
+            }}
+          />
         </View>
-        {state.toast.isVisible &&
-        <Text>{state.toast.message}</Text>
-          }
+        <View style={styles.button}>
+          <Button
+            disabled={isLoading}
+            title="Picker"
+            onPress={() => {
+              handleTakeChoosePhoto();
+            }}
+          />
+        </View>
       </View>
+      {imgSrc && (
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={imgSrc} />
+          {isLoading ? (
+            <ProgressCircle showsText progress={progress} />
+          ) : (
+            <Text>{text}</Text>
+          )}
+        </View>
+      )}
     </View>
   );
 }
@@ -236,44 +134,37 @@ export default function TicketPiece() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5', // 배경색
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
-  content: {
-    flex: 1,
-    padding: 20, // 내부 여백
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333', // 제목 텍스트 색상
-    textAlign: 'center',
-    marginBottom: 20,
+  options: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
   },
   button: {
-    backgroundColor: '#007bff', // 버튼 배경색
-    paddingVertical: 15, // 세로 여백
-    paddingHorizontal: 20, // 가로 여백
-    borderRadius: 10, // 버튼 테두리 둥글기
+    marginHorizontal: 10,
+  },
+  imageContainer: {
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  shadow: {
-    shadowColor: '#000', // 그림자 색상
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25, // 그림자 투명도
-    shadowRadius: 3.84, // 그림자 반경
-    elevation: 5, // 안드로이드 그림자 효과
-  },
   image: {
-    width: 200, // 이미지 너비
-    height: 200, // 이미지 높이
-    borderRadius: 10, // 이미지 모서리 둥글기
-    marginVertical: 20, // 이미지 위아래 여백
+    marginVertical: 15,
+    height: DEFAULT_HEIGHT / 2.5,
+    width: DEFAULT_WITH / 2.5,
+  },
+  title: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
   },
 });
-// 특정 공간 추가를 위한 함수 스타일
-export const getSpace = (size) => ({
-  marginVertical: size,
-});
+
+export default TicketPiece;

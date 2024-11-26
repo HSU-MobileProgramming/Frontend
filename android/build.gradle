@@ -19,6 +19,7 @@ buildscript {
         classpath('com.facebook.react:react-native-gradle-plugin')
         classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
         implementation project(':react-native-text-recognition')
+        implementation project(':react-native-tesseract-ocr')
         implementation (project(':react-native-text-detector')) {
         exclude group: 'com.google.firebase'
         }
