@@ -10,8 +10,8 @@ export default function DetailTravelLogHeader() {
     return (
         <MainLayout>
             <GradientBackground>
-                <HeaderIcon1 />
-                <HeaderIcon2 />
+                <HeaderIcon1 source={HEADERICON1}/>
+                <HeaderIcon2 source={HEADERICON2}/>
                 <HeaderPuzzleIcon source={HEADERPUZZLEICON}/>
             </GradientBackground>
         </MainLayout>
@@ -37,13 +37,13 @@ shadow-radius: 21.438px; /* 42.876 / 2 */
 elevation: 10; /* Android 그림자 효과 */
 `;
 
-const HeaderIcon1 = styled(HEADERICON1)`
+const HeaderIcon1 = styled.Image`
 position: absolute;
 top: 0;
 left: 0;
 `;
 
-const HeaderIcon2 = styled(HEADERICON2)`
+const HeaderIcon2 = styled.Image`
 position: absolute;
 top: 0;
 right: 0;

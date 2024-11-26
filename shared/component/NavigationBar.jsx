@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useNavigation } from '@react-navigation/native'
 
 //이미지
-import world from '../../assets/world.png'
+import worldImage from '../../assets/world.png'
 import compass from '../../assets/compass.png'
 import bookmark from '../../assets/bookmark.png'
 import person from '../../assets/person.png'
@@ -34,14 +34,14 @@ export default function NavigationBar({ world, mylog, search, mypage }) {
       {
         world ?
           (
-            <WrapTap>
+            <WrapTap onPress={() => handleTabPress("world")}>
               <StyledImg source={colorworld} />
               <StyledText color="#5C95FB">월드</StyledText>
             </WrapTap>
           ) :
           (
-            <WrapTap>
-              <StyledImg source={world} />
+            <WrapTap onPress={() => handleTabPress("world")}>
+              <StyledImg source={worldImage} />
               <StyledText color="#A7A7A7">월드</StyledText>
             </WrapTap>
           )
