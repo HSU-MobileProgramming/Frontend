@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-native';
 import styled from 'styled-components/native';
 import StandardInput from '../../shared/component/StandardInput';
@@ -6,9 +6,13 @@ import RNPickerSelect from 'react-native-picker-select';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import SelectBox from './SelectBox';
+import icon from '../../assets/datepickicon.png'
 
 export default function InputSection() {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [year, setYear] = useState("YYYY");
+    const [month, setMonth] = useState("MM");
+    const [day, setDay] = useState("DD");
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -19,23 +23,34 @@ export default function InputSection() {
     };
 
     const handleConfirm = (date) => {
-        console.warn("A date has been picked: ", date);
+       // console.log(date);
+        console.log("1");
         hideDatePicker();
     };
     return (
         <MainLayout>
             <StandardInput type="닉네임" placeholder="사용할 닉네임을 입력해주세요" />
+            <SelectSection>
+                <SelectBox/>
 
-            <SelectBox />
+                <WrapButton>
+                <StyledText>생년월일</StyledText>
 
-            <BirthSelectButton title="YYYY/MM/DD" onPress={showDatePicker} />
+                <BirthSelectButton onPress={showDatePicker}>
+                    <DateText>{year}/{month}/{day}</DateText>
+                    <IconImage source={icon} />
+                </BirthSelectButton>
 
-            <DateTimePickerModal
-                isVisible={isDatePickerVisible}
-                mode="date"
-                onConfirm={handleConfirm}
-                onCancel={hideDatePicker}
-            />
+                <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={handleConfirm}
+                    onCancel={hideDatePicker}
+                />
+
+                </WrapButton>
+
+            </SelectSection>
 
             <>
                 <StyledText>국적</StyledText>
@@ -68,8 +83,8 @@ export default function InputSection() {
                         inputIOS: {
                             color: 'black',
                             backgroundColor: '#fff',
-                            width: 348,
-                            height: 50
+                            width: 328,
+                            height: 50                        
                         },
                         inputAndroid: { color: 'black' },
                         placeholder: { color: 'gray' },
@@ -93,13 +108,32 @@ margin-top: 20px;
 margin-bottom : 10px;
 `;
 
-const BirthSelectButton = styled.Button`
-border-radius: 5px;
-background-color: #FFF;
+const IconImage = styled.Image`
+width: 15px;
+height: 17px;
+`
+
+const DateText = styled.Text`
 color: #B7B7B7;
 font-family: Pretendard;
 font-size: 15px;
-font-style: normal;
 font-weight: 500;
-line-height: normal;
+`
+const BirthSelectButton = styled.TouchableOpacity`
+width: 198px;
+height: 50px;
+border-radius: 5px;
+background-color: #FFF;
+justify-content : center;
+align-items : center;
+padding : 13px 15px 13px 15px;
+flex-direction : row;
+justify-content : space-between;
+`
+const SelectSection = styled.View`
+flex-direction : row;
+`
+
+const WrapButton = styled.View`
+
 `
