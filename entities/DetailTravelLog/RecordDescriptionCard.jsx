@@ -7,7 +7,7 @@ export default function RecordDescriptionCard({recordImage, decoImage, descripti
         <MainLayout>
             <DescriptionBox>
                 <DescriptionTextBold>{descriptionText1}</DescriptionTextBold>
-                {puzzleImage}
+                <PuzzleImageBox>{puzzleImage}</PuzzleImageBox>
             </DescriptionBox>
             <DescriptionTextLight>{descriptionText2}</DescriptionTextLight>
             <RecordImage>{recordImage}</RecordImage>
@@ -62,5 +62,9 @@ bottom: 30px;
 z-index: 2;
 width: 50px;
 height: 50px;
+`;
 
+const PuzzleImageBox = styled.View`
+width: 21px;
+height: 21px;
 `;

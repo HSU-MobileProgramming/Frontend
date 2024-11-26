@@ -4,7 +4,7 @@ import SelectDate from "./SelectDate";
 import StandardButton from "../../../shared/component/StandardButton";
 import { useEffect, useState } from "react";
 
-export default function StartTravelLogBottom({onSelectedCountry}) {
+export default function AddTravelLogBottom({onSelectedCountry}) {
     const [isAllSelected, setIsAllSelected] = useState(false);
     const [startDate, setStartDate] = useState('시작 날짜');
     const [endDate, setEndDate] = useState('종료 날짜');

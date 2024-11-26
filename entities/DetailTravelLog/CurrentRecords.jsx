@@ -9,30 +9,30 @@ export default function CurrentRecords() {
     return (
         <MainLayout>
             <PuzzleRecordBox>
-                <PUZZLESKYBLUE />
+                <PuzzleImageBox><PUZZLESKYBLUE/></PuzzleImageBox>
                 <RecordCountBox>
-                    <Text style={{fontSize: 18, fontWeight: 600}}>0</Text> {/* 통신 시 변경 */}
+                    <Text style={{ fontSize: 18, fontWeight: 600 }}>0</Text> {/* 통신 시 변경 */}
                     <Text>개</Text>
                 </RecordCountBox>
             </PuzzleRecordBox>
             <PuzzleRecordBox>
-                <PUZZLEYELLOW />
+                <PuzzleImageBox><PUZZLEPINK/></PuzzleImageBox>
                 <RecordCountBox>
-                    <Text style={{fontSize: 18, fontWeight: 600}}>0</Text> {/* 통신 시 변경 */}
+                    <Text style={{ fontSize: 18, fontWeight: 600 }}>0</Text> {/* 통신 시 변경 */}
                     <Text>개</Text>
                 </RecordCountBox>
             </PuzzleRecordBox>
             <PuzzleRecordBox>
-                <PUZZLEMINT />
+                <PuzzleImageBox><PUZZLEMINT /></PuzzleImageBox>
                 <RecordCountBox>
-                    <Text style={{fontSize: 18, fontWeight: 600}}>0</Text> {/* 통신 시 변경 */}
+                    <Text style={{ fontSize: 18, fontWeight: 600 }}>0</Text> {/* 통신 시 변경 */}
                     <Text>개</Text>
                 </RecordCountBox>
             </PuzzleRecordBox>
             <PuzzleRecordBox>
-                <PUZZLEPINK />
+            <PuzzleImageBox><PUZZLEMINT /></PuzzleImageBox>
                 <RecordCountBox>
-                    <Text style={{fontSize: 18, fontWeight: 600}}>0</Text> {/* 통신 시 변경 */}
+                    <Text style={{ fontSize: 18, fontWeight: 600 }}>0</Text> {/* 통신 시 변경 */}
                     <Text>개</Text>
                 </RecordCountBox>
             </PuzzleRecordBox>
@@ -70,4 +70,9 @@ justify-contetn: center;
 const RecordCountText = styled.Text`
 font-size: 18px;
 font-weight: 600;
+`;
+
+const PuzzleImageBox = styled.View`
+width: 21px;
+height: 21px;
 `;
