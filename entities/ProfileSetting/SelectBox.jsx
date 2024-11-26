@@ -6,26 +6,30 @@ export default function SelectBox() {
     const [currentGender, setCurrentGender] = useState("남성");
     const gender = ["남성", "여성"];
     return (
-        <>
+        <MainLayout>
             <StyledText>성별</StyledText>
 
-            <MainLayout>
+            <Wrap>
 
                 {gender.map((g, i) => (
                     <SelectSection key={i} onPress={() => setCurrentGender(g)} isSelected={currentGender === g}>
-                        <SelectText>
+                        <SelectText isSelected={currentGender === g}>
                             {g}
                         </SelectText>
                     </SelectSection>
                 ))}
-            </MainLayout>
-        </>
+            </Wrap>
+        </MainLayout>
 
     )
 }
 
 const MainLayout = styled.View`
-width: 132px;
+
+`
+
+const Wrap = styled.View`
+width: 136px;
 height: 50px;
 flex-direction: row;
 border-radius: 5px;
@@ -34,7 +38,7 @@ margin-top: 10px;
 `;
 
 const StyledText = styled.Text`
-color: #1F1F1F;
+color: ${({ isSelected }) => (isSelected ? '#5C95FB' : '#1F1F1F')}; 
 font-family: Pretendard;
 font-size: 16px;
 font-weight: 600;
