@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import glasses from '../../assets/glasses.png'
 
-export default function StandardInput({type, placeholder,isShow,marginBottom,height,width,opacity,onSubmitEditing,returnKeyType}) {
+export default function StandardInput({type, placeholder,isShow,marginBottom,height,width,opacity,onSubmitEditing,returnKeyType,onChange,value}) {
     const [isFocus, setIsFocus] = useState(false);
   return (
     <MainLayout marginBottom={marginBottom}>
@@ -17,6 +17,8 @@ export default function StandardInput({type, placeholder,isShow,marginBottom,hei
             isFocus={isFocus}
             onSubmitEditing={onSubmitEditing}
             returnKeyType={returnKeyType}
+            onChange={onChange}
+            value={value}
         />
         <GlassesImg source={glasses} opacity={opacity}/>
     </MainLayout>
@@ -31,6 +33,7 @@ const Title = styled.Text`
 color: #1F1F1F;
 font-size: 16px;
 font-weight: 600;
+margin-bottom : 10px;
 `
 const StyledInput = styled.TextInput`
 padding-left : 11px;

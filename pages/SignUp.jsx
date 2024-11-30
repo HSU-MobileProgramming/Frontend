@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import TopBar from '../shared/component/TopBar'
 import StandardInput from '../shared/component/StandardInput'
@@ -7,6 +8,18 @@ import StandardButton from '../shared/component/StandardButton'
 import { useNavigation } from '@react-navigation/native'
 export default function SignUp() {
   const navigation = useNavigation();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    nickname: '',
+    gender: '',
+    profile_img: '',
+    country: '',
+    gps_consent: '',
+    is_public: ''
+  });
 
   const onPressButton = () => {
     navigation.navigate("ProfileSetting")
@@ -15,9 +28,9 @@ export default function SignUp() {
     <MainLayout>
         <TopBar text="SIGN UP"/>
 
-        <InputSection/>
+        <InputSection formData={formData}/>
 
-        <CheckBoxSection/>
+        <CheckBoxSection formData={formData}/>
 
         <StandardButton text="가입하기" onPress={onPressButton}/>
     </MainLayout>
