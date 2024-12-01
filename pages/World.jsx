@@ -7,10 +7,16 @@ import MapSection from '../entities/World/MapSection';
 import Info from '../entities/World/Info';
 import StandardInput from '../shared/component/StandardInput';
 import { touristAttraction } from '../shared/component/db/country.json';
+import Modal from '../entities/World/Modal';
 
 export default function World() {
   const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 관리
   const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터 관리 (초기에는 빈 배열)
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [country, setCountry]= useState();
+  const [city, setCity]= useState();
+  const [emoji, setEmoji]= useState();
+  const [description, setDescription] = useState();
 
   // 검색 기능
   const handleSearch = (text) => {
@@ -29,6 +35,14 @@ export default function World() {
     );
     setFilteredData(filtered);
   };
+
+  const onPressItem = (item) => {
+    setCountry(item.country)
+    setCity(item.city)
+    setEmoji(item.emoji)
+    setDescription(item.description)
+    setIsShowModal(true)
+  }
 
   return (
     <MainLayout>
@@ -52,8 +66,8 @@ export default function World() {
             data={filteredData}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <ResultItem>
-                <CountryText>{item.country}, {item.city}</CountryText>
+              <ResultItem onPress={()=>onPressItem(item)}>
+                <CountryText>{item.emoji}{item.country}, {item.city}</CountryText>
               </ResultItem>
             )}
             ListEmptyComponent={() => (
@@ -69,6 +83,8 @@ export default function World() {
       </Wrap>
 
       <MapSection />
+
+      {isShowModal && <Modal setIsShowModal={setIsShowModal} country={country} city={city} emoji={emoji} description={description} />}
 
       <NavigationBar world />
     </MainLayout>
@@ -89,7 +105,7 @@ const Wrap = styled.View`
 `;
 
 
-const ResultItem = styled.View`
+const ResultItem = styled.TouchableOpacity`
   padding: 15px 10px;
   border-bottom-width: 1px;
   border-bottom-color: #ddd;
