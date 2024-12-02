@@ -61,7 +61,7 @@ export default function World() {
         />
 
         {/* 검색어가 있는 경우에만 FlatList 렌더링 */}
-        {searchQuery.trim() !== '' && (
+        {searchQuery.trim() !== '' && isShowModal && (
           <FlatList
             data={filteredData}
             keyExtractor={(item, index) => index.toString()}
