@@ -21,8 +21,7 @@ function TicketPiece() {
   const [progress, setProgress] = useState(0);
   const [imgSrc, setImgSrc] = useState(null);
   const [text, setText] = useState('');
- 
-
+  
   useEffect(() => {
     if(imgSrc != null) {
       console.log(TesseractOcr);

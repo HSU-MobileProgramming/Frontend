@@ -3,21 +3,38 @@ import { View, Text, TextInput } from "react-native";
 import SelectDate from "./SelectDate";
 import StandardButton from "../../../shared/component/StandardButton";
 import { useEffect, useState } from "react";
+import { postCreateTravel } from "./api/AddLogApi";
 
-export default function AddTravelLogBottom({onSelectedCountry}) {
+export default function AddTravelLogBottom({selectedCountryId, selectedCityId}) {
     const [isAllSelected, setIsAllSelected] = useState(false);
+    const [countryId, setCountryId] = useState(selectedCountryId);
+    const [cityId, setCityId] = useState(selectedCityId);
     const [startDate, setStartDate] = useState('시작 날짜');
     const [endDate, setEndDate] = useState('종료 날짜');
     const [logTitle, setLogTitle] = useState(null);
 
+    useEffect(()  => {
+        console.log("도시 아이디: " + selectedCityId);
+        console.log("나라 아이디: " + selectedCountryId);
+    },[]);
+
     useEffect(() => {
-        if (startDate !== '시작 날짜' && endDate !== '종료 날짜' && onSelectedCountry !== '' && logTitle) {
+        if (startDate !== '시작 날짜' && endDate !== '종료 날짜' && selectedCountryId !== null && logTitle) {
             setIsAllSelected(true);
         } else {
             setIsAllSelected(false);
         }
-    },[startDate, endDate, onSelectedCountry, logTitle])
+    },[startDate, endDate, selectedCountryId, logTitle])
     
+    const handleCreateTravelLogBtn = () => {
+        console.log(selectedCountryId);
+        console.log(selectedCityId);
+        console.log(logTitle);
+        console.log(startDate);
+        postCreateTravel(4, selectedCityId, selectedCountryId, logTitle, startDate, endDate).then((res) => {
+            console.log(res);
+        })
+    }
 
     return (
         <StartTravelLogBottomLayout>
@@ -44,6 +61,7 @@ export default function AddTravelLogBottom({onSelectedCountry}) {
             height="60px"
             borderRadius="5px"
             backgroundColor={isAllSelected ? "#6644FF" : "#D3D3D3"}
+            onPress={handleCreateTravelLogBtn}
             />
         </StartTravelLogBottomLayout>
     )

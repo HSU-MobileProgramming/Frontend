@@ -2,14 +2,21 @@ import styled from "styled-components/native";
 import { View, Text, Image } from "react-native";
 import AddTravelLogTop from "../entities/AddLog/ui/AddTravelLogTop";
 import AddTravelLogBottom from "../entities/AddLog/ui/AddTravelLogBottom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AddTravelLog() {
-    const [isSelectedCountry, setIsSelectedCountry] = useState('');
+    const [selectedCountryId, setSelectedCountryId] = useState(null);
+    const [selectedCityId, setSelectedCityId] = useState(null);
+
+    useEffect(() => {
+        //console.log("selectedCountryId: " + selectedCountryId);
+        console.log("selectedCountryId: " + selectedCountryId);
+    },[selectedCountryId])
+
     return (
             <AddTravelLogLayout>
-                <AddTravelLogTop onSelectedCountry={setIsSelectedCountry}/>
-                <AddTravelLogBottom onSelectedCountry={isSelectedCountry}/>
+                <AddTravelLogTop setSelectedCountryId={(countryId) => setSelectedCountryId(countryId)} setSelectedCityId={(index) => setSelectedCityId(index)}/>
+                <AddTravelLogBottom selectedCountryId={selectedCountryId} selectedCityId={selectedCityId}/>
             </AddTravelLogLayout>
     )
 }

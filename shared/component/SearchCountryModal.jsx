@@ -2,8 +2,9 @@ import styled from "styled-components/native";
 import { Image, TextInput, TouchableOpacity, Text, View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import SEARCH from '../../assets/search.png';
 import { useState } from "react";
+import { SvgXml } from 'react-native-svg';
 
-import dummy from './db/data.json';
+import { countries } from './db/CountryData';
 import { FlatList } from "react-native-gesture-handler";
 
 export default function SearchCountryModal({ onClose, onSelectCountry }) {
@@ -19,23 +20,24 @@ export default function SearchCountryModal({ onClose, onSelectCountry }) {
       setSearchResults([]);
       return;
     }
-    const results = dummy.countries.filter(
-      (item) =>
+    const results = countries.filter(
+      (item) => 
         item.city.includes(inputText) || item.country.includes(inputText)
     );
     setSearchResults(results);
   }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ModalOverlay>
         {/* 배경을 눌렀을 때 모달 닫기 */}
         <TouchableOpacity style={{ flex: 1, width: '100%' }} activeOpacity={1} onPress={onClose}>
           <SearchContainer>
-            <TextInput
+            <SearchTextInput
               placeholder="| 여행할 도시 및 국가를 검색해보세요"
-              style={searchInputStyle}
               value={inputText}
               onChangeText={(text) => setInputText(text)}
+              
             />
             <TouchableOpacity onPress={handleSearch}>
               <Image source={SEARCH} />
@@ -46,22 +48,28 @@ export default function SearchCountryModal({ onClose, onSelectCountry }) {
               <SearchResultText style={searchResultBold}>검색 결과</SearchResultText>
               <FlatList
                 data={searchResults}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress={() => {
-                      onSelectCountry(item.city + "," + item.country); // 선택된 국가 전달
-                      onClose(); // 모달 닫기
-                    }}
-                  >
-                    <SearchResultBox>
-                      <SearchResultText style={searchResultLight}>
-                        {item.city}, {item.country}
-                      </SearchResultText>
-                    </SearchResultBox>
-                  </TouchableOpacity>
-                )}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item, index }) => {
+                  // 이미지 경로를 동적으로 require
+                  //const imagePath = require(`${item.image}`);
+                  return (
+                    <TouchableOpacity
+                      onPress={() => {
+                        onSelectCountry(item.city + "," + item.country, item.countryId, item.index);
+                        onClose();
+                      }}
+                    >
+                      <SearchResultBox>
+                        {/* <SvgXml xml={item.image} width={30} height={20} /> */}
+                        <SearchResultText style={searchResultLight}>
+                          {item.flagImage}, {item.city}, {item.country}
+                        </SearchResultText>
+                      </SearchResultBox>
+                    </TouchableOpacity>
+                  );
+                }}
               />
+
             </SearchResultBox>
           )}
         </TouchableOpacity>
@@ -102,14 +110,15 @@ const CloseButtonText = styled.Text`
   color: black;
 `;
 
+const SearchTextInput = styled.TextInput`
+width: 80%;
+color: black;
+background-color: #f5f5f5; /* 배경색 명시 */
+`;
+
 const searchInputStyle = {
   width: "80%",
   color: "black",
-
-  // borderColor: "#ccc",
-  // borderWidth: 1,
-  // borderRadius: 5,
-
 };
 
 const searchResultBold = {
@@ -134,7 +143,7 @@ padding: 20px 15px 0;
 `;
 
 const SearchResultText = styled.Text`
-color: var(--Black-1, #141414);
+color: #141414;
 letter-spacing: -0.3px;
 
 `;

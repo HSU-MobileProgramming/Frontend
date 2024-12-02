@@ -30,8 +30,8 @@ width: 100%;
 height: 100%;
 padding: 16px;
 border-radius: 10px;
-border: 0.6px solid #64F;
-background: rgba(102, 68, 255, 0.10);
+border: 0.6px solid #5C95FB;
+background: rgba(92, 149, 251, 0.10);
 
 `;
 

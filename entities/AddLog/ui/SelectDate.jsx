@@ -18,12 +18,24 @@ export default function SelectDate({ text, onDateChange }) {
         setIsDatePickerVisible(!isDatePickerVisible);
     }
 
+
+    const formatDateToCustom = (date) => {
+        if (!date || !(date instanceof Date)) {
+            console.error("Invalid date provided:", date);
+            return ""; // 기본값 반환
+        }
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        return `${year}-${month}-${day}`;
+    };
+
     return (
         <Pressable onPress={() => setIsDatePickerVisible(true)}>
             <SelectDateBox>
                 <Image source={date ? calendarPurple : calendarGrey} />
-                <DateText isDate={date}>{date ? date.toLocaleDateString() : text}</DateText>
-                <Image source={downArrow}/>
+                <DateText isDate={!!date}>{date ? formatDateToCustom(date) : text}</DateText>
+                <Image source={downArrow} />
             </SelectDateBox>
 
             {/* 날짜 선택 모달 */}
@@ -33,8 +45,8 @@ export default function SelectDate({ text, onDateChange }) {
                 mode="date"
                 onConfirm={(date) => {
                     setIsDatePickerVisible(false);
-                    setDate(date);
-                    onDateChange(date.toLocaleDateString());
+                    setDate(date); // Date 객체로 저장
+                    onDateChange(formatDateToCustom(date)); // 문자열로 변환하여 전달
                 }}
                 onCancel={() => {
                     setIsDatePickerVisible(false);
