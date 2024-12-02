@@ -8,7 +8,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import SelectBox from './SelectBox';
 import icon from '../../assets/datepickicon.png'
 
-export default function InputSection() {
+export default function InputSection({nickname,setNickname,country,setCountry}) {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [year, setYear] = useState("YYYY");
     const [month, setMonth] = useState("MM");
@@ -29,7 +29,7 @@ export default function InputSection() {
     };
     return (
         <MainLayout>
-            <StandardInput type="닉네임" placeholder="사용할 닉네임을 입력해주세요" />
+            <StandardInput value={nickname} onChangeText={(value)=>setNickname(value)}type="닉네임" placeholder="사용할 닉네임을 입력해주세요" isShow="true" />
             <SelectSection>
                 <SelectBox/>
 
@@ -51,46 +51,7 @@ export default function InputSection() {
                 </WrapButton>
 
             </SelectSection>
-
-            <>
-                <StyledText>국적</StyledText>
-                <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
-                    items={[
-                        { label: '중국', value: '중국' },
-                        { label: '일본', value: '일본' },
-                        { label: '베트남', value: '베트남' },
-                        { label: '태국', value: '태국' },
-                        { label: '필리핀', value: '필리핀' },
-                        { label: '싱가포르', value: '싱가포르' },
-                        { label: '대만', value: '대만' },
-                        { label: '인도네시아', value: '인도네시아' },
-                        { label: '호주', value: '호주' },
-                        { label: '뉴질랜드', value: '뉴질랜드' },
-                        { label: '프랑스', value: '프랑스' },
-                        { label: '이탈리아', value: '이탈리아' },
-                        { label: '독일', value: '독일' },
-                        { label: '이탈리아', value: '이탈리아' },
-                        { label: '영국', value: '영국' },
-                        { label: '스페인', value: '스페인' },
-                        { label: '튀르키에', value: '튀르키에' },
-                        { label: '미국', value: '미국' },
-                        { label: '캐나다', value: '캐나다' },
-                        { label: '스위스', value: '스위스' }
-                    ]}
-                    placeholder={{ label: '대한민국', value: '대한민국', color: '#9EA0A4' }}
-                    style={{
-                        inputIOS: {
-                            color: 'black',
-                            backgroundColor: '#fff',
-                            width: 328,
-                            height: 50                        
-                        },
-                        inputAndroid: { color: 'black' },
-                        placeholder: { color: 'gray' },
-                    }}
-                />
-            </>
+                <StandardInput value={country} onChangeText={(value)=>setCountry(value)} type="국적" placeholder="국적을 입력해주세요" isShow="true" marginTop="20px"/>
         </MainLayout>
     );
 }

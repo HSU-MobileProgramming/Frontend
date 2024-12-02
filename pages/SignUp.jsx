@@ -8,29 +8,23 @@ import StandardButton from '../shared/component/StandardButton'
 import { useNavigation } from '@react-navigation/native'
 export default function SignUp() {
   const navigation = useNavigation();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    phone: '',
-    nickname: '',
-    gender: '',
-    profile_img: '',
-    country: '',
-    gps_consent: '',
-    is_public: ''
-  });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [gpsConsent,setGpsConsent] = useState(true);
+  const [isPublic,setIsPublic] = useState(true);
+
 
   const onPressButton = () => {
-    navigation.navigate("ProfileSetting")
+    navigation.navigate("ProfileSetting",{name,email,password,gpsConsent,isPublic})
   }
   return (
     <MainLayout>
         <TopBar text="SIGN UP"/>
 
-        <InputSection formData={formData}/>
+        <InputSection name={name} setName={setName} email={email}  setEmail={setEmail} password={password} setPassword={setPassword}/>
 
-        <CheckBoxSection formData={formData}/>
+        <CheckBoxSection gpsConsent={gpsConsent} setGpsConsent={setGpsConsent} isPublic={isPublic} setIsPublic={setIsPublic}/>
 
         <StandardButton text="가입하기" onPress={onPressButton}/>
     </MainLayout>

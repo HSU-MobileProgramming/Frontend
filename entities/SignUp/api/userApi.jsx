@@ -1,49 +1,49 @@
-import axios from 'axios'
+import axios from 'axios';
 import { BASE_URL } from '../../../shared/config/config';
-export const signUp = ({formdata}) => {    
-    axios.post(`${BASE_URL}/user/register`,
-        {
-            "name": name, 
-            "email" : email,
-            "password": password,
-            "phone" : phone,
-            "nickname" : nickname,
-            "gender" : gender,
-            "profile_img" : profile_img,
-            "country": country,
-            "gps_consent": gps_consent,
-            "is_public" : is_public
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const signUp = (formData) => {
+    console.log("서버로 보낼 formData",formData)
+    return axios.post(`${BASE_URL}/user/register`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
         },
-        {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    )
+    })
     .then((response) => {
-        console.log(response.data);
+        console.log('Sign-up success:', response.data);
+        return response.data;
     })
     .catch((error) => {
-        console.error('error!', error.response?.data || error.message);
+        console.error('Sign-up error:', error.response?.data || error.message);
+        throw error; // 에러를 호출자에게 전달
     });
 };
 
-export const login = (email,password) => {    
-    axios.post(`${BASE_URL}/user/register`,
-        {
-            "email" : email,
-            "password": password,
-        },
-        {
-            headers: {
-                'Content-Type': 'application/json'
+export const login = async (email, password) => {
+    try {
+        console.log("email", email);
+        console.log("password", password);
+
+        const response = await axios.post(
+            `${BASE_URL}/user/login`,
+            {
+                email,
+                password,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             }
-        }
-    )
-    .then((response) => {
-        console.log(response.data);
-    })
-    .catch((error) => {
-        console.error('error!', error.response?.data || error.message);
-    });
+        );
+
+        // 토큰 저장
+        await AsyncStorage.setItem('accessToken', response.data.token);
+
+        // 저장된 토큰 가져오기
+        const token = await AsyncStorage.getItem('accessToken');
+        console.log("로컬에 저장된 토큰", token);
+    } catch (error) {
+        console.error('Login error!', error.response?.data || error.message);
+    }
 };

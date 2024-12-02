@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import CheckBox from './CheckBox'
 
-export default function CheckBoxSection({formData}) {
-  const [gpsConsent,setGpsConsent] = useState(formData.gpsConsent);
-  const [isPublic,setIsPublic] = useState(formData.isPublic);
+export default function CheckBoxSection({gpsConsent,setGpsConsent,isPublic,setIsPublic}) {
+
   return (
     <MainLayout>
 

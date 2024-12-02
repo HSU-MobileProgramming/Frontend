@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 import glasses from '../../assets/glasses.png'
 
-export default function StandardInput({type, placeholder,isShow,marginBottom,height,width,opacity,onSubmitEditing,returnKeyType,onChangeText,value,zIndex}) {
+export default function StandardInput({type, placeholder,isShow,marginBottom,height,width,opacity,onSubmitEditing,returnKeyType,onChangeText,value,zIndex,marginTop}) {
     const [isFocus, setIsFocus] = useState(false);
   return (
-    <MainLayout marginBottom={marginBottom} zIndex={zIndex}>
+    <MainLayout marginBottom={marginBottom} zIndex={zIndex} marginTop={marginTop}>
       { isShow && <Title>{type}</Title> }
         <StyledInput 
             placeholder={isFocus ? "" : placeholder}
@@ -28,6 +28,7 @@ export default function StandardInput({type, placeholder,isShow,marginBottom,hei
 const MainLayout = styled.View`
 justify-content : space-between;
 margin-bottom : ${({ marginBottom }) => marginBottom || '0px'};
+margin-top : ${({ marginTop }) => marginTop || '0px'};
 z-index : ${({ zIndex }) => zIndex || '0'};
 `
 const Title = styled.Text`
