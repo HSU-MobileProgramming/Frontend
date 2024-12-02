@@ -420,7 +420,7 @@ const SvgIcon = (props) => (
       transform="scale(.3474)"
     ></Path>
     <Path
-      fill="#FAAEC4"
+      fill="#D2D2D2"
       stroke="#fff"
       strokeLinejoin="round"
       strokeWidth="2.522"
