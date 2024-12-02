@@ -13,7 +13,7 @@ export const postCreateTravel = async (userId, cityId, countryId, title, startDa
       const response = await axios.post(`${BASE_URL}/trip/travel_create`,
         {
           "userId": userId,
-          "cityId": cityId,
+          "cityId": cityId + 1,
           "countryId": countryId,
           "title": title,
           "startDate": startDate,

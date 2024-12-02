@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function MyLog() {
     const [allTravelLog, setAllTravelLog] = useState([]); // 생성된 여행기 저장
-    const [currentTravelLog, setCurrentTravelLog] = useState(null);
+    const [currentTravelLog, setCurrentTravelLog] = useState([]);
     const navigation = useNavigation();
     const handleTouchableBtn = (name) => {
         if (name === "addlog") {
@@ -22,11 +22,11 @@ export default function MyLog() {
     const saveAllTravelLogApi = () => {
         getAllTravelLog().then((res) => {
             setAllTravelLog(res);
-            console.log("Created Log: " + res);
+            console.log("Created Log: " + JSON.stringify(res.data));
         })
         getCurrentTravelLog().then((res) => {
             setCurrentTravelLog(res);
-            console.log("Current Log: " + res);
+            console.log("Current Log: " + JSON.stringify(res));
         })
     }
 
@@ -34,15 +34,28 @@ export default function MyLog() {
         saveAllTravelLogApi();
     }, []);
 
+    useEffect(() => {
+        //console.log("travel_id: " + currentTravelLog.travel_id);
+        console.log("length: " + currentTravelLog.length);
+    },[allTravelLog, currentTravelLog]);
+
     return (
         <MainLayout>
             <MapView />
             <ScrollViewContainer>
                 <ContentContainer>
-                    {!allTravelLog === null && (
+                    {currentTravelLog.length > 0 && (
                         <>
                             <TitleText>진행중인 여행</TitleText>
-                            <CurrentLog />
+                            <CurrentLog 
+                            travel_id={currentTravelLog[0].travel_id}
+                            title={currentTravelLog[0].title}
+                            start_date={currentTravelLog[0].start_date}
+                            end_date={currentTravelLog[0].end_date}
+                            description={currentTravelLog[0].description}
+                            city_name={currentTravelLog[0].city_name}
+                            country_name={currentTravelLog[0].country_name}
+                            />
                         </>
                     )}
 

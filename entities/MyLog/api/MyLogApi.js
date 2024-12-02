@@ -2,7 +2,7 @@ import axios from "axios";
 import * as AsyncStorage from '@react-native-async-storage/async-storage'
 import { BASE_URL } from "../../../shared/config/config";
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoia2FuZUBleGFtcGxlLmNvbSIsImlhdCI6MTczMzE1ODgxMywiZXhwIjoxNzMzMTYyNDEzfQ.p4bd0a0ntGUw3He-zZ9x18JSqu9Ypwn-YmqrCm0tgp8";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoia2FuZUBleGFtcGxlLmNvbSIsImlhdCI6MTczMzE2MjY1MywiZXhwIjoxNzMzMTY2MjUzfQ.EJQ3L6cJs99j1EdoAeiqYXwVnVyyiVAk9QqxNqzrLR8";
 
 export const postRegister = (name, id, password, birth, pef) => {
   axios.post(`${BASE_URL}/user/register`,
@@ -67,7 +67,7 @@ export const getAllTravelLog = async () => {
         }
       });
 
-      return response.data;
+      return response;
     } else {
       console.log("토큰이 없습니다.");
       return "토큰이 없습니다.";

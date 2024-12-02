@@ -37,30 +37,34 @@ export const countries = [
   {
     index: 4,
     countryId: 2,
-    city: "도쿄",
+    city: "오사카",
     country: "일본",
-    flagImage: "🇯🇵"
+    flagImage: "🇯🇵",
+    thumnail: <JAPAN/>
   },
   {
     index: 5,
     countryId: 2,
     city: "후쿠오카",
     country: "일본",
-    flagImage: "🇯🇵"
+    flagImage: "🇯🇵",
+    thumnail: <JAPAN/>
   },
   {
     index: 6,
     countryId: 2,
-    city: "오사카",
+    city: "삿포로",
     country: "일본",
-    flagImage: "🇯🇵"
+    flagImage: "🇯🇵",
+    thumnail: <JAPAN/>
   },
   {
     index: 7,
     countryId: 2,
-    city: "삿포로",
+    city: "도쿄",
     country: "일본",
-    flagImage: "🇯🇵"
+    flagImage: "🇯🇵",
+    thumnail: <JAPAN/>
   },
   {
     index: 8,

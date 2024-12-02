@@ -31,9 +31,9 @@ export default function AddTravelLogBottom({selectedCountryId, selectedCityId}) 
         console.log(selectedCityId);
         console.log(logTitle);
         console.log(startDate);
-        postCreateTravel(4, selectedCityId, selectedCountryId, logTitle, startDate, endDate).then((res) => {
-            console.log(res);
-        })
+        // postCreateTravel(4, selectedCityId, selectedCountryId, logTitle, startDate, endDate).then((res) => {
+        //     console.log(res);
+        // })
     }
 
     return (
