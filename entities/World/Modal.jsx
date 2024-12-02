@@ -11,40 +11,58 @@ import MintPuzzle from '../../assets/puzzle-mint.svg';
 import SkyBluePuzzle from '../../assets/puzzle-skyblue.svg';
 import { setMapColor } from './api/worldApi';
 
-export default function Modal({ setIsShowModal, country, city, emoji, description }) {
+export default function Modal({ setIsShowModal, country, city, emoji, description,loadData}) {
     const Navigation = useNavigation();
     const [currentStep, setCurrentStep] = useState(1);
     const [selectedPuzzle, setSelectedPuzzle] = useState(null);
     const [countryId, setCountryId] = useState();
-
-    const onPressCompleteButton = () => {
-        switch(country){
-            case "베트남" : setCountryId(1); break;
-            case "일본" : setCountryId(2); break; 
-            case "중국" : setCountryId(3); break;
-            case "태국" : setCountryId(4); break;
-            case "필리핀" : setCountryId(5); break;
-            case "호주" : setCountryId(6); break;
-            default : break;
+    const onPressCompleteButton = async () => {
+        let selectedCountryId;
+    
+        // country 값에 따라 countryId 결정
+        switch (country) {
+            case "베트남":
+                selectedCountryId = 1;
+                break;
+            case "일본":
+                selectedCountryId = 2;
+                break;
+            case "중국":
+                selectedCountryId = 3;
+                break;
+            case "태국":
+                selectedCountryId = 4;
+                break;
+            case "필리핀":
+                selectedCountryId = 5;
+                break;
+            case "호주":
+                selectedCountryId = 6;
+                break;
+            default:
+                console.warn("알 수 없는 국가:", country);
+                return; // 알 수 없는 국가인 경우 함수 종료
         }
-           
-        console.log("완료 버튼 클릭");
-        console.log("선택된 퍼즐 색상:", selectedPuzzle);
-        console.log("나라 정보:", country);
-
+    
+        // console.log("완료 버튼 클릭");
+        // console.log("선택된 퍼즐 색상:", selectedPuzzle);
+        // console.log("나라 정보:", country);
+        // console.log("countryId:", selectedCountryId);
+    
         if (selectedPuzzle) {
-            setMapColor(selectedPuzzle, countryId)
-                .then(() => {
-                    console.log("setMapColor 호출 성공");
-                    setIsShowModal(false); // 성공 시 모달 닫기
-                })
-                .catch((error) => {
-                    console.error("setMapColor 호출 중 에러:", error);
-                });
+            try {
+                await setMapColor(selectedPuzzle, selectedCountryId);
+                console.log("setMapColor 호출 성공");
+                loadData()
+                setIsShowModal(false); // 성공 시 모달 닫기
+            } catch (error) {
+                console.error("setMapColor 호출 중 에러:", error);
+            }
         } else {
             console.warn("퍼즐 색상이 선택되지 않았습니다!");
         }
     };
+    
 
     return (
         <RNModal

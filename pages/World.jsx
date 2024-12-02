@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList, Text } from 'react-native';
 import NavigationBar from '../shared/component/NavigationBar';
 import styled from 'styled-components/native';
@@ -8,21 +8,47 @@ import Info from '../entities/World/Info';
 import StandardInput from '../shared/component/StandardInput';
 import { touristAttraction } from '../shared/component/db/country.json';
 import Modal from '../entities/World/Modal';
+import { getMapColor } from '../entities/World/api/worldApi';
 
 export default function World() {
   const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 관리
   const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터 관리 (초기에는 빈 배열)
   const [isShowModal, setIsShowModal] = useState(false);
-  const [country, setCountry]= useState();
-  const [city, setCity]= useState();
-  const [emoji, setEmoji]= useState();
+  const [isShowList, setIsShowList] = useState(true);
+  const [country, setCountry] = useState();
+  const [city, setCity] = useState();
+  const [emoji, setEmoji] = useState();
   const [description, setDescription] = useState();
 
-  // 검색 기능
+  const [colors, setColors] = useState([]); // 국가별 색상 배열
+  const [countryIds, setCountryIds] = useState([]); // 국가 ID 배열
+
+  const loadData = () => {
+    getMapColor().then((res) => {
+      if (res?.visits?.length) {
+        const colorMap = {
+          pink: '#FAAEC4',
+          yellow: '#FFDD92',
+          skyblue: '#739EF6',
+          mint: '#9BE4DE',
+        };
+
+        const ids = res.visits.map((visit) => visit.country_id);
+        const mappedColors = res.visits.map((visit) => colorMap[visit.color] || '#D2D2D2');
+
+        setCountryIds(ids);
+        setColors(mappedColors);
+      }
+    });
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   const handleSearch = (text) => {
     setSearchQuery(text);
 
-    // 검색어가 비어있는 경우, 결과를 초기화
     if (text.trim() === '') {
       setFilteredData([]);
       return;
@@ -37,12 +63,13 @@ export default function World() {
   };
 
   const onPressItem = (item) => {
-    setCountry(item.country)
-    setCity(item.city)
-    setEmoji(item.emoji)
-    setDescription(item.description)
-    setIsShowModal(true)
-  }
+    setCountry(item.country);
+    setCity(item.city);
+    setEmoji(item.emoji);
+    setDescription(item.description);
+    setIsShowModal(true);
+    setIsShowList(false); // 모달 열릴 때 리스트 숨김
+  };
 
   return (
     <MainLayout>
@@ -57,34 +84,44 @@ export default function World() {
           zIndex="10"
           marginBottom="10px"
           value={searchQuery}
-          onChangeText={handleSearch} // 검색어 입력 시 호출
+          onChangeText={(text) => {
+            handleSearch(text);
+            setIsShowList(true); // 검색어 입력 시 리스트 표시
+          }}
         />
 
-        {/* 검색어가 있는 경우에만 FlatList 렌더링 */}
-        {searchQuery.trim() !== '' && isShowModal && (
+        {searchQuery.trim() !== '' && isShowList && (
           <FlatList
             data={filteredData}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <ResultItem onPress={()=>onPressItem(item)}>
+              <ResultItem onPress={() => onPressItem(item)}>
                 <CountryText>{item.emoji}{item.country}, {item.city}</CountryText>
               </ResultItem>
             )}
-            ListEmptyComponent={() => (
-              <NoResultText>검색 결과가 없습니다.</NoResultText>
-            )} // 검색 결과가 없을 때 표시
-            contentContainerStyle={{
-              paddingBottom: 20, // 리스트 하단 여백
-            }}
+            ListEmptyComponent={() => <NoResultText>검색 결과가 없습니다.</NoResultText>}
+            contentContainerStyle={{ paddingBottom: 20 }}
           />
         )}
 
-        <Info/>
+        <Info />
       </Wrap>
 
-      <MapSection />
+      <MapSection colors={colors} countryIds={countryIds} />
 
-      {isShowModal && <Modal setIsShowModal={setIsShowModal} country={country} city={city} emoji={emoji} description={description} />}
+      {isShowModal && (
+        <Modal
+          setIsShowModal={(visible) => {
+            setIsShowModal(visible);
+            if (!visible) setIsShowList(false); // 모달 닫을 때 리스트 숨김
+          }}
+          country={country}
+          city={city}
+          emoji={emoji}
+          description={description}
+          loadData={loadData}
+        />
+      )}
 
       <NavigationBar world />
     </MainLayout>
@@ -104,7 +141,6 @@ const Wrap = styled.View`
   bottom: 40px;
 `;
 
-
 const ResultItem = styled.TouchableOpacity`
   padding: 15px 10px;
   border-bottom-width: 1px;
@@ -114,12 +150,11 @@ const ResultItem = styled.TouchableOpacity`
 `;
 
 const CountryText = styled.Text`
-color: #747474;
-font-family: Pretendard;
-font-size: 16px;
-font-weight: 500;
+  color: #747474;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 500;
 `;
-
 
 const NoResultText = styled.Text`
   padding: 15px 10px;
