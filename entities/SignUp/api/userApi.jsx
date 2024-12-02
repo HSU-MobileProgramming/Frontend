@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../../shared/config/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const signUp = (formData) => {
     console.log("서버로 보낼 formData",formData)
@@ -18,22 +19,31 @@ export const signUp = (formData) => {
     });
 };
 
-export const login = (email,password) => {    
-    axios.post(`${BASE_URL}/user/register`,
-        {
-            "email" : email,
-            "password": password,
-        },
-        {
-            headers: {
-                'Content-Type': 'application/json'
+export const login = async (email, password) => {
+    try {
+        console.log("email", email);
+        console.log("password", password);
+
+        const response = await axios.post(
+            `${BASE_URL}/user/login`,
+            {
+                email,
+                password,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             }
-        }
-    )
-    .then((response) => {
-        console.log(response.data);
-    })
-    .catch((error) => {
-        console.error('error!', error.response?.data || error.message);
-    });
+        );
+
+        // 토큰 저장
+        await AsyncStorage.setItem('accessToken', response.data.token);
+
+        // 저장된 토큰 가져오기
+        const token = await AsyncStorage.getItem('accessToken');
+        console.log("로컬에 저장된 토큰", token);
+    } catch (error) {
+        console.error('Login error!', error.response?.data || error.message);
+    }
 };
