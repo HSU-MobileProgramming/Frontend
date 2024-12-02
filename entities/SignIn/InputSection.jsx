@@ -18,7 +18,7 @@ export default function InputSection() {
 
         <StandardInput placeholder="비밀번호를 입력해주세요" value={password} onChangeText={(e)=>setPassword(e.target.value)} isShow={false} marginBottom=""/>
 
-        <StandardButton text="로그인" onPress={()=>onPressButton()}/>
+        <StandardButton text="로그인" marginTop="20px" onPress={()=>onPressButton()}/>
     </>
   )
 }
