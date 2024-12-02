@@ -8,29 +8,32 @@ import StandardInput from '../shared/component/StandardInput'
 import CitySection from '../entities/Search/CitySection'
 import { ScrollView } from 'react-native-gesture-handler'
 import ResultSection from '../entities/Search/ResultSection'
+import Select from '../entities/Search/Select'
 export default function Search() {
   const [isShowResult, setIsShowResult] = useState(false);
+  const [currentSection, setIsCurrentSection] = useState("✨ 요즘 떠오르는 도시 ✨");
   return (
     <MainLayout>
-        <TitleBar text="탐색" backgroundColor="#fff" color="#5C95FB" />
+      <TitleBar text="탐색" backgroundColor="#fff" color="#5C95FB" />
 
-        <StandardInput 
-          placeholder="도시 및 국가를 검색해보세요" 
-          width="348px" 
-          height="48px" 
-          opacity="1"
-          onSubmitEditing={()=>setIsShowResult(true)}
-          returnKeyType="done"
-          marginBottom="20px"
-          />
+      <Select currentSection={currentSection} setIsCurrentSection={setIsCurrentSection} />
 
-        <ScrollContainer>
-        {
-          isShowResult ? 
-          <ResultSection/> : 
-          <CitySection />
-        }
-        </ScrollContainer>
+      {
+        currentSection === "✨ 요즘 떠오르는 도시 ✨" ?
+
+          <ScrollContainer>
+            {
+              isShowResult ?
+                <ResultSection /> :
+                <CitySection />
+            }
+          </ScrollContainer> :
+          <ScrollContainer>
+            <ResultSection />
+          </ScrollContainer>
+
+      }
+
 
 
       <NavigationBar search />
