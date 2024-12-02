@@ -121,6 +121,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 일본 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -419,7 +420,7 @@ const SvgIcon = (props) => (
       transform="scale(.3474)"
     ></Path>
     <Path
-      fill="#D2D2D2"
+      fill="#FAAEC4"
       stroke="#fff"
       strokeLinejoin="round"
       strokeWidth="2.522"
@@ -485,7 +486,7 @@ const SvgIcon = (props) => (
       transform="scale(.3474)"
     ></Path>
     <Path
-      fill="#D2D2D2"
+      fill="#FAAEC4"
       stroke="#fff"
       strokeLinejoin="round"
       strokeWidth="2.522"
@@ -1144,6 +1145,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 말레이시아 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -1177,6 +1179,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 프랑스 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -1265,6 +1268,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 노르웨이 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -1419,6 +1423,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 중국 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -1639,6 +1644,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 캄보디아 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -1694,6 +1700,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 대한민국 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -1881,6 +1888,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 독일 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -1937,7 +1945,7 @@ const SvgIcon = (props) => (
       transform="scale(.3474)"
     ></Path>
     <Path
-      fill="#D2D2D2"
+      fill="#D2DFAAEC42D2"
       stroke="#fff"
       strokeLinejoin="round"
       strokeWidth="2.522"
@@ -1969,6 +1977,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 라오스 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -1991,6 +2000,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 대만 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -2013,6 +2023,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 터키 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -2101,6 +2112,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 태국 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -2321,6 +2333,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 호주 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -2354,6 +2367,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 인도 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
@@ -2409,6 +2423,7 @@ const SvgIcon = (props) => (
       style={{ webkitTapHighlightColor: "transparent" }}
       transform="scale(.3474)"
     ></Path>
+    {/* 인도네시아 */}
     <Path
       fill="#D2D2D2"
       stroke="#fff"
