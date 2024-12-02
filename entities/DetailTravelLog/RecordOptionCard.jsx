@@ -1,12 +1,19 @@
 import styled from "styled-components/native";
 import { TouchableOpacity, View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default function RecordOptionCard({ recordName, recordImage, borderColor }) {
+export default function RecordOptionCard({ recordType, recordImage, borderColor, decoImage }) {
+    const navigation = useNavigation();
+    const handleClickOptionCard = (recordType) => {
+        navigation.navigate("CreateTravelPiece", {recordType: recordType, recordImage: recordImage, decoImage: decoImage}); // 주소 뒤에 붙는 params로 전달한것 (props가 아님)
+        
+    }
+    
     return (
-        <OptionCardTouchable>
+        <OptionCardTouchable onPress={() => handleClickOptionCard(recordType)}>
             <MainLayout borderColor={borderColor}>
                 <RecordImage>{recordImage}</RecordImage>
-                <Text>{recordName}</Text>
+                <Text>{recordType}</Text>
             </MainLayout>
         </OptionCardTouchable>
     )

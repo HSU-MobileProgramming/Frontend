@@ -8,7 +8,7 @@ import BACK from '../../../assets/back.png';
 import SearchCountryModal from "../../../shared/component/SearchCountryModal";
 import CountryImagePicker from "./CountryImagePicker";
 
-export default function StartTravelLogTop({onSelectedCountry}) {
+export default function AddTravelLogTop({onSelectedCountry}) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedCity, setSelectedCity] = useState('도시 추가'); // 선택된 도시 상태
 

@@ -14,7 +14,7 @@ export default function InputSection() {
   }
   return (
     <>
-        <StandardInput type="로그인" placeholder="이메일을 입력해주세요" value={email} onChangeText={()=>setEmail(e.target.value)} isShow={true} marginBottom="10px"/>
+        <StandardInput type="로그인" placeholder="이메일을 입력해주세요" value={email} onChangeText={(e)=>setEmail(e.target.value)} isShow={true} marginBottom="10px"/>
 
         <StandardInput placeholder="비밀번호를 입력해주세요" value={password} onChangeText={(e)=>setPassword(e.target.value)} isShow={false} marginBottom=""/>
 
