@@ -112,7 +112,7 @@ const CloseButtonText = styled.Text`
 
 const SearchTextInput = styled.TextInput`
 width: 80%;
-color: black;
+color: #111;
 background-color: #f5f5f5; /* 배경색 명시 */
 `;
 

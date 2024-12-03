@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import { View, Text, TextInput } from "react-native";
 import SelectDate from "./SelectDate";
 import StandardButton from "../../../shared/component/StandardButton";
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { postCreateTravel } from "./api/AddLogApi";
 
@@ -12,6 +13,8 @@ export default function AddTravelLogBottom({selectedCountryId, selectedCityId}) 
     const [startDate, setStartDate] = useState('시작 날짜');
     const [endDate, setEndDate] = useState('종료 날짜');
     const [logTitle, setLogTitle] = useState(null);
+    const navigation = useNavigation();
+    const [travelId, setTravelId] = useState(null);
 
     useEffect(()  => {
         console.log("도시 아이디: " + selectedCityId);
@@ -31,10 +34,17 @@ export default function AddTravelLogBottom({selectedCountryId, selectedCityId}) 
         console.log(selectedCityId);
         console.log(logTitle);
         console.log(startDate);
-        // postCreateTravel(4, selectedCityId, selectedCountryId, logTitle, startDate, endDate).then((res) => {
-        //     console.log(res);
-        // })
+        postCreateTravel(4, selectedCityId, selectedCountryId, logTitle, startDate, endDate).then((res) => {
+            console.log(res);
+            setTravelId(res.travelId);
+        });
+        navigation.navigate("DetailTravelLog", {travel_id: travelId});
     }
+
+    // // 여행기 생성하면 여행기 상세화면으로 넘어간다 (travelId값을 넘겨줌)
+    // useEffect(() => {
+    //     navigation.navigate("DetailTravelLog", {travel_id: travelId});
+    // }, [travelId]);
 
     return (
         <StartTravelLogBottomLayout>

@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
-import { View, Text, Image, Modal } from "react-native";
+import { View, Text, Image, Modal, TouchableOpacity } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { countries } from "../../../shared/component/db/CountryData";
+import { useNavigation } from "@react-navigation/native";
 
 // image
 import addCountryImg from '../../../assets/add-country.png';
@@ -9,11 +10,15 @@ import BACK from '../../../assets/back.png';
 import SearchCountryModal from "../../../shared/component/SearchCountryModal";
 import CountryImagePicker from "./CountryImagePicker";
 
-export default function AddTravelLogTop({setSelectedCountryId, setSelectedCityId}) {
+export default function AddTravelLogTop({ setSelectedCountryId, setSelectedCityId }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedCity, setSelectedCity] = useState('도시 추가'); // 선택된 도시 상태
     const [selectedCityIndex, setSelectedCityIndex] = useState(null);
-    
+    const navigation = useNavigation();
+
+    const handleClickBack = () => {
+        navigation.navigate("MyLog");
+    }
 
     const toggleSearchCountryModal = () => {
         setIsModalVisible(!isModalVisible);
@@ -30,20 +35,22 @@ export default function AddTravelLogTop({setSelectedCountryId, setSelectedCityId
     };
 
     useEffect(() => {
-        
-    },[selectedCity, selectedCityIndex]);
+
+    }, [selectedCity, selectedCityIndex]);
 
     return (
         <StartTravelLogTopLayout>
-            <BackImage source={BACK} />
+            <TouchableOpacity onPress={handleClickBack} style={{width:'50', height:'50'}}>
+                <BackImage source={BACK} />
+            </TouchableOpacity>
             <StartTravelLogTitle>여행 기록 시작하기</StartTravelLogTitle>
             <SettingCountryContainer>
                 {selectedCity != '도시 추가' ? (
                     // <CountryImagePicker/>
                     <>
-                    <CountryThumnailView>
-                        {countries.at(selectedCityIndex).thumnail}
-                    </CountryThumnailView>
+                        <CountryThumnailView>
+                            {countries.at(selectedCityIndex).thumnail}
+                        </CountryThumnailView>
                     </>
                 ) : (
                     <SearchCountryButton onPress={toggleSearchCountryModal}>

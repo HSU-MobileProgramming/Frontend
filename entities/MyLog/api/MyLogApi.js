@@ -2,7 +2,7 @@ import axios from "axios";
 import * as AsyncStorage from '@react-native-async-storage/async-storage'
 import { BASE_URL } from "../../../shared/config/config";
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoia2FuZUBleGFtcGxlLmNvbSIsImlhdCI6MTczMzE2MjY1MywiZXhwIjoxNzMzMTY2MjUzfQ.EJQ3L6cJs99j1EdoAeiqYXwVnVyyiVAk9QqxNqzrLR8";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdEBuYXZlci5jb20iLCJpYXQiOjE3MzMyMDgwNjEsImV4cCI6MTczMzI5NDQ2MX0.sbqGlKp_oDqJMC4nWHtqzkWiKNtMGaWHRWBdOx0QacY";
 
 export const postRegister = (name, id, password, birth, pef) => {
   axios.post(`${BASE_URL}/user/register`,

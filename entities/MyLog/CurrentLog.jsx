@@ -16,12 +16,13 @@ export default function CurrentLog({ travel_id, title, start_date, end_date, des
         return `${year}년 ${month}월 ${day}일(${dayOfWeek})`;
     };
 
+    const cityIndex = countries.findIndex((item) => item.city === city_name); // 도시이름(city_name)으로 더미데이터의 인덱스 찾기
 
     return (
         <MainLayout>
             <CurrentLogContainer>
                 <InfoContainer>
-                    <ThumnailView>{countries.at(travel_id).thumnail}</ThumnailView>
+                    <ThumnailView>{countries[cityIndex].thumnail}</ThumnailView>
                     <ColumnView>
                         <DateText>{formatDateWithDay(start_date)} ~ {formatDateWithDay(end_date)}</DateText>
                         <TitleText>[{city_name}] {title}</TitleText>

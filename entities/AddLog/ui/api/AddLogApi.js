@@ -2,7 +2,7 @@ import axios from "axios";
 import * as AsyncStorage from '@react-native-async-storage/async-storage'
 import { BASE_URL } from "../../../../shared/config/config.jsx";
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoia2FuZUBleGFtcGxlLmNvbSIsImlhdCI6MTczMzE1ODgxMywiZXhwIjoxNzMzMTYyNDEzfQ.p4bd0a0ntGUw3He-zZ9x18JSqu9Ypwn-YmqrCm0tgp8";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdEBuYXZlci5jb20iLCJpYXQiOjE3MzMyMDgwNjEsImV4cCI6MTczMzI5NDQ2MX0.sbqGlKp_oDqJMC4nWHtqzkWiKNtMGaWHRWBdOx0QacY";
 
 /* 여행기 전체 조회 */
 export const postCreateTravel = async (userId, cityId, countryId, title, startDate, endDate) => {

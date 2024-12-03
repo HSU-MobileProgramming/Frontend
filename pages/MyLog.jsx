@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import NavigationBar from "../shared/component/NavigationBar";
-import { View, Image, Text, ScrollView } from "react-native";
+import { View, Image, Text, ScrollView, FlatList} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { getAllTravelLog, getCurrentTravelLog } from "../entities/MyLog/api/MyLogApi.js";
 
@@ -13,6 +13,10 @@ export default function MyLog() {
     const [allTravelLog, setAllTravelLog] = useState([]); // 생성된 여행기 저장
     const [currentTravelLog, setCurrentTravelLog] = useState([]);
     const navigation = useNavigation();
+    const itemWidth = 270; // CreatedLog의 너비와 동일
+    const itemSpacing = 10; // 각 항목 사이의 간격
+    const snapToOffsets = Array.from({ length: allTravelLog.length }, (_, i) => i * (itemWidth + itemSpacing));
+
     const handleTouchableBtn = (name) => {
         if (name === "addlog") {
             navigation.navigate("AddTravelLog");
@@ -21,7 +25,7 @@ export default function MyLog() {
 
     const saveAllTravelLogApi = () => {
         getAllTravelLog().then((res) => {
-            setAllTravelLog(res);
+            setAllTravelLog(res.data);
             console.log("Created Log: " + JSON.stringify(res.data));
         })
         getCurrentTravelLog().then((res) => {
@@ -32,12 +36,12 @@ export default function MyLog() {
 
     useEffect(() => {
         saveAllTravelLogApi();
-    }, []);
+    },[]);
 
     useEffect(() => {
         //console.log("travel_id: " + currentTravelLog.travel_id);
-        console.log("length: " + currentTravelLog.length);
-    },[allTravelLog, currentTravelLog]);
+        console.log("length: " + allTravelLog.length);
+    }, [allTravelLog, currentTravelLog]);
 
     return (
         <MainLayout>
@@ -47,14 +51,14 @@ export default function MyLog() {
                     {currentTravelLog.length > 0 && (
                         <>
                             <TitleText>진행중인 여행</TitleText>
-                            <CurrentLog 
-                            travel_id={currentTravelLog[0].travel_id}
-                            title={currentTravelLog[0].title}
-                            start_date={currentTravelLog[0].start_date}
-                            end_date={currentTravelLog[0].end_date}
-                            description={currentTravelLog[0].description}
-                            city_name={currentTravelLog[0].city_name}
-                            country_name={currentTravelLog[0].country_name}
+                            <CurrentLog
+                                travel_id={currentTravelLog[0].travel_id}
+                                title={currentTravelLog[0].title}
+                                start_date={currentTravelLog[0].start_date}
+                                end_date={currentTravelLog[0].end_date}
+                                description={currentTravelLog[0].description}
+                                city_name={currentTravelLog[0].city_name}
+                                country_name={currentTravelLog[0].country_name}
                             />
                         </>
                     )}
@@ -66,8 +70,47 @@ export default function MyLog() {
                             <ADD />
                         </AddLogButton>
                     </RowView>
-                    {!allTravelLog.length === 0 ? (
-                        <CreatedLog />
+                    {allTravelLog.length > 0 ? (
+                        <>
+                            <FlatList
+                                data={allTravelLog}
+                                horizontal
+                                renderItem={({ item }) => (
+                                    <CreatedLog
+                                        key={item.travel_id} // 고유 key 설정
+                                        travel_id={item.travel_id}
+                                        title={item.title}
+                                        start_date={item.start_date}
+                                        end_date={item.end_date}
+                                        description={item.description}
+                                        city_name={item.city_name}
+                                        country_name={item.country_name}
+                                    />
+                                )}
+                                keyExtractor={(item) => String(item.travel_id)}
+                                snapToOffsets={snapToOffsets}
+                                snapToAlignment="start"
+                                decelerationRate="fast"
+                                showsHorizontalScrollIndicator={false}
+                                contentContainerStyle={{ paddingHorizontal: 0 }}
+                                ItemSeparatorComponent={() => <View style={{ width: itemSpacing }} />}
+
+                            />
+                            {/* {allTravelLog.map((data, i) => (
+                                <CreatedLog
+                                    key={data.travel_id || i} // 고유 key 설정
+                                    travel_id={data.travel_id}
+                                    title={data.title}
+                                    start_date={data.start_date}
+                                    end_date={data.end_date}
+                                    description={data.description}
+                                    city_name={data.city_name}
+                                    country_name={data.country_name}
+                                />
+
+                            ))} */}
+
+                        </>
                     ) : (
                         <NullCreatedLogView>
                             <Text style={{ textAlign: 'center' }}>앗, 생성된 여행기가 없어요 !</Text>
