@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import NavigationBar from "../shared/component/NavigationBar";
-import { View, Image, Text, ScrollView, FlatList} from "react-native";
+import { View, Image, Text, ScrollView, FlatList } from "react-native";
+
 import { useNavigation } from '@react-navigation/native';
 import { getAllTravelLog, getCurrentTravelLog } from "../entities/MyLog/api/MyLogApi.js";
 
@@ -8,6 +9,7 @@ import ADD from '../assets/add-log.svg';
 import CreatedLog from "../entities/MyLog/CreatedLog";
 import CurrentLog from "../entities/MyLog/CurrentLog";
 import { useEffect, useState } from "react";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 
 export default function MyLog() {
     const [allTravelLog, setAllTravelLog] = useState([]); // 생성된 여행기 저장
@@ -36,7 +38,7 @@ export default function MyLog() {
 
     useEffect(() => {
         saveAllTravelLogApi();
-    },[]);
+    }, []);
 
     useEffect(() => {
         //console.log("travel_id: " + currentTravelLog.travel_id);
@@ -45,7 +47,18 @@ export default function MyLog() {
 
     return (
         <MainLayout>
-            <MapView />
+            <MapViewContainer>
+                <MapView
+                    provider={PROVIDER_GOOGLE}
+                    initialRegion={{
+                        latitude: 37.541,
+                        longitude: 126.986,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                    style={{width:'100%', height:'100%'}}
+                />
+            </MapViewContainer>
             <ScrollViewContainer>
                 <ContentContainer>
                     {currentTravelLog.length > 0 && (
@@ -126,16 +139,16 @@ export default function MyLog() {
     )
 }
 
+
 const MainLayout = styled.View`
 height : 100%;
 justify-content : space-between;
 
 `;
 
-const MapView = styled.View`
+const MapViewContainer = styled.View`
 width: 100%;
 height: 235px;
-background: lightblue;
 `;
 
 const TitleText = styled.Text`
