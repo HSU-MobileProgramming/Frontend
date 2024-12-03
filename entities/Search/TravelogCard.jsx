@@ -7,13 +7,15 @@ import calendar from '../../assets/calendar.png'
 import marker from '../../assets/marker.png'
 import Tokyo from '../../assets/tokyo.png'
 import Danang from '../../assets/danang.png'
-export default function TravelogCard({description,duration,country,city}) {
+import UK from '../../assets/uk.jpg'
+export default function TravelogCard({title,duration,country,city,nickname}) {
     const [image,setImage] = useState();
     const [emoji,setEmoji] = useState();
     useEffect(()=>{
         switch(country) {
             case "일본" : setImage(Tokyo); setEmoji("🇯🇵"); break;
             case "베트남" : setImage(Danang); setEmoji("🇻🇳"); break;
+            case "영국" : setImage(UK); setEmoji("🇬🇧"); break;
         }
     },[])
   return (
@@ -21,7 +23,7 @@ export default function TravelogCard({description,duration,country,city}) {
         <BackgroundImage source={image}/>
         <Wrap>
             <StyledImage source={profileImage} width="23px" height="23px" borderRadius="23px"/>
-            <StyledText>아보카도 소녀</StyledText>
+            <StyledText>{nickname}</StyledText>
         </Wrap>
 
         <WrapImage>
@@ -29,7 +31,7 @@ export default function TravelogCard({description,duration,country,city}) {
         </WrapImage>
 
         <Wrap>
-            <StyledText>{emoji} {description}</StyledText>
+            <StyledText>{emoji} {title}</StyledText>
         </Wrap>
 
         <Line/>

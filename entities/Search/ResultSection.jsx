@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import TravelogCard from './TravelogCard';
 import { getTravels } from './api/SearchApi';
 
-//이미지
-import Tokyo from '../../assets/tokyo.png'
-import Danang from '../../assets/danang.png'
+
 
 // 날짜 포맷 함수
 const formatDate = (dateString) => {
@@ -25,10 +23,11 @@ export default function ResultSection() {
       console.log('여행 데이터:', res);
       // 배열 상태 업데이트
       const updatedData = res.map((item) => ({
-        description: item.description,
+        title: item.title,
         duration: `${formatDate(item.start_date)} ~ ${formatDate(item.end_date)}`,
         country: item.country_name,
-        city: item.city_name
+        city: item.city_name,
+        nickname : item.nickname
       }));
       setTravelData(updatedData);
     });
@@ -41,10 +40,11 @@ export default function ResultSection() {
       {travelData.map((data, index) => (
         <TravelogCard
           key={index}
-          description={data.description}
+          title={data.title}
           duration={data.duration}
           country={data.country}
           city={data.city}
+          nickname={data.nickname}
         />
       ))}
     </MainLayout>

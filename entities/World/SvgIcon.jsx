@@ -732,6 +732,7 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
         style={{ webkitTapHighlightColor: "transparent" }}
         transform="scale(.3474)"
       ></Path>
+      {/* 폴란드 */}
       <Path
         fill="#D2D2D2"
         stroke="#fff"
@@ -776,8 +777,9 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
         style={{ webkitTapHighlightColor: "transparent" }}
         transform="scale(.3474)"
       ></Path>
+      {/* 러시아 */}
       <Path
-        fill="#D2D2D2"
+        fill={getColorByCountryId(27)}
         stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="2.522"
@@ -1152,7 +1154,7 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
       ></Path>
       {/* 말레이시아 */}
       <Path
-        fill="#D2D2D2"
+        fill={getColorByCountryId(28)}
         stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="2.522"
@@ -1186,7 +1188,7 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
       ></Path>
       {/* 프랑스 */}
       <Path
-        fill="#D2D2D2"
+        fill={getColorByCountryId(11)}
         stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="2.522"
@@ -1406,8 +1408,9 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
         style={{ webkitTapHighlightColor: "transparent" }}
         transform="scale(.3474)"
       ></Path>
+      {/* 체코 */}
       <Path
-        fill="#D2D2D2"
+        fill={getColorByCountryId(15)}
         stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="2.522"
@@ -1895,7 +1898,7 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
       ></Path>
       {/* 독일 */}
       <Path
-        fill="#D2D2D2"
+        fill={getColorByCountryId(23)}
         stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="2.522"
@@ -2007,7 +2010,7 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
       ></Path>
       {/* 대만 */}
       <Path
-        fill="#D2D2D2"
+        fill={getColorByCountryId(8)}
         stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="2.522"
@@ -2030,7 +2033,7 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
       ></Path>
       {/* 터키 */}
       <Path
-        fill="#D2D2D2"
+        fill={getColorByCountryId(26)}
         stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="2.522"
@@ -2350,8 +2353,9 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
         style={{ webkitTapHighlightColor: "transparent" }}
         transform="scale(.3474)"
       ></Path>
+      {/* 오스트리아 */}
       <Path
-        fill="#D2D2D2"
+        fill={getColorByCountryId(14)}
         stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="2.522"
@@ -2430,7 +2434,7 @@ const SvgIcon = ({ dynamicColors, dynamicCountryIds }) => {
       ></Path>
       {/* 인도네시아 */}
       <Path
-        fill="#D2D2D2"
+        fill={getColorByCountryId(9)}
         stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="2.522"
