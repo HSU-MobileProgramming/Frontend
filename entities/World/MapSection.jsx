@@ -1,43 +1,37 @@
-import React from 'react'
-import styled from 'styled-components'
-import MapView, { Geojson } from 'react-native-maps';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components/native';
+import { Svg } from 'react-native-svg';
+import { Dimensions } from 'react-native';
+import SvgIcon from './SvgIcon';
+import { getMapColor } from './api/worldApi';
 
-export default function MapSection() {
-  const geojson = {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "properties": { "name": "Vietnam" },
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [102.0, 0.0],
-              [103.0, 1.0],
-              [104.0, 0.0],
-              [103.0, -1.0],
-              [102.0, 0.0]
-            ]
-          ]
-        }
-      }
-    ]
-  };
+const { width, height } = Dimensions.get('window'); // 화면 크기 가져오기
+
+export default function MapSection({colors,countryIds}) {
 
   return (
-    <MapView style={{ flex: 1 }}>
-      <Geojson
-        geojson={geojson}
-        strokeColor="red"
-        fillColor="rgba(255, 0, 0, 0.5)"
-        strokeWidth={2}
-      />
-    </MapView>
+    <MainLayout horizontal>
+      <SvgWrapper>
+        <Svg
+          width={width} // 화면 너비에 맞춤
+          height={height} // 화면 높이에 맞춤
+          viewBox="350 0 250 490" // SVG의 원본 좌표계
+        >
+          <SvgIcon dynamicColors={colors} dynamicCountryIds={countryIds} />
+        </Svg>
+      </SvgWrapper>
+    </MainLayout>
   );
 }
 
+const MainLayout = styled.ScrollView`
+  height: 100%;
+  position: absolute;
+  top: 70;
+  z-index: -10;
+`;
 
-const MainLayout = styled.View`
-
-`
+const SvgWrapper = styled.View`
+  justify-content: center;
+  align-items: center;
+`;

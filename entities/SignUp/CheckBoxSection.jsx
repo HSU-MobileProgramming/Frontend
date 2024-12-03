@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import CheckBox from './CheckBox'
 
-export default function CheckBoxSection() {
+export default function CheckBoxSection({gpsConsent,setGpsConsent,isPublic,setIsPublic}) {
+
   return (
     <MainLayout>
 
-        <CheckBox text="이용약관 (필수)"/>
+        <CheckBox text="이용약관 (필수)" />
 
         <CheckBox text="개인정보 수집 및 이용 (필수)"/>
 
