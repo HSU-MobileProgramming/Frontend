@@ -10,6 +10,7 @@ import CreatedLog from "../entities/MyLog/CreatedLog";
 import CurrentLog from "../entities/MyLog/CurrentLog";
 import { useEffect, useState } from "react";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function MyLog() {
     const [allTravelLog, setAllTravelLog] = useState([]); // 생성된 여행기 저장
