@@ -26,6 +26,7 @@ export default function World() {
   const [countryIds, setCountryIds] = useState([]);
   const [countryCount,setCountryCount] = useState();
   const [cityCount,setCiryCount] = useState();
+
   const loadData = () => {
     getMapColor().then((res) => {
       console.log(res);
@@ -118,7 +119,6 @@ export default function World() {
             contentContainerStyle={{ paddingBottom: 20 }}
           />
         )}
-
         <Info userInfo={userInfo} countryCount={countryCount} cityCount={cityCount} />
       </Wrap>
 

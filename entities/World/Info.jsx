@@ -11,6 +11,7 @@ export default function Info({userInfo,countryCount,cityCount}) {
 
   useEffect(() => {
     console.log("count",countryCount)
+
     // 애니메이션 실행
     Animated.timing(slideAnim, {
       toValue: 0, // 최종 위치
