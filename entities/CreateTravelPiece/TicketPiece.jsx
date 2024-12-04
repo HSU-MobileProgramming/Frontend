@@ -6,34 +6,49 @@ import ADD from '../../assets/add-grey.svg';
 import Modal from './Modal';
 import StandardButton from '../../shared/component/StandardButton';
 import { getTicket, getTicketList } from './api/ticketApi';
+import { useNavigation } from '@react-navigation/native';
 
 export default function TicketPiece() {
+  const navigation = useNavigation()
   const [itemWidth, setItemWidth] = useState(0);
   const [isShowModal, setIsShowModal] = useState(false);
-  const [ticketId, setTicketId] = useState(null);
-  const [tickets, setTickets] = useState([]);
+  const [tickets, setTickets] = useState([
+    // {
+    //   travel_record_id: 11,
+    //   place: '디즈니 랜드',
+    //   city: '도쿄',
+    //   ticket_date: '2024-12-03',
+    // },
+  ]);
+
+  const loadTickets = async () => {
+    try {
+      const response = await getTicketList(); // getTicketList 호출
+      console.log('getTicketList 조회 성공:', response);
+
+      const ticketDetails = await Promise.all(
+        response.tickets.map(async (ticket) => {
+          const detail = await getTicket(ticket.travel_record_id); // 각 travel_record_id로 getTicket 호출
+          //console.log(`getTicket(${ticket.travel_record_id}) 조회 성공:`, detail);
+          return detail;
+        })
+      );
+
+      setTickets((prevTickets) => [...prevTickets, ...ticketDetails]); // 기존 tickets에 새 데이터 추가
+    } catch (error) {
+      console.error('티켓 데이터 가져오기 오류:', error);
+    }
+  };
 
   useEffect(() => {
-    if (ticketId) {
-      getTicket(ticketId).then((newTicket) => {
-        console.log('getTicket 조회 성공:', newTicket);
-
-        // 기존 tickets 배열에 새로운 ticket 추가
-        setTickets((prevTickets) => [...prevTickets, newTicket]);
-      });
-    }
-
-    getTicketList().then((res) => {
-      console.log(res)
-    })
-  }, [ticketId]);
+    loadTickets();
+  }, []);
 
   return (
     <WrapCard>
       <ScrollView
         horizontal
         nestedScrollEnabled
-        contentContainerStyle={{ width: `${100 * (tickets.length + 1)}%` }}
         scrollEventThrottle={200}
         decelerationRate="fast"
         onContentSizeChange={(w) => setItemWidth(w / (tickets.length + 1))}
@@ -48,6 +63,7 @@ export default function TicketPiece() {
               ticket_date={item.ticket_date}
               length={tickets.length + 1}
               marginLeft={index === 0 ? '47px' : '0px'}
+              index={index}
             />
           ))}
 
@@ -55,20 +71,24 @@ export default function TicketPiece() {
             <ADD />
           </AddButton>
 
-          {isShowModal && <Modal setIsShowModal={setIsShowModal} setTicketId={setTicketId} />}
+          {isShowModal && (
+            <Modal setIsShowModal={setIsShowModal} setTickets={setTickets} />
+          )}
         </Container>
       </ScrollView>
+
       <StandardButton
         text="티켓 추가 완료"
-        backgroundColor="#D3D3D3"
+        backgroundColor="#5C95FB"
         color="#FFF"
-        marginTop='auto' /* 버튼 위에 모든 여백 추가 */
-        onPress={() => setIsClickAddPiece(true)}
+        marginTop="auto"
+        onPress={()=>navigation.navigate("DetailTravelLog")}
       />
     </WrapCard>
   );
 }
 
+// 스타일 정의
 const WrapCard = styled.View`
   height: 100%;
   justify-content: center;
@@ -80,6 +100,7 @@ const Container = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `;
 
 const AddButton = styled.TouchableOpacity`

@@ -2,18 +2,21 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 //이미지
-import Puzzle from '../../assets/puzzle-skyblue.svg'
+import PinkPuzzle from '../../assets/puzzle-pink.svg';
+import YellowPuzzle from '../../assets/puzzle-yellow.svg';
+import MintPuzzle from '../../assets/puzzle-mint.svg';
+import SkyBluePuzzle from '../../assets/puzzle-skyblue.svg';
 import DisneyLand from '../../assets/disneyLand.jpg'
 import UniversalStudio from '../../assets/universalStudios.jpg'
-export default function Ticket({ place, city, ticket_date, length, marginLeft }) {
+export default function Ticket({ place, city, ticket_date, length, marginLeft,index }) {
     const [image, setImage] = useState();
+    const [backgroundColor, setBackgroundColor] = useState();
     const [cityName, setCityName] = useState();
     useEffect(() => {
         switch (true) {
-            case ["디즈니랜드", "디즈니 랜드", "해리포터 스튜디오"].includes(place):
+            case ["디즈니랜드", "디즈니 랜드"].includes(place):
                 setImage(DisneyLand);
                 setCityName("Tokyo");
-                set
                 break;
             case ["유니버셜 스튜디오", "유니버셜스튜디오"].includes(place):
                 setImage(UniversalStudio);
@@ -23,22 +26,42 @@ export default function Ticket({ place, city, ticket_date, length, marginLeft })
                 setImage(null); // 기본값 설정
                 break;
         }
+
+        switch(index%4) {
+            case 0 : setBackgroundColor("#739EF6");  break;
+            case 1 : setBackgroundColor("#FFDD92");  break;
+            case 2 : setBackgroundColor("#9BE4DE");  break;
+            case 3 : setBackgroundColor("#FAAEC4");  break;
+            default : break;
+
+        }
     }, [city]);
+
+    const Puzzle = () => {
+        switch(index%4) {
+            case 0 : return <SkyBluePuzzle/>;
+            case 1 : return <YellowPuzzle width={16} height={16}/>;
+            case 2 : return <MintPuzzle/>;
+            case 3 : return <PinkPuzzle/>;
+            default : break;
+
+        }
+    }
     return (
         <Container marginLeft={marginLeft}>
 
-            <TopCard>
+            <TopCard backgroundColor={backgroundColor}>
 
                 <WrapRound>
 
                     <Round padding="4px 14px 4px 14px">
-                        <StyledText fontSize="18px" color="#5C95FB" lineHeight="20px" letterSpacing="-0.35px" fontWeight="700">
+                        <StyledText fontSize="18px" color={backgroundColor} lineHeight="20px" letterSpacing="-0.35px" fontWeight="700">
                             {cityName}
                         </StyledText>
                     </Round>
 
                     <Round width="28px" height="28px">
-                        <Puzzle />
+                        <Puzzle/>
                     </Round>
 
                 </WrapRound>
@@ -47,9 +70,9 @@ export default function Ticket({ place, city, ticket_date, length, marginLeft })
 
             </TopCard>
 
-            <BottomCard>
+            <BottomCard backgroundColor={backgroundColor}>
 
-                <StyledText fontSize="36px" fontWeight="600" lineHeight="44px" letterSpacing="-0.9px" color="#F7F7FB" marginBottom="12px">
+                <StyledText fontSize="32px" fontWeight="600" lineHeight="44px" letterSpacing="-0.9px" color="#F7F7FB" marginBottom="12px">
                     {place}
                 </StyledText>
 
@@ -86,7 +109,7 @@ margin-bottom :  ${({ marginBottom }) => marginBottom || '0px'};
 const TopCard = styled.View`
 width : 280px;
 height : 324px;
-background-color : #5C95FB;
+background-color : ${({ backgroundColor }) => backgroundColor || '#5C95FB'};
 border-radius : 24px;
 align-items : center;
 justify-content : space-between;
@@ -122,7 +145,7 @@ border-radius: 200px;
 const BottomCard = styled.View`
 width : 280px;
 height : 140px;
-background-color : #5C95FB;
+background-color : ${({ backgroundColor }) => backgroundColor || '#5C95FB'};
 border-radius : 24px;
 border-top-width: 1px;
 border-top-color: #FFFFFF80;

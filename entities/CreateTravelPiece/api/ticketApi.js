@@ -29,7 +29,7 @@ export const setTicket = async (travel_id,place,ticket_date,city) => {
 };
 
 export const getTicket = async (ticketId) => {
-    console.log("getTicket 호출");
+    console.log("getTicket 호출",ticketId);
 
     try {
         const token = await AsyncStorage.getItem('accessToken');
@@ -46,7 +46,7 @@ export const getTicket = async (ticketId) => {
         console.log("getTicket 조회 성공:", response.data);
         return response.data;
     } catch (error) {
-        console.error("setTicket 호출 에러:", error.response?.data || error.message);
+        console.error("getTicket 호출 에러:", error.response?.data || error.message);
     }
 };
 
@@ -65,8 +65,8 @@ export const getTicketList = async () => {
                 },
             }
         );
-        console.log("getTicketList 조회 성공:", response.data);
-        return response.data.tickets;
+        //console.log("getTicketList 조회 성공:", response.data);
+        return response.data;
     } catch (error) {
         console.error("getTicketList 호출 에러:", error.response?.data || error.message);
     }
