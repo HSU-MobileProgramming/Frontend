@@ -70,7 +70,7 @@ export default function MyLog() {
                             coordinate={countries[cityIndex].coordinates}
                             title={log.title}
                             description={log.description}
-                            pinColor="white"
+                            pinColor="blue"
                             >
                                 {/* <CreatedLogMarker>
                                     <MarkerView>{countries[cityIndex].thumnail}</MarkerView>

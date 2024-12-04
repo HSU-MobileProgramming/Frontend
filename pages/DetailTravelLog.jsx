@@ -151,6 +151,7 @@ export default function DetailTravelLog() {
                     {logData.map((data, i) => (
                         <RecordOptionCard
                             key={i}
+                            travelId={travel_id}
                             recordType={data.recordType}
                             recordImage={data.recordImage}
                             borderColor={data.borderColor}

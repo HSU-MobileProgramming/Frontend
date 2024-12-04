@@ -12,19 +12,19 @@ export default function CreatedPiece() {
 
     const handleTab = (i) => {
         setSelectedTab(i); // 선택된 탭 인덱스 저장
-        if(tabList[i] === '📷 사진') {
+        if (tabList[i] === '📷 사진') {
             getPhotoPieces().then((res) => {
                 console.log("사진 조각 조회 성공!" + JSON.stringify(res.photos));
-                setTravelPiece(res.tickets || []);
+                setTravelPiece(res.photos || []);
 
             })
-        } else if(tabList[i] === '✍🏻 메모') {
+        } else if (tabList[i] === '✍🏻 메모') {
             getMemoPieces().then((res) => {
                 console.log("메모 조각 조회 성공!" + JSON.stringify(res.memos));
-                setTravelPiece(res.tickets || []);
+                setTravelPiece(res.memos || []);
 
             })
-        } else if(tabList[i] === '🎫 티켓') {
+        } else if (tabList[i] === '🎫 티켓') {
             getTicketPieces().then((res) => {
                 console.log("티켓 조각 조회 성공!" + JSON.stringify(res.tickets));
                 setTravelPiece(res.tickets || []);
@@ -34,10 +34,8 @@ export default function CreatedPiece() {
             getAllTravelPiece().then((res) => {
                 console.log("전체 조각 조회 성공!" + JSON.stringify(res.pieces));
                 setTravelPiece(res.pieces || []);
-
             })
         }
-
     }
 
     return (
@@ -51,13 +49,19 @@ export default function CreatedPiece() {
                     </TouchableOpacity>
                 ))}
             </TabListContainer>
-            {travelPiece.length > 0 ? (
+            <PieceListContainer>
+                {travelPiece.length > 0 ? (
                     travelPiece.map((piece, index) => (
-                        <PieceInfo  />
+                        <PieceInfo
+                            key={index}
+                            category={piece.category}
+                            createdAt={piece.created_at}
+                        />
                     ))
                 ) : (
                     <Text>표시할 조각이 없습니다.</Text>
-            )}
+                )}
+            </PieceListContainer>
         </MainLayout>
     )
 }
@@ -69,6 +73,7 @@ width: 100%;
 const TabListContainer = styled.View`
 flex-direction: row;
 gap: 15px;
+margin-bottom: 10px;
 `;
 
 const TabView = styled.View`
@@ -85,5 +90,10 @@ const TabText = styled.Text`
 color: ${(props) => (props.isSelected ? '#64F' : 'black')};
 text-align: center;
 
+`;
+
+const PieceListContainer = styled.View`
+width: 100%;
+gap: 10px;
 `;
 

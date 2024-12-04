@@ -7,26 +7,28 @@ import StandardButton from "../shared/component/StandardButton";
 import { useState } from "react";
 import CompleteAddPiece from "../entities/CreateTravelPiece/CompleteAddPiece";
 import TicketPiece from "../entities/CreateTravelPiece/TicketPiece";
+import PhotoPiece from "../entities/CreateTravelPiece/PhotoPiece";
+import MemoPiece from "../entities/CreateTravelPiece/MemoPiece";
 
 export default function CreateTravelPiece({ route }) {
-    const { recordType, recordImage, decoImage } = route.params; // route 객체를 통해 params에 접근해서 값을 가져와야함
+    const { travelId, recordType, recordImage, decoImage } = route.params; // route 객체를 통해 params에 접근해서 값을 가져와야함
     const [isClickAddPiece, setIsClickAddPiece] = useState(false);
+    const [recordId, setRecordId] = useState([]);
 
     return (
         <MainLayout>
             {!isClickAddPiece ? (
                 <>
-                    <CreatePieceTop recordType={recordType} recordImage={recordImage} decoImage={decoImage} />
+                    <CreatePieceTop travelId={travelId} recordType={recordType} recordImage={recordImage} decoImage={decoImage} />
                     <CreatePieceBottom>
                         {(() => {
                             switch (recordType) {
                                 case "메모":
-                                    return <InputMemo height='190px' placeholder='| 메모를 작성하세요(100자 이내)' />;
+                                    return <MemoPiece travelId={travelId} setIsClickAddPiece={setIsClickAddPiece} setRecordId={setRecordId}/>
                                 case "사진":
                                     return (
                                         <>
-                                            <PhotoCapturePicker />
-                                            <InputMemo />
+                                            <PhotoPiece travelId={travelId} setIsClickAddPiece={setIsClickAddPiece} setRecordId={setRecordId}/>
                                         </>
                                     );
                                 case "티켓":
@@ -43,7 +45,7 @@ export default function CreateTravelPiece({ route }) {
                 </>
             ) : (
                 <>
-                    <CompleteAddPiece recordType={recordType} onPress={() => setIsClickAddPiece(false)} />
+                    <CompleteAddPiece recordType={recordType} onPress={() => setIsClickAddPiece(false)} recordId={recordId}/>
                 </>
             )}
 

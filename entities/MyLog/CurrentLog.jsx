@@ -32,7 +32,6 @@ export default function CurrentLog({ travel_id, title, start_date, end_date, des
 
                 </InfoContainer>
             </CurrentLogContainer>
-
         </MainLayout>
     )
 }

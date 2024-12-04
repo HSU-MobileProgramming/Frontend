@@ -3,10 +3,10 @@ import { View, Text } from "react-native";
 import ComponentTopBar from "../../shared/component/ComponentTopBar";
 import { useNavigation } from "@react-navigation/native";
 
-export default function CreatePieceTop({recordType, recordImage, decoImage}) {
+export default function CreatePieceTop({travelId, recordType, recordImage, decoImage}) {
     const navigation = useNavigation();
     const goToDetailTravelLog = () => {
-        navigation.navigate("DetailTravelLog");
+        navigation.navigate("DetailTravelLog", {travel_id: travelId});
     }
     return (
         <MainLayout>
