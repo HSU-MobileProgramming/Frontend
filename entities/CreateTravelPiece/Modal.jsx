@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Modal as RNModal, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import StandardButton from '../../shared/component/StandardButton';
 import close from '../../assets/close.png';
@@ -9,22 +8,14 @@ import StandardInput from '../../shared/component/StandardInput';
 import { setTicket } from './api/ticketApi';
 import SelectDate from '../AddLog/ui/SelectDate';
 
-export default function Modal({ setIsShowModal,setTicketId }) {
-    const Navigation = useNavigation();
+export default function Modal({ setIsShowModal, setTickets }) {
     const [date, setDate] = useState('날짜');
-    const [formattedDate, setFormattedDate] = useState('');
     const [ticketInfo, setTicketInfo] = useState({
-        travel_id: 5,
+        travel_id: 11,
         city: '',
         ticket_date: '',
         place: '',
     });
-
-    // 날짜 포맷 함수
-    const formatDate = (inputDate) => {
-        const [month, day, year] = inputDate.split('/');
-        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-    };
 
     const handleInputChange = (field, value) => {
         setTicketInfo((prev) => ({ ...prev, [field]: value }));
@@ -32,8 +23,21 @@ export default function Modal({ setIsShowModal,setTicketId }) {
 
     const onPressButton = async () => {
         try {
-            const travelRecordId = await setTicket(ticketInfo.travel_id, ticketInfo.place, formatDate(date), ticketInfo.city);
-            setTicketId(travelRecordId)
+            const newTicket = {
+                ...ticketInfo,
+                ticket_date: date, // 날짜 그대로 사용
+            };
+
+            // API 호출
+            await setTicket(
+                newTicket.travel_id,
+                newTicket.place,
+                newTicket.ticket_date,
+                newTicket.city
+            );
+
+            // 티켓 추가
+            setTickets((prevTickets) => [...prevTickets, newTicket]);
             setIsShowModal(false);
         } catch (error) {
             console.error('티켓 추가 중 오류:', error);
