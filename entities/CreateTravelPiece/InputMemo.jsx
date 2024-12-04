@@ -1,7 +1,12 @@
 import styled from "styled-components/native";
 import { View, Text, TextInput } from "react-native";
 
-export default function InputMemo({height, placeholder}) {
+export default function InputMemo({height, placeholder, setMemo}) {
+    const handleTextChange = (text) => {
+        if (setMemo) {
+            setMemo(text); // 상위 컴포넌트로 메모 내용 전달
+        }
+    };
     return (
         <MainLayout>
             <MemoText>메모</MemoText>
@@ -10,6 +15,7 @@ export default function InputMemo({height, placeholder}) {
             numberOfLines={4} 
             placeholder={placeholder || '| 사진에 대해 설명해주세요! (30자 이내)'}
             height={height}
+            onChangeText={handleTextChange}
             />
         </MainLayout>
     )

@@ -1,13 +1,13 @@
 import axios from "axios";
-import * as AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BASE_URL } from "../../../../shared/config/config.jsx";
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdEBuYXZlci5jb20iLCJpYXQiOjE3MzMyMDgwNjEsImV4cCI6MTczMzI5NDQ2MX0.sbqGlKp_oDqJMC4nWHtqzkWiKNtMGaWHRWBdOx0QacY";
+//const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdEBuYXZlci5jb20iLCJpYXQiOjE3MzMyMDgwNjEsImV4cCI6MTczMzI5NDQ2MX0.sbqGlKp_oDqJMC4nWHtqzkWiKNtMGaWHRWBdOx0QacY";
 
 /* 여행기 전체 조회 */
 export const postCreateTravel = async (userId, cityId, countryId, title, startDate, endDate) => {
   try {
-    // const token = await AsyncStorage.getItem('accessToken');
+    const token = await AsyncStorage.getItem('accessToken');
  
     if (token) {
       const response = await axios.post(`${BASE_URL}/trip/travel_create`,

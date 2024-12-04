@@ -8,15 +8,17 @@ export const countries = [
     city: "하노이",
     country: "베트남",
     flagImage: "🇻🇳",
-    thumnail: <VIETNAM/>
+    thumnail: <VIETNAM />,
+    coordinates: { latitude: 21.0285, longitude: 105.8542 }
   },
   {
     index: 1,
     countryId: 1,
     city: "다낭",
     country: "베트남",
-    flagImage: "🇻🇳",
-    thumnail: <VIETNAM/>
+    flagImage: "🇻🇳",  
+    thumnail: <VIETNAM />,
+    coordinates: { latitude: 16.0544, longitude: 108.2022 }
   },
   {
     index: 2,
@@ -24,7 +26,8 @@ export const countries = [
     city: "호치민",
     country: "베트남",
     flagImage: "🇻🇳",
-    thumnail: <VIETNAM/>
+    thumnail: <VIETNAM />,
+    coordinates: { latitude: 10.8231, longitude: 106.6297 }
   },
   {
     index: 3,
@@ -32,7 +35,8 @@ export const countries = [
     city: "나트랑",
     country: "베트남",
     flagImage: "🇻🇳",
-    thumnail: <VIETNAM/>
+    thumnail: <VIETNAM />,
+    coordinates: { latitude: 12.2388, longitude: 109.1967 }
   },
   {
     index: 4,
@@ -40,7 +44,8 @@ export const countries = [
     city: "오사카",
     country: "일본",
     flagImage: "🇯🇵",
-    thumnail: <JAPAN/>
+    thumnail: <JAPAN />,
+    coordinates: { latitude: 34.6937, longitude: 135.5023 }
   },
   {
     index: 5,
@@ -48,7 +53,8 @@ export const countries = [
     city: "후쿠오카",
     country: "일본",
     flagImage: "🇯🇵",
-    thumnail: <JAPAN/>
+    thumnail: <JAPAN />,
+    coordinates: { latitude: 33.5904, longitude: 130.4017 }
   },
   {
     index: 6,
@@ -56,7 +62,8 @@ export const countries = [
     city: "삿포로",
     country: "일본",
     flagImage: "🇯🇵",
-    thumnail: <JAPAN/>
+    thumnail: <JAPAN />,
+    coordinates: { latitude: 43.0621, longitude: 141.3544 }
   },
   {
     index: 7,
@@ -64,84 +71,96 @@ export const countries = [
     city: "도쿄",
     country: "일본",
     flagImage: "🇯🇵",
-    thumnail: <JAPAN/>
+    thumnail: <JAPAN />,
+    coordinates: { latitude: 35.6895, longitude: 139.6917 }
   },
   {
     index: 8,
     countryId: 3,
     city: "상하이",
     country: "중국",
-    flagImage: "🇨🇳"
+    flagImage: "🇨🇳",
+    coordinates: { latitude: 31.2304, longitude: 121.4737 }
   },
   {
     index: 9,
     countryId: 3,
     city: "베이징",
     country: "중국",
-    flagImage: "🇨🇳"
+    flagImage: "🇨🇳",
+    coordinates: { latitude: 39.9042, longitude: 116.4074 }
   },
   {
     index: 10,
     countryId: 3,
     city: "심천",
     country: "중국",
-    flagImage: "🇨🇳"
+    flagImage: "🇨🇳",
+    coordinates: { latitude: 22.5431, longitude: 114.0579 }
   },
   {
     index: 11,
     countryId: 3,
     city: "광저우",
     country: "중국",
-    flagImage: "🇨🇳"
+    flagImage: "🇨🇳",
+    coordinates: { latitude: 23.1291, longitude: 113.2644 }
   },
   {
     index: 12,
     countryId: 4,
     city: "방콕",
     country: "태국",
-    flagImage: "🇹🇭"
+    flagImage: "🇹🇭",
+    coordinates: { latitude: 13.7563, longitude: 100.5018 }
   },
   {
     index: 13,
     countryId: 5,
     city: "세부",
     country: "필리핀",
-    flagImage: "🇵🇭"
+    flagImage: "🇵🇭",
+    coordinates: { latitude: 10.3157, longitude: 123.8854 }
   },
   {
     index: 14,
     countryId: 5,
     city: "마닐라",
     country: "필리핀",
-    flagImage: "🇵🇭"
+    flagImage: "🇵🇭",
+    coordinates: { latitude: 14.5995, longitude: 120.9842 }
   },
   {
     index: 15,
     countryId: 6,
     city: "브리즈번",
     country: "호주",
-    flagImage: "🇦🇺"
+    flagImage: "🇦🇺",
+    coordinates: { latitude: -27.4698, longitude: 153.0251 }
   },
   {
     index: 16,
     countryId: 6,
     city: "시드니",
     country: "호주",
-    flagImage: "🇦🇺"
+    flagImage: "🇦🇺",
+    coordinates: { latitude: -33.8688, longitude: 151.2093 }
   },
   {
     index: 17,
     countryId: 6,
     city: "멜버른",
     country: "호주",
-    flagImage: "🇦🇺"
+    flagImage: "🇦🇺",
+    coordinates: { latitude: -37.8136, longitude: 144.9631 }
   },
   {
     index: 18,
     countryId: 7,
     city: "싱가포르",
     country: "싱가포르",
-    flagImage: "🇸🇬"
+    flagImage: "🇸🇬",
+    coordinates: { latitude: 1.3521, longitude: 103.8198 }
   },
   {
     index: 19,

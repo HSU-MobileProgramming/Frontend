@@ -2,14 +2,18 @@ import styled from "styled-components/native";
 import { View, Text } from "react-native";
 import AddPhotoBox from "./AddPhotoBox";
 
-export default function PhotoCapturePicker() {
+export default function PhotoCapturePicker({ selectedPhotos, onPhotoSelect }) {
     return (
         <MainLayout>
             <AddPhotoContainer>
-                <AddPhotoBox />
-                <AddPhotoBox />
-                <AddPhotoBox />
-                <AddPhotoBox />
+            {selectedPhotos.map((photo, index) => (
+                    <AddPhotoBox
+                        key={index}
+                        index={index}
+                        photo={photo}
+                        onPhotoSelect={onPhotoSelect}
+                    />
+                ))}
             </AddPhotoContainer>
 
             <DescriptionText>최대 4장 첨부 가능합니다</DescriptionText>

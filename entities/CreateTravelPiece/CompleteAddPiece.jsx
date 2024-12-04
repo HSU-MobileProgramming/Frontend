@@ -6,7 +6,7 @@ import CHECKPUZZLEPINK from '../../assets/checkpuzzle-pink.svg';
 import CHECKPUZZLEMINT from '../../assets/checkpuzzle-mint.svg';
 import StandardButton from "../../shared/component/StandardButton";
 
-export default function CompleteAddPiece({ recordType, onPress }) {
+export default function CompleteAddPiece({ recordType, onPress, recordId }) {
     const renderPuzzleImage = () => {
         switch (recordType) {
             case "사진":
