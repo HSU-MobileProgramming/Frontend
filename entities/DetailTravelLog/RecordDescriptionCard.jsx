@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { View, Text } from "react-native";
 
 
-export default function RecordDescriptionCard({recordImage, decoImage, descriptionText1, descriptionText2, puzzleImage}) {
+export default function RecordDescriptionCard({recordType,recordImage, decoImage, descriptionText1, descriptionText2, puzzleImage}) {
     return (
         <MainLayout>
             <DescriptionBox>
@@ -10,7 +10,11 @@ export default function RecordDescriptionCard({recordImage, decoImage, descripti
                 <PuzzleImageBox>{puzzleImage}</PuzzleImageBox>
             </DescriptionBox>
             <DescriptionTextLight>{descriptionText2}</DescriptionTextLight>
-            <RecordImage>{recordImage}</RecordImage>
+            {
+                    recordType === "티켓" ?
+                        <Ticket style={{fontSize:"50"}}>{recordImage}</Ticket> :
+                        <RecordImage>{recordImage}</RecordImage>
+            }
             <DecoImage>{decoImage}</DecoImage>
         
         </MainLayout>
@@ -42,6 +46,7 @@ align-self: flex-start; /* 부모의 flex 영향을 받지 않고, 텍스트 길
 `;
 
 const DescriptionTextLight = styled.Text`
+width : 128px;
 color: #747474;
 font-size: 14px;
 font-weight: 500;
@@ -68,3 +73,9 @@ const PuzzleImageBox = styled.View`
 width: 21px;
 height: 21px;
 `;
+
+const Ticket = styled.Text`
+position: absolute;
+right: 30px;
+bottom: 20px;
+`

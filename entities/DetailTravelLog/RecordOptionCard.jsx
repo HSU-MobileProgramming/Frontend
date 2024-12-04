@@ -5,14 +5,18 @@ import { useNavigation } from "@react-navigation/native";
 export default function RecordOptionCard({ travelId, recordType, recordImage, borderColor, decoImage }) {
     const navigation = useNavigation();
     const handleClickOptionCard = (recordType) => {
-        navigation.navigate("CreateTravelPiece", {travelId: travelId, recordType: recordType, recordImage: recordImage, decoImage: decoImage}); // 주소 뒤에 붙는 params로 전달한것 (props가 아님)
-        
+        navigation.navigate("CreateTravelPiece", { travelId: travelId, recordType: recordType, recordImage: recordImage, decoImage: decoImage }); // 주소 뒤에 붙는 params로 전달한것 (props가 아님)
+
     }
-    
+
     return (
         <OptionCardTouchable onPress={() => handleClickOptionCard(recordType)}>
             <MainLayout borderColor={borderColor}>
-                <RecordImage>{recordImage}</RecordImage>
+                {
+                    recordType === "티켓" ?
+                        <Text style={{fontSize:"32"}}>{recordImage}</Text> :
+                        <RecordImage>{recordImage}</RecordImage>
+                }
                 <Text>{recordType}</Text>
             </MainLayout>
         </OptionCardTouchable>
@@ -38,7 +42,6 @@ border: 2px solid ${(props) => props.borderColor || "#000"};
 
 
 `;
-
 const RecordImage = styled.View`
 width: 30px;
 height: 30px;

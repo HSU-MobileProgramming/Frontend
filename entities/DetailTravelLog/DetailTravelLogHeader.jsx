@@ -1,21 +1,38 @@
 import styled from "styled-components/native";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 
 import LinearGradient from "react-native-linear-gradient";
 
 import HEADERICON1 from '../../assets/detail-log-header-icon1.svg';
 import HEADERICON2 from '../../assets/detail-log-header-icon2.svg';
 import HEADERPUZZLEICON from '../../assets/detail-log-header-puzzle.png';
+import CALENDAR from '../../assets/calendar-white.svg'
+import PROF from '../../assets/profileSvg.svg'
 
 export default function DetailTravelLogHeader({ title, cityName, countryName, travelOpen, startDate, endDate }) {
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const year = String(date.getFullYear()).slice(-2); // 연도 두 자리
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월
+        const day = String(date.getDate()).padStart(2, '0'); // 일
+        return `${year}.${month}.${day}`;
+    };
     return (
         <MainLayout>
             <GradientBackground>
                 <TravelLogInfoContainer>
+                    <Wrap>
+                        <PROF />
+                        <Nickname>여행자</Nickname>
+                    </Wrap>
                     <Title>{title}</Title>
                     <LocationText>{cityName}, {countryName}</LocationText>
                     <TravelOpenText>오늘은 여행 {travelOpen}일차에요!</TravelOpenText>
-                    <DateText>{startDate} ~ {endDate}</DateText>
+                    <Wrap>
+                        <CALENDAR />
+                        <DateText>{formatDate(startDate)} ~ {formatDate(endDate)}</DateText>
+                    </Wrap>
+
                 </TravelLogInfoContainer>
                 <HeaderIcon1 source={HEADERICON1} />
                 <HeaderIcon2 source={HEADERICON2} />
@@ -29,7 +46,6 @@ export default function DetailTravelLogHeader({ title, cityName, countryName, tr
 const MainLayout = styled.View`
 width: 100%;
 height: 230px;
-
 `;
 
 
@@ -68,12 +84,24 @@ height: 110px;
 `;
 
 const TravelLogInfoContainer = styled.View`
-margin-top: 80px;
+margin-top: 48px;
 `;
-
+const Nickname = styled.Text`
+color: #F9F9F9;
+font-family: Pretendard;
+font-size: 14px;
+font-weight: 500;
+letter-spacing: -0.3px;
+margin-bottom : 21px;
+margin-top : 4px;
+`;
 const Title = styled.Text`
-    font-size: 16px;
-    color: #F9F9F9;
+color: #F9F9F9;
+font-family: Pretendard;
+font-size: 16px;
+font-weight: 500;
+letter-spacing: -0.3px;
+margin-bottom : 10px;
 `;
 
 const LocationText = styled.Text`
@@ -82,14 +110,29 @@ color: #FFF;
 text-decoration-line: underline;
 text-decoration-style: solid;
 font-weight: 700;
+margin-bottom : 8px;
 `;
 
 const TravelOpenText = styled.Text`
-    font-size: 26px;
-    color: #FFF;
+color: #FFF;
+font-family: Pretendard;
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.3px;
+margin-bottom : 10px;
 `;
 
 const DateText = styled.Text`
-    font-size: 12px;
-    color: #FFF;
+color: #F9F9F9;
+font-family: Pretendard;
+font-size: 12px;
+font-weight: 400;
+letter-spacing: -0.3px;
+margin-left : 6px;
+margin-top : 2px;
 `;
+
+
+const Wrap = styled.View`
+flex-direction : row;
+`

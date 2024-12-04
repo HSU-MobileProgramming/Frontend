@@ -15,14 +15,13 @@ export default function CurrentLog({ travel_id, title, start_date, end_date, des
         const weekDayNames = ["일", "월", "화", "수", "목", "금", "토"];
         const dayOfWeek = weekDayNames[date.getDay()];
     
-        return `${year}년 ${month}월 ${day}일(${dayOfWeek})`;
+        return `${month}/${day}(${dayOfWeek})`;
     };
 
     const cityIndex = countries.findIndex((item) => item.city === city_name); // 도시이름(city_name)으로 더미데이터의 인덱스 찾기
 
     return (
         <MainLayout onPress={() => navigation.navigate("DetailTravelLog", {travel_id: travel_id})}>
-            <CurrentLogContainer>
                 <InfoContainer>
                     <ThumnailView>{countries[cityIndex].thumnail}</ThumnailView>
                     <ColumnView>
@@ -31,7 +30,6 @@ export default function CurrentLog({ travel_id, title, start_date, end_date, des
                     </ColumnView>
 
                 </InfoContainer>
-            </CurrentLogContainer>
         </MainLayout>
     )
 }
@@ -39,17 +37,10 @@ export default function CurrentLog({ travel_id, title, start_date, end_date, des
 const MainLayout = styled.TouchableOpacity`
 width: 100%;
 height: 85px;
-
-`;
-
-const CurrentLogContainer = styled.View`
-width: 100%;
-height: 100%;
-padding: 16px;
 border-radius: 10px;
 border: 0.6px solid #5C95FB;
 background: rgba(92, 149, 251, 0.10);
-
+padding : 19px 0 19px 16px;
 `;
 
 const InfoContainer = styled.View`
@@ -59,13 +50,15 @@ gap: 10px;
 
 const ColumnView = styled.View`
 flex-direction: column;
-gap: 5px;
+
 `;
 
 const DateText = styled.Text`
 color: #666;
 font-size: 12px;
 font-weight: 500;
+margin-bottom : 3px;
+margin-top : 6px;
 `;
 
 const TitleText = styled.Text`
