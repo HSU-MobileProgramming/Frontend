@@ -52,7 +52,34 @@ export default function MyLog() {
     return (
         <MainLayout>
             <MapViewContainer>
-
+                <MapView
+                    provider={PROVIDER_GOOGLE}
+                    initialRegion={{
+                        latitude: 34.0479,
+                        longitude: 100.6197,
+                        latitudeDelta: 70,
+                        longitudeDelta: 90,
+                    }}
+                    style={{ width: '100%', height: '100%' }}
+                >
+                    {allTravelLog.map((log, index) => {
+                        const cityIndex = countries.findIndex((item) => item.city === log.city_name); // 도시이름(city_name)으로 더미데이터의 인덱스 찾기
+                        return (
+                            <Marker
+                                key={index}
+                                coordinate={countries[cityIndex].coordinates}
+                                title={log.title}
+                                description={log.description}
+                                pinColor="blue"
+                            >
+                                {/* <CreatedLogMarker>
+                                    <MarkerView>{countries[cityIndex].thumnail}</MarkerView>
+                                    
+                                </CreatedLogMarker> */}
+                            </Marker>
+                        )
+                    })}
+                </MapView>
             </MapViewContainer>
             <ScrollViewContainer>
                 <ContentContainer>
@@ -75,7 +102,7 @@ export default function MyLog() {
                         <TitleText>생성된 여행기</TitleText>
                         <AddLogButton onPress={() => handleTouchableBtn("addlog")}>
                             {/* <Image source={ADD} style={{ width: '30', height: '30' }} /> */}
-                            <ADD />
+                            <ADD width={30} height={30} marginBottom={6} />
                         </AddLogButton>
                     </RowView>
                     {allTravelLog.length > 0 ? (
@@ -104,7 +131,7 @@ export default function MyLog() {
                                 ItemSeparatorComponent={() => <View style={{ width: itemSpacing }} />}
 
                             />
-                        
+
 
                         </>
                     ) : (
@@ -113,7 +140,7 @@ export default function MyLog() {
                         </NullCreatedLogView>
                     )}
                     <TitleText>여행자님의 지난 여행 조각</TitleText>
-                    <CreatedPiece/>
+                    <CreatedPiece />
 
 
                 </ContentContainer>
@@ -141,7 +168,7 @@ font-size: 20px;
 font-weight: 700;
 letter-spacing: -0.3px;
 margin-top: 10px;
-margin-bottom: 5px;
+margin-bottom: 12px;
 `;
 
 const AddLogButton = styled.TouchableOpacity`
@@ -161,6 +188,7 @@ flex-direction: row;
 align-items: center;
 gap: 3px;
 margin-bottom: 3px;
+margin-top : 32px;
 `;
 
 const NullCreatedLogView = styled.View`
@@ -173,6 +201,7 @@ shadowOpacity: 0.1;
 justify-content: center;
 align-items: center;
 background: rgba(92, 149, 251, 0.10);
+margin-bottom : 39px;
 `;
 
 const CreatedLogMarker = styled.View`

@@ -28,7 +28,6 @@ export default function CreatedPiece() {
             getTicketPieces().then((res) => {
                 console.log("티켓 조각 조회 성공!" + JSON.stringify(res.tickets));
                 setTravelPiece(res.tickets || []);
-
             })
         } else {
             getAllTravelPiece().then((res) => {
@@ -84,6 +83,7 @@ border-radius: 100px;
 background: ${(props) => (props.isSelected ? 'rgba(102, 68, 255, 0.10)' : '#FFF')};
 border: ${(props) => (props.isSelected ? '1px solid #64F' : 'none')};
 justify-content: center;
+margin-bottom : 20px;
 `;
 
 const TabText = styled.Text`
