@@ -39,14 +39,6 @@ export default function CreateTravelPiece({ route }) {
                                     return null; // 기본적으로 아무것도 렌더링하지 않음
                             }
                         })()}
-                        <StandardButton
-                            text="기록 추가"
-                            backgroundColor="#D3D3D3"
-                            color="#FFF"
-                            width="100%"
-                            marginTop='auto' /* 버튼 위에 모든 여백 추가 */
-                            onPress={() => setIsClickAddPiece(true)}
-                        />
                     </CreatePieceBottom>
                 </>
             ) : (
@@ -66,9 +58,6 @@ flex: 1;
 
 const CreatePieceBottom = styled.View`
 flex: 1;
-padding: 30px;
-`;
-
-const StandardButtonContainer = styled.View`
-width: 100%;
+padding-bottom : 20px;
+align-items : center;
 `;

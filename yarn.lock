@@ -3128,7 +3128,7 @@
     "@expo/config" "~10.0.4"
     "@expo/env" "~0.4.0"
 
-"expo-file-system@~18.0.4":
+"expo-file-system@^18.0.4", "expo-file-system@~18.0.4":
   "integrity" "sha512-aAWEDwnu0XHOBYvQ9Q0+QIa+483vYJaC4IDsXyWQ73Rtsg273NZh5kYowY+cAocvoSmA99G6htrLBn11ax2bTQ=="
   "resolved" "https://registry.npmjs.org/expo-file-system/-/expo-file-system-18.0.4.tgz"
   "version" "18.0.4"
