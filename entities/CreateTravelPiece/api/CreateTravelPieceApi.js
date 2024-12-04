@@ -49,3 +49,48 @@ export const postMemo = async ( travel_id, description ) => {
         console.error("setTicket 호출 에러:", error.response?.data || error.message);
     }
 };
+
+
+/* 메모 조각 조회 api */
+export const getMemoPiece = async (travel_record_id) => {
+    try {
+        const token = await AsyncStorage.getItem('accessToken');
+        console.log(travel_record_id);
+
+        const response = await axios.get(
+            `${BASE_URL}/piece/photo/${travel_record_id}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            }
+        );
+        console.log("사진 조각 조회 성공:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("setTicket 호출 에러:", error.response?.data || error.message);
+    }
+};
+
+/* 사진 조각 조회 api */
+export const getPhotoPiece = async (travel_record_id) => {
+    try {
+        const token = await AsyncStorage.getItem('accessToken');
+        console.log(travel_record_id);
+
+        const response = await axios.get(
+            `${BASE_URL}/piece/photo/${travel_record_id}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            }
+        );
+        console.log("사진 조각 조회 성공:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("setTicket 호출 에러:", error.response?.data || error.message);
+    }
+};
