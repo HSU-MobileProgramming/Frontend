@@ -24,9 +24,13 @@ export default function World() {
 
   const [colors, setColors] = useState([]);
   const [countryIds, setCountryIds] = useState([]);
+  const [countryCount,setCountryCount] = useState();
+  const [cityCount,setCiryCount] = useState();
 
   const loadData = () => {
     getMapColor().then((res) => {
+      console.log(res);
+  
       if (res?.visits?.length) {
         const colorMap = {
           pink: '#FAAEC4',
@@ -34,15 +38,22 @@ export default function World() {
           skyblue: '#739EF6',
           mint: '#9BE4DE',
         };
-
+  
         const ids = res.visits.map((visit) => visit.country_id);
+        const uniqueCountryIds = [...new Set(ids)]; // 중복 제거
         const mappedColors = res.visits.map((visit) => colorMap[visit.color] || '#D2D2D2');
-
+  
         setCountryIds(ids);
         setColors(mappedColors);
+        setCountryCount(uniqueCountryIds.length); // 고유한 country_id의 개수
+        setCiryCount(res.visits.length); // 전체 방문 수
+      } else {
+        setCountryCount(0);
+        setCiryCount(0);
       }
     });
   };
+  
 
   useEffect(() => {
     loadData();
@@ -108,8 +119,7 @@ export default function World() {
             contentContainerStyle={{ paddingBottom: 20 }}
           />
         )}
-
-        <Info userInfo={userInfo} />
+        <Info userInfo={userInfo} countryCount={countryCount} cityCount={cityCount} />
       </Wrap>
 
       <MapSection colors={colors} countryIds={countryIds} />

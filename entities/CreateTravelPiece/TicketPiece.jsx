@@ -1,169 +1,93 @@
-import React, {useEffect, useState} from 'react';
-import {Button, StyleSheet, Text, View, Image} from 'react-native';
-// import ImagePicker from 'react-native-image-crop-picker';
-import * as ImagePicker from 'expo-image-picker';
-import ProgressCircle from 'react-native-progress/Circle';
-import TesseractOcr, {LANG_ENGLISH, LEVEL_WORD} from 'react-native-tesseract-ocr';
+import React, { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
+import styled from 'styled-components/native';
+import Ticket from './Ticket';
+import ADD from '../../assets/add-grey.svg';
+import Modal from './Modal';
+import StandardButton from '../../shared/component/StandardButton';
+import { getTicket, getTicketList } from './api/ticketApi';
 
+export default function TicketPiece() {
+  const [itemWidth, setItemWidth] = useState(0);
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [ticketId, setTicketId] = useState(null);
+  const [tickets, setTickets] = useState([]);
 
-const DEFAULT_HEIGHT = 500;
-const DEFAULT_WITH = 600;
-const defaultPickerOptions = {
-  cropping: true,
-  height: DEFAULT_HEIGHT,
-  width: DEFAULT_WITH,
-};
-
-function TicketPiece() {
-  const [response, setResponse] = useState(null);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [imgSrc, setImgSrc] = useState(null);
-  const [text, setText] = useState('');
-  
   useEffect(() => {
-    if(imgSrc != null) {
-      console.log(TesseractOcr);
-    }
-  },[imgSrc])
+    if (ticketId) {
+      getTicket(ticketId).then((newTicket) => {
+        console.log('getTicket 조회 성공:', newTicket);
 
-  const recognizeTextFromImage = async (path) => {
-    setIsLoading(true);
-
-    try {
-      const tessOptions = { level: LEVEL_WORD };
-      const recognizedText = await TesseractOcr.recognizeTokens(
-        path,
-        LANG_ENGLISH,
-        tessOptions,
-      );
-      setText(recognizedText);
-    } catch (err) {
-      console.error(err);
-      setText('');
+        // 기존 tickets 배열에 새로운 ticket 추가
+        setTickets((prevTickets) => [...prevTickets, newTicket]);
+      });
     }
 
-    setIsLoading(false);
-    setProgress(0);
-  };
-  const handleTakeChoosePhoto = async () => {
-    try {
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['images'], // 사진만 선택
-            //allowsEditing: true, // 편집 허용
-            quality: 1, // 원본 품질 유지
-        });
-
-        if (!result.canceled) {
-            setResponse(result); // 전체 응답 저장
-            setImgSrc(result.assets[0].uri); // 선택된 이미지 URI 저장
-            await recognizeTextFromImage(result.assets[0].uri);
-
-        } else {
-            console.log("Image selection canceled");
-        }
-
-    } catch (error) {
-        console.error("ImagePicker Error:", error);
-    }
-}
-  const recognizeFromPicker = async (options = defaultPickerOptions) => {
-    // try {
-    //   const image = await ImagePicker.openPicker(options);
-    //   setImgSrc({uri: image.path});
-    //   await recognizeTextFromImage(image.path);
-    // } catch (err) {
-    //   if (err.message !== 'User cancelled image selection') {
-    //     console.error(err);
-    //   }
-    // }
-  };
-
-  const recognizeFromCamera = async (options = defaultPickerOptions) => {
-    // try {
-    //   const image = await ImagePicker.openCamera(options);
-    //   setImgSrc({uri: image.path});
-    //   await recognizeTextFromImage(image.path);
-    // } catch (err) {
-    //   if (err.message !== 'User cancelled image selection') {
-    //     console.error(err);
-    //   }
-    // }
-  };
+    getTicketList().then((res) => {
+      console.log(res)
+    })
+  }, [ticketId]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tesseract OCR example</Text>
-      <Text style={styles.instructions}>Select an image source:</Text>
-      <View style={styles.options}>
-        <View style={styles.button}>
-          <Button
-            disabled={isLoading}
-            title="Camera"
-            onPress={() => {
-              handleTakeChoosePhoto();
-            }}
-          />
-        </View>
-        <View style={styles.button}>
-          <Button
-            disabled={isLoading}
-            title="Picker"
-            onPress={() => {
-              handleTakeChoosePhoto();
-            }}
-          />
-        </View>
-      </View>
-      {imgSrc && (
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={imgSrc} />
-          {isLoading ? (
-            <ProgressCircle showsText progress={progress} />
-          ) : (
-            <Text>{text}</Text>
-          )}
-        </View>
-      )}
-    </View>
+    <WrapCard>
+      <ScrollView
+        horizontal
+        nestedScrollEnabled
+        contentContainerStyle={{ width: `${100 * (tickets.length + 1)}%` }}
+        scrollEventThrottle={200}
+        decelerationRate="fast"
+        onContentSizeChange={(w) => setItemWidth(w / (tickets.length + 1))}
+        showsHorizontalScrollIndicator={false}
+      >
+        <Container>
+          {tickets.map((item, index) => (
+            <Ticket
+              key={item.travel_record_id}
+              place={item.place}
+              city={item.city}
+              ticket_date={item.ticket_date}
+              length={tickets.length + 1}
+              marginLeft={index === 0 ? '47px' : '0px'}
+            />
+          ))}
+
+          <AddButton onPress={() => setIsShowModal(true)}>
+            <ADD />
+          </AddButton>
+
+          {isShowModal && <Modal setIsShowModal={setIsShowModal} setTicketId={setTicketId} />}
+        </Container>
+      </ScrollView>
+      <StandardButton
+        text="티켓 추가 완료"
+        backgroundColor="#D3D3D3"
+        color="#FFF"
+        marginTop='auto' /* 버튼 위에 모든 여백 추가 */
+        onPress={() => setIsClickAddPiece(true)}
+      />
+    </WrapCard>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  options: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-  },
-  button: {
-    marginHorizontal: 10,
-  },
-  imageContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    marginVertical: 15,
-    height: DEFAULT_HEIGHT / 2.5,
-    width: DEFAULT_WITH / 2.5,
-  },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+const WrapCard = styled.View`
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
 
-export default TicketPiece;
+const Container = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const AddButton = styled.TouchableOpacity`
+  width: 80px;
+  height: 80px;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+`;
