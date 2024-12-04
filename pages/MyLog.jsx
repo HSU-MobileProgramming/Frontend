@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { countries } from "../shared/component/db/CountryData";
+import CreatedPiece from "../entities/MyLog/CreatedPiece";
 
 export default function MyLog() {
     const [allTravelLog, setAllTravelLog] = useState([]); // 생성된 여행기 저장
@@ -47,6 +48,7 @@ export default function MyLog() {
         console.log("length: " + allTravelLog.length);
     }, [allTravelLog, currentTravelLog]);
 
+    // 
     return (
         <MainLayout>
             <MapViewContainer>
@@ -68,7 +70,7 @@ export default function MyLog() {
                             coordinate={countries[cityIndex].coordinates}
                             title={log.title}
                             description={log.description}
-                            pinColor="green"
+                            pinColor="white"
                             >
                                 {/* <CreatedLogMarker>
                                     <MarkerView>{countries[cityIndex].thumnail}</MarkerView>
@@ -129,19 +131,7 @@ export default function MyLog() {
                                 ItemSeparatorComponent={() => <View style={{ width: itemSpacing }} />}
 
                             />
-                            {/* {allTravelLog.map((data, i) => (
-                                <CreatedLog
-                                    key={data.travel_id || i} // 고유 key 설정
-                                    travel_id={data.travel_id}
-                                    title={data.title}
-                                    start_date={data.start_date}
-                                    end_date={data.end_date}
-                                    description={data.description}
-                                    city_name={data.city_name}
-                                    country_name={data.country_name}
-                                />
-
-                            ))} */}
+                        
 
                         </>
                     ) : (
@@ -150,6 +140,7 @@ export default function MyLog() {
                         </NullCreatedLogView>
                     )}
                     <TitleText>여행자님의 지난 여행 조각</TitleText>
+                    <CreatedPiece/>
 
 
                 </ContentContainer>

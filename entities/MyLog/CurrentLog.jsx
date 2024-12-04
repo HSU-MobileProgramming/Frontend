@@ -1,8 +1,10 @@
 import styled from "styled-components/native";
 import { Text, View } from "react-native";
 import { countries } from "../../shared/component/db/CountryData";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CurrentLog({ travel_id, title, start_date, end_date, description, city_name, country_name }) {
+    const navigation = useNavigation();
     const formatDateWithDay = (isoDateString) => {
         const date = new Date(isoDateString);
     
@@ -19,7 +21,7 @@ export default function CurrentLog({ travel_id, title, start_date, end_date, des
     const cityIndex = countries.findIndex((item) => item.city === city_name); // 도시이름(city_name)으로 더미데이터의 인덱스 찾기
 
     return (
-        <MainLayout>
+        <MainLayout onPress={() => navigation.navigate("DetailTravelLog", {travel_id: travel_id})}>
             <CurrentLogContainer>
                 <InfoContainer>
                     <ThumnailView>{countries[cityIndex].thumnail}</ThumnailView>

@@ -1,18 +1,25 @@
 import styled from "styled-components/native";
 import { View, StyleSheet } from "react-native";
+
 import LinearGradient from "react-native-linear-gradient";
 
 import HEADERICON1 from '../../assets/detail-log-header-icon1.svg';
 import HEADERICON2 from '../../assets/detail-log-header-icon2.svg';
 import HEADERPUZZLEICON from '../../assets/detail-log-header-puzzle.png';
 
-export default function DetailTravelLogHeader() {
+export default function DetailTravelLogHeader({ title, cityName, countryName, travelOpen, startDate, endDate }) {
     return (
         <MainLayout>
             <GradientBackground>
-                <HeaderIcon1 source={HEADERICON1}/>
-                <HeaderIcon2 source={HEADERICON2}/>
-                <HeaderPuzzleIcon source={HEADERPUZZLEICON}/>
+                <TravelLogInfoContainer>
+                    <Title>{title}</Title>
+                    <LocationText>{cityName}, {countryName}</LocationText>
+                    <TravelOpenText>오늘은 여행 {travelOpen}일차에요!</TravelOpenText>
+                    <DateText>{startDate} ~ {endDate}</DateText>
+                </TravelLogInfoContainer>
+                <HeaderIcon1 source={HEADERICON1} />
+                <HeaderIcon2 source={HEADERICON2} />
+                <HeaderPuzzleIcon source={HEADERPUZZLEICON} />
             </GradientBackground>
         </MainLayout>
     )
@@ -22,6 +29,7 @@ export default function DetailTravelLogHeader() {
 const MainLayout = styled.View`
 width: 100%;
 height: 230px;
+
 `;
 
 
@@ -35,6 +43,7 @@ shadow-offset: 0px 8.575px;
 shadow-opacity: 0.2;
 shadow-radius: 21.438px; /* 42.876 / 2 */
 elevation: 10; /* Android 그림자 효과 */
+padding-left: 30px;
 `;
 
 const HeaderIcon1 = styled.Image`
@@ -51,9 +60,36 @@ right: 0;
 
 const HeaderPuzzleIcon = styled.Image`
 position: absolute;
-top: 108px;
-right: 34px;
+top: 90px;
+right: 25px;
 width: 140px;
 height: 110px;
 
+`;
+
+const TravelLogInfoContainer = styled.View`
+margin-top: 80px;
+`;
+
+const Title = styled.Text`
+    font-size: 16px;
+    color: #F9F9F9;
+`;
+
+const LocationText = styled.Text`
+font-size: 26px;
+color: #FFF;
+text-decoration-line: underline;
+text-decoration-style: solid;
+font-weight: 700;
+`;
+
+const TravelOpenText = styled.Text`
+    font-size: 26px;
+    color: #FFF;
+`;
+
+const DateText = styled.Text`
+    font-size: 12px;
+    color: #FFF;
 `;

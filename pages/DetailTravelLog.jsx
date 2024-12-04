@@ -2,7 +2,8 @@ import styled from "styled-components/native";
 import { View, Text, TouchableOpacity, Modal } from "react-native";
 import DetailTravelLogHeader from "../entities/DetailTravelLog/DetailTravelLogHeader";
 import CurrentRecords from "../entities/DetailTravelLog/CurrentRecords";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRoute } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import RecordDescriptionCard from "../entities/DetailTravelLog/RecordDescriptionCard";
 import Indicator from "../entities/DetailTravelLog/Indicator";
@@ -22,13 +23,38 @@ import RecordOptionCard from "../entities/DetailTravelLog/RecordOptionCard";
 import StandardButton from "../shared/component/StandardButton";
 import EndTravelModal from "../entities/DetailTravelLog/EndTravelModal";
 
-
+import { getDetailTravelLog } from "../entities/DetailTravelLog/api/DetailTravelLogApi";
 
 export default function DetailTravelLog() {
     const margin = 25;
     const offset = 264 + margin;
     const [page, setPage] = useState(0);
     const [isClickEndTravel, setIsClickEndTravel] = useState(false);
+    const route = useRoute();
+    const { travel_id } = route.params;
+    const [travelDetails, setTravelDetails] = useState({
+        title: null,
+        startDate: null,
+        endDate: null,
+        travelOpen: null,
+        cityName: null,
+        countryName: null,
+    });
+
+    useEffect(() => {
+        getDetailTravelLog(travel_id).then((res) => {
+            console.log("상세조회 통신 : " + res);
+            // res 데이터를 travelDetails로 업데이트
+            setTravelDetails({
+                title: res?.title || null,
+                startDate: res?.start_date || null,
+                endDate: res?.end_date || null,
+                travelOpen: res?.travel_open || null,
+                cityName: res?.city_name || null,
+                countryName: res?.country_name || null,
+            });
+        })
+    }, [])
 
     const logData = useMemo(() => [
         {
@@ -76,7 +102,14 @@ export default function DetailTravelLog() {
 
     return (
         <MainLayout>
-            <DetailTravelLogHeader />
+            <DetailTravelLogHeader 
+            title={travelDetails.title}
+            cityName={travelDetails.cityName}
+            countryName={travelDetails.countryName}
+            startDate={travelDetails.startDate}
+            endDate={travelDetails.endDate}
+            travelOpen={travelDetails.travelOpen}
+            />
             <View style={{ marginHorizontal: 21, marginVertical: 0 }}>
                 <View style={{ marginTop: 20 }}>
                     <TitleText>기록 현황</TitleText>
