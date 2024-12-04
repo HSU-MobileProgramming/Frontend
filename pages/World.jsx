@@ -9,19 +9,21 @@ import StandardInput from '../shared/component/StandardInput';
 import { touristAttraction } from '../shared/component/db/country.json';
 import Modal from '../entities/World/Modal';
 import { getMapColor } from '../entities/World/api/worldApi';
+import { getUserInfo } from '../entities/SignUp/api/userApi';
 
 export default function World() {
-  const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 관리
-  const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터 관리 (초기에는 빈 배열)
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowList, setIsShowList] = useState(true);
   const [country, setCountry] = useState();
   const [city, setCity] = useState();
   const [emoji, setEmoji] = useState();
   const [description, setDescription] = useState();
+  const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '' }); // useState로 상태 관리
 
-  const [colors, setColors] = useState([]); // 국가별 색상 배열
-  const [countryIds, setCountryIds] = useState([]); // 국가 ID 배열
+  const [colors, setColors] = useState([]);
+  const [countryIds, setCountryIds] = useState([]);
 
   const loadData = () => {
     getMapColor().then((res) => {
@@ -44,6 +46,9 @@ export default function World() {
 
   useEffect(() => {
     loadData();
+    getUserInfo().then((res) => {
+      setUserInfo({ nickname: res.nickname, profileImage: res.profile_img }); // 상태 업데이트
+    });
   }, []);
 
   const handleSearch = (text) => {
@@ -68,7 +73,7 @@ export default function World() {
     setEmoji(item.emoji);
     setDescription(item.description);
     setIsShowModal(true);
-    setIsShowList(false); // 모달 열릴 때 리스트 숨김
+    setIsShowList(false);
   };
 
   return (
@@ -86,7 +91,7 @@ export default function World() {
           value={searchQuery}
           onChangeText={(text) => {
             handleSearch(text);
-            setIsShowList(true); // 검색어 입력 시 리스트 표시
+            setIsShowList(true);
           }}
         />
 
@@ -104,7 +109,7 @@ export default function World() {
           />
         )}
 
-        <Info />
+        <Info userInfo={userInfo} />
       </Wrap>
 
       <MapSection colors={colors} countryIds={countryIds} />
@@ -113,7 +118,7 @@ export default function World() {
         <Modal
           setIsShowModal={(visible) => {
             setIsShowModal(visible);
-            if (!visible) setIsShowList(false); // 모달 닫을 때 리스트 숨김
+            if (!visible) setIsShowList(false);
           }}
           country={country}
           city={city}

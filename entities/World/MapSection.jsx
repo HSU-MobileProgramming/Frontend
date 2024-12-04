@@ -15,7 +15,7 @@ export default function MapSection({colors,countryIds}) {
         <Svg
           width={width} // 화면 너비에 맞춤
           height={height} // 화면 높이에 맞춤
-          viewBox="350 0 250 490" // SVG의 원본 좌표계
+          viewBox="310 0 320 560" // SVG의 원본 좌표계
         >
           <SvgIcon dynamicColors={colors} dynamicCountryIds={countryIds} />
         </Svg>

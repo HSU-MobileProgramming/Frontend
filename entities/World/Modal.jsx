@@ -11,14 +11,14 @@ import MintPuzzle from '../../assets/puzzle-mint.svg';
 import SkyBluePuzzle from '../../assets/puzzle-skyblue.svg';
 import { setMapColor } from './api/worldApi';
 
-export default function Modal({ setIsShowModal, country, city, emoji, description,loadData}) {
+export default function Modal({ setIsShowModal, country, city, emoji, description, loadData }) {
     const Navigation = useNavigation();
     const [currentStep, setCurrentStep] = useState(1);
     const [selectedPuzzle, setSelectedPuzzle] = useState(null);
     const [countryId, setCountryId] = useState();
     const onPressCompleteButton = async () => {
         let selectedCountryId;
-    
+
         // country 값에 따라 countryId 결정
         switch (country) {
             case "베트남":
@@ -39,16 +39,82 @@ export default function Modal({ setIsShowModal, country, city, emoji, descriptio
             case "호주":
                 selectedCountryId = 6;
                 break;
+            case "싱가포르":
+                selectedCountryId = 7;
+                break;
+            case "대만":
+                selectedCountryId = 8;
+                break;
+            case "인도네시아":
+                selectedCountryId = 9;
+                break;
+            case "뉴질랜드":
+                selectedCountryId = 10;
+                break;
+            case "프랑스":
+                selectedCountryId = 11;
+                break;
+            case "미국":
+                selectedCountryId = 12;
+                break;
+            case "스위스":
+                selectedCountryId = 13;
+                break;
+            case "오스트리아":
+                selectedCountryId = 14;
+                break;
+            case "체코":
+                selectedCountryId = 15;
+                break;
+            case "이집트":
+                selectedCountryId = 16;
+                break;
+            case "홍콩":
+                selectedCountryId = 17;
+                break;
+            case "마카오":
+                selectedCountryId = 18;
+                break;
+            case "몽골":
+                selectedCountryId = 19;
+                break;
+            case "멕시코":
+                selectedCountryId = 20;
+                break;
+            case "아랍에미리트":
+                selectedCountryId = 21;
+                break;
+            case "이탈리아":
+                selectedCountryId = 22;
+                break;
+            case "독일":
+                selectedCountryId = 23;
+                break;
+            case "영국":
+                selectedCountryId = 24;
+                break;
+            case "스페인":
+                selectedCountryId = 25;
+                break;
+            case "터키":
+                selectedCountryId = 26;
+                break;
+            case "러시아":
+                selectedCountryId = 27;
+                break;
+            case "터키":
+                selectedCountryId = 28;
+                break;
             default:
                 console.warn("알 수 없는 국가:", country);
                 return; // 알 수 없는 국가인 경우 함수 종료
         }
-    
+
         // console.log("완료 버튼 클릭");
         // console.log("선택된 퍼즐 색상:", selectedPuzzle);
         // console.log("나라 정보:", country);
         // console.log("countryId:", selectedCountryId);
-    
+
         if (selectedPuzzle) {
             try {
                 await setMapColor(selectedPuzzle, selectedCountryId);
@@ -62,7 +128,7 @@ export default function Modal({ setIsShowModal, country, city, emoji, descriptio
             console.warn("퍼즐 색상이 선택되지 않았습니다!");
         }
     };
-    
+
 
     return (
         <RNModal

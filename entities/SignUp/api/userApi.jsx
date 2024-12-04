@@ -47,3 +47,24 @@ export const login = async (email, password) => {
         console.error('Login error!', error.response?.data || error.message);
     }
 };
+
+export const getUserInfo = async () => {
+    console.log("getUserInfo 호출");
+
+    try {
+        const token = await AsyncStorage.getItem('accessToken');
+
+        const response = await axios.get(
+            `${BASE_URL}/user/profile`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("setMapColor 호출 에러:", error.response?.data || error.message);
+    }
+};

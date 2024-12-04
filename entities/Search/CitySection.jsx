@@ -5,24 +5,68 @@ import styled from 'styled-components'
 import fukuoka from '../../assets/fukuoka.png'
 import tokyo from '../../assets/tokyo.png'
 import danang from '../../assets/danang.png'
+import paris from '../../assets/paris.jpg'
+import seoul from '../../assets/seoul.jpg'
+import newyork from '../../assets/newyork.jpg'
+import bangkok from '../../assets/bangkok.jpg'
+import berlin from '../../assets/berlin.jpg'
+import sydney from '../../assets/sydney.jpg'
+import volley from '../../assets/volley.jpg'
+
 export default function CitySection() {
     const city = [
         {
-            image : fukuoka,
-            name : "후쿠오카, 일본",
-            des : "1,084명이 여행했어요"
+            image: fukuoka,
+            name: "후쿠오카, 일본",
+            des: "1,084명이 여행했어요",
         },
         {
-            image : danang,
-            name : "다낭, 베트남",
-            des : "987명이 여행했어요"
+            image: danang,
+            name: "다낭, 베트남",
+            des: "987명이 여행했어요",
         },
         {
-            image : tokyo,
-            name : "도쿄, 일본",
-            des : "2,453명이 여행했어요"
+            image: tokyo,
+            name: "도쿄, 일본",
+            des: "2,453명이 여행했어요",
+        },
+        {
+            image: paris,
+            name: "파리, 프랑스",
+            des: "3,257명이 여행했어요",
+        },
+        {
+            image: seoul,
+            name: "서울, 대한민국",
+            des: "5,876명이 여행했어요",
+        },
+        {
+            image: newyork,
+            name: "뉴욕, 미국",
+            des: "4,193명이 여행했어요",
+        },
+        {
+            image: bangkok,
+            name: "방콕, 태국",
+            des: "2,754명이 여행했어요",
+        },
+        {
+            image: berlin,
+            name: "베를린, 독일",
+            des: "2,639명이 여행했어요",
+        },
+        {
+            image: sydney,
+            name: "시드니, 호주",
+            des: "1,834명이 여행했어요",
+        },
+        {
+            image: volley,
+            name: "발리, 인도네시아",
+            des: "3,029명이 여행했어요",
         }
-    ]
+    ];
+    
     return (
         <MainLayout>
             <StyledText color="3A3A3A" fontSize="20px" fontWeight="700"> 요즘 떠오르는 도시 </StyledText>
