@@ -6,11 +6,11 @@ import { Animated, View } from 'react-native';
 import ProfileImg from '../../assets/profileImg.png';
 import Puzzle from '../../assets/pinkpuzzle.png';
 
-export default function Info({userInfo}) {
+export default function Info({userInfo,countryCount,cityCount}) {
   const slideAnim = useRef(new Animated.Value(200)).current; // 시작 위치 설정
 
   useEffect(() => {
-    console.log("userInfo",userInfo)
+    console.log("count",countryCount)
     // 애니메이션 실행
     Animated.timing(slideAnim, {
       toValue: 0, // 최종 위치
@@ -30,11 +30,11 @@ export default function Info({userInfo}) {
         <StyledText fontSize="19px" fontWeight="600" width="190px">
           현재까지{' '}
           <StyledText color="#5C95FB" fontSize="20px" fontWeight="700">
-            0개의 나라
+            {countryCount}개의 나라
           </StyledText>
           의{' '}
           <StyledText color="#5C95FB" fontSize="20px" fontWeight="700">
-            0개의 도시
+            {cityCount}개의 도시
           </StyledText>
           를 방문했어요
         </StyledText>
