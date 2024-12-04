@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { View, Text, TouchableOpacity, Modal } from "react-native";
+import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
 import DetailTravelLogHeader from "../entities/DetailTravelLog/DetailTravelLogHeader";
 import CurrentRecords from "../entities/DetailTravelLog/CurrentRecords";
 import { useEffect, useMemo, useState } from "react";
@@ -12,6 +12,7 @@ import NavigationBar from "../shared/component/NavigationBar";
 import PUZZLEMINT from '../assets/puzzle-mint.svg';
 import PUZZLEPINK from '../assets/puzzle-pink.svg';
 import PUZZLESKYBLUE from '../assets/puzzle-skyblue.svg';
+import PUZZLEYELLOW from '../assets/puzzle-yellow.svg';
 import PHOTO from '../assets/camera.svg';
 import MEMO from '../assets/memo.svg';
 import TICKET from '../assets/ticket.svg';
@@ -77,23 +78,13 @@ export default function DetailTravelLog() {
         },
         {
             recordType: '티켓',
-            recordImage: <TICKET />,
+            recordImage: "🎫",
             decoImage: <CARDDECOMINT />,
-            descriptionText1: '추억이 담긴 티켓을 있나요?',
+            descriptionText1: '추억이 담긴 티켓이 있나요?',
             descriptionText2: '티켓을 추가해 소중한 추억을 간직하세요!',
-            puzzleImage: <PUZZLEMINT />,
-            borderColor: '#9BE4DE'
-        },
-        {
-            recordType: '티켓',
-            recordImage: <TICKET />,
-            decoImage: <CARDDECOMINT />,
-            descriptionText1: '추억이 담긴 티켓을 있나요?',
-            descriptionText2: '티켓을 추가해 소중한 추억을 간직하세요!',
-            puzzleImage: <PUZZLEMINT />,
-            borderColor: '#9BE4DE'
+            puzzleImage: <PUZZLEYELLOW />,
+            borderColor: '#FFDD92'
         }
-
     ])
     const snapToOffsets = useMemo(() => Array.from(Array(logData.length)).map((_, index) => index * offset),
         [logData],
@@ -102,73 +93,79 @@ export default function DetailTravelLog() {
 
     return (
         <MainLayout>
-            <DetailTravelLogHeader 
-            title={travelDetails.title}
-            cityName={travelDetails.cityName}
-            countryName={travelDetails.countryName}
-            startDate={travelDetails.startDate}
-            endDate={travelDetails.endDate}
-            travelOpen={travelDetails.travelOpen}
+            <DetailTravelLogHeader
+                title={travelDetails.title}
+                cityName={travelDetails.cityName}
+                countryName={travelDetails.countryName}
+                startDate={travelDetails.startDate}
+                endDate={travelDetails.endDate}
+                travelOpen={travelDetails.travelOpen}
             />
-            <View style={{ marginHorizontal: 21, marginVertical: 0 }}>
-                <View style={{ marginTop: 20 }}>
-                    <TitleText>기록 현황</TitleText>
-                    <CurrentRecords />
-                </View>
-                <View style={{ marginTop: 20 }}>
-                    <TitleText>기록 남기기</TitleText>
-                    <FlatList
-                        data={logData}
-                        horizontal
-                        renderItem={({ item }) => (
-                            <TouchableOpacity style={{ marginRight: margin }}>
-                                <RecordDescriptionCard
-                                    recordImage={item.recordImage}
-                                    decoImage={item.decoImage}
-                                    descriptionText1={item.descriptionText1}
-                                    descriptionText2={item.descriptionText2}
-                                    puzzleImage={item.puzzleImage}
-                                />
-                            </TouchableOpacity>
-                        )}
-                        keyExtractor={(_, index) => String(index)}
-                        snapToOffsets={snapToOffsets}
-                        showsHorizontalScrollIndicator={false}
-                        onScroll={(event) => {
-                            const currentOffset = event.nativeEvent.contentOffset.x;
-                            const currentPage = Math.round(currentOffset / offset);
-                            setPage(currentPage);
-                        }}
-                    />
-                    <IndicatorWrapper>
-                        {Array.from({ length: logData.length }, (_, i) => i).map((i) => (
-                            <Indicator key={i} index={`indicator_${i}`} focused={i === page} />
-                        ))}
-                    </IndicatorWrapper>
-                </View>
-                {/* 사진, 메모, 티켓 버튼 */}
-                <View style={{ marginTop: 20, flexDirection: "row", justifyContent: 'space-between' }}>
-                    {logData.map((data, i) => (
-                        <RecordOptionCard
-                            key={i}
-                            travelId={travel_id}
-                            recordType={data.recordType}
-                            recordImage={data.recordImage}
-                            borderColor={data.borderColor}
-                            decoImage={data.decoImage}
+
+            <ScrollView>
+                <View style={{ marginHorizontal: 21, marginVertical: 0 }}>
+                    <View style={{ marginTop: 20 }}>
+                        <TitleText>기록 현황</TitleText>
+                        <CurrentRecords />
+                    </View>
+                    <View style={{ marginTop: 20 }}>
+                        <TitleText>기록 남기기</TitleText>
+                        <FlatList
+                            data={logData}
+                            horizontal
+                            renderItem={({ item }) => (
+                                <TouchableOpacity style={{ marginRight: margin }}>
+                                    <RecordDescriptionCard
+                                        recordType={item.recordType}
+                                        recordImage={item.recordImage}
+                                        decoImage={item.decoImage}
+                                        descriptionText1={item.descriptionText1}
+                                        descriptionText2={item.descriptionText2}
+                                        puzzleImage={item.puzzleImage}
+                                    />
+                                </TouchableOpacity>
+                            )}
+                            keyExtractor={(_, index) => String(index)}
+                            snapToOffsets={snapToOffsets}
+                            showsHorizontalScrollIndicator={false}
+                            onScroll={(event) => {
+                                const currentOffset = event.nativeEvent.contentOffset.x;
+                                const currentPage = Math.round(currentOffset / offset);
+                                setPage(currentPage);
+                            }}
                         />
-                    ))}
+                        <IndicatorWrapper>
+                            {Array.from({ length: logData.length }, (_, i) => i).map((i) => (
+                                <Indicator key={i} index={`indicator_${i}`} focused={i === page} />
+                            ))}
+                        </IndicatorWrapper>
+                    </View>
+                    {/* 사진, 메모, 티켓 버튼 */}
+                    <View style={{ marginTop: 20, flexDirection: "row", justifyContent: 'space-around' }}>
+                        {logData.map((data, i) => (
+                            <RecordOptionCard
+                                key={i}
+                                travelId={travel_id}
+                                recordType={data.recordType}
+                                recordImage={data.recordImage}
+                                borderColor={data.borderColor}
+                                decoImage={data.decoImage}
+                            />
+                        ))}
+                    </View>
+                    <StandardButton
+                        text='여행 종료'
+                        color='#FD2D69'
+                        backgroundColor='#FD2D691A'
+                        width='100%'
+                        marginTop='20px'
+                        marginBottom='20px'
+                        onPress={() => setIsClickEndTravel(true)}
+                    />
                 </View>
-                <StandardButton
-                    text='여행 종료'
-                    color='#FD2D69'
-                    backgroundColor='#FD2D691A'
-                    width='100%'
-                    marginTop='20px'
-                    marginBottom='20px'
-                    onPress={() => setIsClickEndTravel(true)}
-                />
-            </View>
+
+            </ScrollView>
+
             <Modal visible={isClickEndTravel} transparent={true} animationType="fade">
                 <EndTravelModal
                     onClose={() => setIsClickEndTravel(false)}
