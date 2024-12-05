@@ -19,7 +19,7 @@ export default function CreateTravelPiece({ route }) {
         <MainLayout>
             {!isClickAddPiece ? (
                 <>
-                    {/* <CreatePieceTop travelId={travelId} recordType={recordType} recordImage={recordImage} decoImage={decoImage} />
+                    <CreatePieceTop travelId={travelId} recordType={recordType} recordImage={recordImage} decoImage={decoImage} />
                     <CreatePieceBottom>
                         {(() => {
                             switch (recordType) {
@@ -41,8 +41,8 @@ export default function CreateTravelPiece({ route }) {
                                     return null; // 기본적으로 아무것도 렌더링하지 않음
                             }
                         })()}
-                    </CreatePieceBottom> */}
-                    <CompleteAddPiece recordType={recordType} onPress={() => setIsClickAddPiece(false)} recordId={recordId}/>
+                    </CreatePieceBottom>
+                    
                 </>
             ) : (
                 <>

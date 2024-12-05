@@ -169,6 +169,7 @@ export default function DetailTravelLog() {
             <Modal visible={isClickEndTravel} transparent={true} animationType="fade">
                 <EndTravelModal
                     onClose={() => setIsClickEndTravel(false)}
+                    travelId={travel_id}
                 />
             </Modal>
             <NavigationBar mylog />
