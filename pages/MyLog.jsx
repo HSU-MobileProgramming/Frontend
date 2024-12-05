@@ -44,7 +44,7 @@ export default function MyLog() {
 
     useEffect(() => {
         saveAllTravelLogApi();
-    }, []);
+    }, [isClickCreatedLog]);
 
     useEffect(() => {
         //console.log("travel_id: " + currentTravelLog.travel_id);
@@ -182,7 +182,7 @@ export default function MyLog() {
             </>
            ) : (
             <>
-                <EndTravelLog travel_id={travelId} recordCountArray={recordCountArray}/>
+                <EndTravelLog travel_id={travelId} recordCountArray={recordCountArray} setIsClickCreatedLog={setIsClickCreatedLog}/>
             </>
            )}
         </MainLayout>

@@ -10,7 +10,7 @@ import { Image, View, ScrollView, Text } from "react-native";
 import StandardButton from "../../shared/component/StandardButton";
 import touristAttractionData from '../../shared/component/db/country.json'
 
-export default function EndTravelLog({ travel_id, recordCountArray, setIsClickEndTravelBtn }) {
+export default function EndTravelLog({ travel_id, recordCountArray, setIsClickEndTravelBtn, setIsClickCreatedLog }) {
     const route = useRoute();
     const navigation = useNavigation();
     const [allPieceCount, setAllPieceCount] = useState(0); // 총 조각 개수 상태 추가
@@ -66,6 +66,9 @@ export default function EndTravelLog({ travel_id, recordCountArray, setIsClickEn
     }
     const handleClosePress = () => {
         navigation.navigate("MyLog");
+        if(setIsClickCreatedLog) {
+            setIsClickCreatedLog(false);
+        }
         console.log("닫기 버튼 클릭!");
     }
     // 총 조각 개수 계산

@@ -192,7 +192,7 @@ export default function DetailTravelLog() {
                     <NavigationBar mylog />
                 </>
             ) : (
-                <EndTravelLog travel_id={travel_id} recordCountArray={recordCountArray} setIsClickEndTravelBtn={setIsClickEndTravelBtn}/>
+                <EndTravelLog travel_id={travel_id} recordCountArray={recordCountArray} setIsClickCreatedLog={setIsClickEndTravelBtn} setIsClickEndTravelBtn={setIsClickEndTravelBtn}/>
            )}
 
         </MainLayout>
