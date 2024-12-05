@@ -5,7 +5,7 @@ import { countries } from "../../shared/component/db/CountryData";
 import calendarPurple from '../../assets/calendar-purple.png';
 import LOCATION from '../../assets/location.png';
 
-export default function CreatedLog({ travel_id, title, start_date, end_date, description, city_name, country_name }) {
+export default function CreatedLog({ travel_id, title, start_date, end_date, description, city_name, country_name, setIsClickCreatedLog, setTravelId }) {
     const formatDateWithDay = (isoDateString) => {
         const date = new Date(isoDateString);
     
@@ -16,8 +16,12 @@ export default function CreatedLog({ travel_id, title, start_date, end_date, des
         return `${year}. ${month}. ${day}`;
     };
     const cityIndex = countries.findIndex((item) => item.city === city_name); // 도시이름(city_name)으로 더미데이터의 인덱스 찾기
+    const handlePress = () => {
+        setIsClickCreatedLog(true);
+        setTravelId(travel_id);
+    }
     return (
-        <MainLayout>
+        <MainLayout onPress={handlePress}>
             <ThumnailContainer>
                 {countries[cityIndex].thumnail}
             </ThumnailContainer>

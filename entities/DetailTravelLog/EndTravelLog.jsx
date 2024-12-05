@@ -155,7 +155,7 @@ export default function EndTravelLog({ travel_id, recordCountArray, setIsClickEn
     return (
         <ScrollViewContainer>
             <MainLayout>
-                <TopBar onBackPress={handleBackPress} onClosePress={handleClosePress} />
+                <TopBar onClosePress={handleClosePress} />
                 <TitleText>{travelDetails.title}</TitleText>
                 <Wrap>
                     <Image source={CALENDAR} />

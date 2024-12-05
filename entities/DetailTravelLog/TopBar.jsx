@@ -10,8 +10,7 @@ import CLOSE from '../../assets/close.png';
 export default function TopBar({onBackPress, onClosePress}) {
     return (
         <MainLayout>
-            <TouchableOpacity onPress={onBackPress} activeOpacity={0.7}><BackImage source={BACK}/></TouchableOpacity>
-            <PuzzleContainer>
+             <PuzzleContainer>
             <PuzzleImageBox><PUZZLESKYBLUE/></PuzzleImageBox>
                 <PuzzleImageBox><PUZZLEPINK/></PuzzleImageBox>
                 <PuzzleImageBox><PUZZLEMINT/></PuzzleImageBox>
