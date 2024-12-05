@@ -108,7 +108,7 @@ export default function EndTravelLog({ travel_id, recordCountArray, setIsClickEn
                 const newMemoData = [];
                 for (const id of memoRecordIds) {
                     const piece = await getMemoPiece(id);
-                    console.log("메모 내용:", piece);
+                    //console.log("메모 내용:", piece);
                     newMemoData.push({
                         description: piece.description, // 메모 내용
                         createdAt: piece.created_at,   // 생성 시간

@@ -24,7 +24,7 @@ import RecordOptionCard from "../entities/DetailTravelLog/RecordOptionCard";
 import StandardButton from "../shared/component/StandardButton";
 import EndTravelModal from "../entities/DetailTravelLog/EndTravelModal";
 
-import { getDetailTravelLog } from "../entities/DetailTravelLog/api/DetailTravelLogApi";
+import { getDetailTravelLog, putEndTravel } from "../entities/DetailTravelLog/api/DetailTravelLogApi";
 import EndTravelLog from "../entities/DetailTravelLog/EndTravelLog";
 
 export default function DetailTravelLog() {
@@ -99,7 +99,9 @@ export default function DetailTravelLog() {
     const handleEndTravelPress = () => {
         // navigation.navigate("EndTravelLog", { travel_id: travel_id, recordCountArray:recordCountArray });
         setIsClickEndTravelBtn(true);
-
+        putEndTravel(travel_id).then((res) => {
+            console.log(res);
+        })
     }
 
     return (
