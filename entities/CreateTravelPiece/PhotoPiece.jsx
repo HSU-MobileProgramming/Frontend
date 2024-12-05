@@ -6,7 +6,7 @@ import styled from "styled-components/native"
 import { postPhoto } from "./api/CreateTravelPieceApi"
 
 
-export default function PhotoPiece({travelId, setRecordId}) {
+export default function PhotoPiece({travelId, setRecordId, setIsClickAddPiece}) {
     const [selectedPhotos, setSelectedPhotos] = useState([null, null, null, null]); // 4개의 사진 선택 상태
     const [memo, setMemo] = useState(null);
 
@@ -33,9 +33,12 @@ export default function PhotoPiece({travelId, setRecordId}) {
                 }
             });
             setRecordId(uploadedIds);
+            setIsClickAddPiece(true);
         } else {
             console.log("모든 사진이 선택되지 않았거나 메모가 없습니다.");
         }
+        //setIsClickAddPiece(true);
+        
     }
 
     // 모든 사진이 선택되었고, 메모가 null이 아니면 true

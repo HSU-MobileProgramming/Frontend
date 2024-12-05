@@ -58,7 +58,7 @@ export const getMemoPiece = async (travel_record_id) => {
         console.log(travel_record_id);
 
         const response = await axios.get(
-            `${BASE_URL}/piece/photo/${travel_record_id}`,
+            `${BASE_URL}/piece/memo/${travel_record_id}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export const getMemoPiece = async (travel_record_id) => {
                 },
             }
         );
-        console.log("사진 조각 조회 성공:", response.data);
+        console.log("메모 조각 조회 성공:", response.data);
         return response.data;
     } catch (error) {
         console.error("setTicket 호출 에러:", error.response?.data || error.message);
@@ -91,6 +91,6 @@ export const getPhotoPiece = async (travel_record_id) => {
         console.log("사진 조각 조회 성공:", response.data);
         return response.data;
     } catch (error) {
-        console.error("setTicket 호출 에러:", error.response?.data || error.message);
+        console.error("getPhotoPiece 호출 에러:", error.response?.data || error.message);
     }
 };

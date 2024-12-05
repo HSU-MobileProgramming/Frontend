@@ -37,13 +37,16 @@ export default function CompleteAddPiece({ recordType, onPress, recordId }) {
                 })
             } else {
                 getPhotoPiece(recordId[i]).then((res) => {
-                    console.log("개별 메모 조각 조회 성공 !: " + res);
+                    console.log("개별 사진 조각 조회 성공 !: " + res);
                     setCreatdeAt(formatDate(res.created_at));
-                    setMemoData(res.description);
+                    updatePhotoData.push(res.url);
+                    
                 })
+
+    
             }
         })
-
+        setPhotoData(updatePhotoData);
     }, []);
 
     const renderPuzzleImage = () => {

@@ -17,6 +17,7 @@ export default function DetailTravelLogHeader({ title, cityName, countryName, tr
         const day = String(date.getDate()).padStart(2, '0'); // 일
         return `${year}.${month}.${day}`;
     };
+    
     return (
         <MainLayout>
             <GradientBackground>

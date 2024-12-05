@@ -7,7 +7,7 @@ import PUZZLEYELLOW from '../../assets/puzzle-yellow.svg';
 import { useEffect, useState } from "react";
 import { getMemoCount, getPhotoCount, getTicketCount } from "./api/pieceApi";
 
-export default function CurrentRecords() {
+export default function CurrentRecords({setRecordCountArray}) {
     const [count, setCount] = useState({
         ticket : '',
         memo : '',
@@ -22,31 +22,42 @@ export default function CurrentRecords() {
                     memo : mc,
                     photo : pc
                 })
+                
             })
         })
     })
-    },[])
+    },[]);
+    useEffect(() => {
+        setRecordCountArray(count);
+    }, [count]);
+
     return (
         <MainLayout>
             <PuzzleRecordBox>
-                <PuzzleImageBox><PUZZLESKYBLUE/></PuzzleImageBox>
+                <PuzzleImageBox>
+                    <PUZZLESKYBLUE/>
+                </PuzzleImageBox>
                 <RecordCountBox>
-                    <Text style={{ fontSize: 18, fontWeight: 600 }}>{count.photo}</Text> {/* 통신 시 변경 */}
-                    <Text>개</Text>
+                    <RecordCountText>{count.photo}</RecordCountText> {/* 통신 시 변경 */}
+                    <UnitText>개</UnitText>
                 </RecordCountBox>
             </PuzzleRecordBox>
             <PuzzleRecordBox>
-                <PuzzleImageBox><PUZZLEPINK/></PuzzleImageBox>
+                <PuzzleImageBox>
+                    <PUZZLEPINK/>
+                </PuzzleImageBox>
                 <RecordCountBox>
-                    <Text style={{ fontSize: 18, fontWeight: 600 }}>{count.memo}</Text> {/* 통신 시 변경 */}
-                    <Text>개</Text>
+                    <RecordCountText >{count.memo}</RecordCountText> {/* 통신 시 변경 */}
+                    <UnitText>개</UnitText>
                 </RecordCountBox>
             </PuzzleRecordBox>
             <PuzzleRecordBox>
-                <PuzzleImageBox><PUZZLEYELLOW /></PuzzleImageBox>
+                <PuzzleImageBox>
+                    <PUZZLEYELLOW />
+                </PuzzleImageBox>
                 <RecordCountBox>
-                    <Text style={{ fontSize: 18, fontWeight: 600 }}>{count.ticket}</Text> {/* 통신 시 변경 */}
-                    <Text>개</Text>
+                    <RecordCountText>{count.ticket}</RecordCountText> {/* 통신 시 변경 */}
+                    <UnitText>개</UnitText>
                 </RecordCountBox>
             </PuzzleRecordBox>
         </MainLayout>
@@ -77,7 +88,7 @@ gap: 10px;
 const RecordCountBox = styled.View`
 flex-direction: row;
 align-items: center;
-justify-contetn: center;
+justify-content: center;
 `;
 
 const RecordCountText = styled.Text`
@@ -89,3 +100,9 @@ const PuzzleImageBox = styled.View`
 width: 21px;
 height: 21px;
 `;
+
+const UnitText = styled.Text`
+    font-size: 14px;
+    margin-left: 2px;
+`;
+

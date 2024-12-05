@@ -12,7 +12,7 @@ export default function RecordDescriptionCard({recordType,recordImage, decoImage
             <DescriptionTextLight>{descriptionText2}</DescriptionTextLight>
             {
                     recordType === "티켓" ?
-                        <Ticket style={{fontSize:"50"}}>{recordImage}</Ticket> :
+                        <Ticket>{recordImage}</Ticket> :
                         <RecordImage>{recordImage}</RecordImage>
             }
             <DecoImage>{decoImage}</DecoImage>
@@ -78,4 +78,5 @@ const Ticket = styled.Text`
 position: absolute;
 right: 30px;
 bottom: 20px;
+font-size: 50px;
 `
