@@ -38,6 +38,7 @@ export default function DetailTravelLog() {
     const route = useRoute();
     const { travel_id } = route.params;
     const [travelDetails, setTravelDetails] = useState({
+        travelId: null,
         title: null,
         startDate: null,
         endDate: null,
@@ -51,6 +52,7 @@ export default function DetailTravelLog() {
             console.log("상세조회 통신 : " + res);
             // res 데이터를 travelDetails로 업데이트
             setTravelDetails({
+                travelId: res?.travel_id || null,
                 title: res?.title || null,
                 startDate: res?.start_date || null,
                 endDate: res?.end_date || null,
@@ -109,6 +111,7 @@ export default function DetailTravelLog() {
             {!isClickEndTravelBtn ? (
                 <>
                     <DetailTravelLogHeader
+                        travelId={travelDetails.travelId}
                         title={travelDetails.title}
                         cityName={travelDetails.cityName}
                         countryName={travelDetails.countryName}

@@ -4,9 +4,9 @@ import SelectDate from "./SelectDate";
 import StandardButton from "../../../shared/component/StandardButton";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { postCreateTravel } from "./api/AddLogApi";
+import { postCreateTravel, putTravel } from "./api/AddLogApi";
 
-export default function AddTravelLogBottom({selectedCountryId, selectedCityId}) {
+export default function AddTravelLogBottom({selectedCountryId, selectedCityId, travel_id}) {
     const [isAllSelected, setIsAllSelected] = useState(false);
     const [countryId, setCountryId] = useState(selectedCountryId);
     const [cityId, setCityId] = useState(selectedCityId);
@@ -34,11 +34,22 @@ export default function AddTravelLogBottom({selectedCountryId, selectedCityId}) 
         console.log(selectedCityId);
         console.log(logTitle);
         console.log(startDate);
-        postCreateTravel(4, selectedCityId, selectedCountryId, logTitle, startDate, endDate).then((res) => {
-            console.log(res);
-            setTravelId(res.travelId);
-        });
-        navigation.navigate("DetailTravelLog", {travel_id: travelId});
+        
+        
+        if(travel_id) { // 수정인 경우
+            putTravel(travel_id, selectedCityId, selectedCountryId, logTitle, startDate, endDate).then((res) => {
+                console.log(res);
+                
+            })
+            navigation.navigate("DetailTravelLog", {travel_id: travel_id});
+        } else {
+            postCreateTravel(4, selectedCityId, selectedCountryId, logTitle, startDate, endDate).then((res) => {
+                console.log(res);
+                setTravelId(res.travelId);
+            });
+            navigation.navigate("DetailTravelLog", {travel_id: travelId});
+        }
+    
     }
 
     // // 여행기 생성하면 여행기 상세화면으로 넘어간다 (travelId값을 넘겨줌)
