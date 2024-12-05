@@ -34,6 +34,7 @@ export default function MemoPiece({travelId, setIsClickAddPiece, setRecordId}) {
                 text="기록 추가"
                 backgroundColor={isAllSelected ? '#5C95FB' : '#D3D3D3'}
                 onPress={handleAddPiece}
+                marginTop='auto'
 
             />
         </MainLayout>
@@ -41,5 +42,9 @@ export default function MemoPiece({travelId, setIsClickAddPiece, setRecordId}) {
 }
 
 const MainLayout = styled.View`
-
+height: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 30px;
 `;

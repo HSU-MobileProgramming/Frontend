@@ -38,3 +38,35 @@ export const postCreateTravel = async (userId, cityId, countryId, title, startDa
   }
 };
 
+export const putTravel = async (travel_id, cityId, countryId, title, startDate, endDate) => {
+  console.log(title + startDate + endDate + cityId);
+  try {
+    const token = await AsyncStorage.getItem('accessToken');
+ 
+    if (token) {
+      const response = await axios.put(
+        `${BASE_URL}/trip/travel_update/${travel_id}`,
+        {
+          "title": title,
+          "startDate": startDate,
+          "endDate": endDate,
+          "cityId": cityId + 1,
+          "countryId": countryId,
+        },
+        {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      return response.data;
+    } else {
+      console.log("토큰이 없습니다.");
+      return "토큰이 없습니다.";
+    }
+  } catch (error) {
+    console.error('postCreateTravel error!', error.response?.data || error.message);
+    return "error";
+  }
+};

@@ -5,8 +5,50 @@ import CHECKPUZZLESKYBLUE from '../../assets/checkpuzzle-skyblue.svg';
 import CHECKPUZZLEPINK from '../../assets/checkpuzzle-pink.svg';
 import CHECKPUZZLEMINT from '../../assets/checkpuzzle-mint.svg';
 import StandardButton from "../../shared/component/StandardButton";
+import { useEffect, useState } from "react";
+import { getMemoPiece, getPhotoPiece } from "./api/CreateTravelPieceApi";
 
 export default function CompleteAddPiece({ recordType, onPress, recordId }) {
+    const [createdAt, setCreatdeAt] = useState(null);
+    const [memoData, setMemoData] = useState(null);
+    const [photoData, setPhotoData] = useState([]);
+
+    const formatDate = (isoDateString) => {
+        if (!isoDateString) return ""; // 값이 없으면 빈 문자열 반환
+    
+        const date = new Date(isoDateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1
+        const day = String(date.getDate()).padStart(2, "0");
+        const hours = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+    
+        return `${year}.${month}.${day} ${hours}:${minutes}`; // 원하는 형식으로 포맷
+    };
+
+    useEffect(() => {
+        const updatePhotoData = [];
+        recordId.map((id, i) => {
+            if (recordType === '메모') {
+                getMemoPiece(recordId[i]).then((res) => {
+                    console.log("개별 메모 조각 조회 성공 !: " + res);
+                    setCreatdeAt(formatDate(res.created_at));
+                    setMemoData(res.description);
+                })
+            } else {
+                getPhotoPiece(recordId[i]).then((res) => {
+                    console.log("개별 사진 조각 조회 성공 !: " + res);
+                    setCreatdeAt(formatDate(res.created_at));
+                    updatePhotoData.push(res.url);
+                    
+                })
+
+    
+            }
+        })
+        setPhotoData(updatePhotoData);
+    }, []);
+
     const renderPuzzleImage = () => {
         switch (recordType) {
             case "사진":
@@ -36,12 +78,21 @@ export default function CompleteAddPiece({ recordType, onPress, recordId }) {
             <TopContainer>
                 <PuzzleImageBox>{renderPuzzleImage()}</PuzzleImageBox>
                 <CompleteText>기록 추가 완료!</CompleteText>
-                <DateText>20xx.xx.xx</DateText> {/* 통신시 변경 */}
+                <DateText>{createdAt}</DateText> {/* 통신시 변경 */}
             </TopContainer>
             <PreviewContainer>
                 <PreviewText>미리보기</PreviewText>
                 <PreviewBox>
-
+                    {photoData.map((photo, i) => (
+                        <Image
+                            key={i} // 고유 키 설정
+                            source={{ uri: photo }} // 파일 경로를 객체로 전달
+                            style={{ width: 80, height: 80, margin: 5, borderRadius: 5 }} // 스타일 추가
+                        />
+                    ))}
+                    {memoData && (
+                        <Text>{memoData}</Text>
+                    )}
                 </PreviewBox>
             </PreviewContainer>
             <StandardButton
@@ -98,7 +149,6 @@ letter-spacing: -0.3px;
 
 const PreviewBox = styled.View`
 width: 100%;
-height: 20%;
 border-radius: 11.501px;
 border: 2.3px solid #EAEAEA;
 background: #FFF;
@@ -107,4 +157,8 @@ shadow-offset: 0px 0px; /* x축, y축 오프셋 */
 shadow-opacity: 0.1; /* 불투명도 */
 shadow-radius: 11.501px; /* 그림자 흐림 정도 */
 margin-top: 10px;
+justify-content: center;
+align-items: center;
+padding: 10px;
+
 `;

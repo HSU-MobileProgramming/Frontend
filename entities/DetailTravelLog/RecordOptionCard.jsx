@@ -6,7 +6,6 @@ export default function RecordOptionCard({ travelId, recordType, recordImage, bo
     const navigation = useNavigation();
     const handleClickOptionCard = (recordType) => {
         navigation.navigate("CreateTravelPiece", { travelId: travelId, recordType: recordType, recordImage: recordImage, decoImage: decoImage }); // 주소 뒤에 붙는 params로 전달한것 (props가 아님)
-
     }
 
     return (
@@ -14,7 +13,7 @@ export default function RecordOptionCard({ travelId, recordType, recordImage, bo
             <MainLayout borderColor={borderColor}>
                 {
                     recordType === "티켓" ?
-                        <Text style={{fontSize:"32"}}>{recordImage}</Text> :
+                        <TicketText >{recordImage}</TicketText> :
                         <RecordImage>{recordImage}</RecordImage>
                 }
                 <Text>{recordType}</Text>
@@ -46,4 +45,8 @@ const RecordImage = styled.View`
 width: 30px;
 height: 30px;
 
+`;
+
+const TicketText = styled.Text`
+font-size: 30px;
 `;

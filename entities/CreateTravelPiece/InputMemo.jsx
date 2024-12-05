@@ -22,7 +22,8 @@ export default function InputMemo({height, placeholder, setMemo}) {
 }
 
 const MainLayout = styled.View`
-
+margin-top: 30px;
+width: 100%;
 `;
 
 const MemoText = styled.Text`

@@ -42,6 +42,7 @@ export default function CreateTravelPiece({ route }) {
                             }
                         })()}
                     </CreatePieceBottom>
+                    
                 </>
             ) : (
                 <>
