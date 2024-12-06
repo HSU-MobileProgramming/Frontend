@@ -58,9 +58,17 @@ export default function World() {
   useEffect(() => {
     loadData();
     getUserInfo().then((res) => {
-      setUserInfo({ nickname: res.nickname, profileImage: res.profile_img }); // 상태 업데이트
+      console.log("getUserInfo response:", res); // 반환값 확인
+      if (res) {
+        setUserInfo({ nickname: res.nickname, profileImage: res.profile_img });
+      } else {
+        console.error("getUserInfo returned an invalid response.");
+      }
+    }).catch((error) => {
+      console.error("Error fetching user info:", error); // 에러 확인
     });
   }, []);
+  
 
   const handleSearch = (text) => {
     setSearchQuery(text);

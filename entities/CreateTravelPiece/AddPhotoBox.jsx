@@ -8,11 +8,11 @@ import * as TextRecognition from 'react-native-text-recognition';
 import ADD from '../../assets/add-grey.svg';
 import { useEffect, useState } from "react";
 
-export default function AddPhotoBox({ index, photo, onPhotoSelect }) {
+export default function AddPhotoBox() {
     const [isLoading, setIsLoading] = useState(false);
     const [progress, setProgress] = useState(0);
     const [response, setResponse] = useState(null);
-    const [selectedImage, setSelectedImage] = useState(photo);
+    const [selectedImage, setSelectedImage] = useState(null);
     const [text, setText] = useState('');
 
     useEffect(() => {
@@ -61,18 +61,17 @@ export default function AddPhotoBox({ index, photo, onPhotoSelect }) {
         setProgress(0);
     };
 
-    const handleSelectPhoto = async () => {
+    const handleTakeChoosePhoto = async () => {
         try {
             const result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ['images'], // 사진만 선택
+                //allowsEditing: true, // 편집 허용
                 quality: 1, // 원본 품질 유지
             });
 
             if (!result.canceled) {
                 setResponse(result); // 전체 응답 저장
-                const uri = result.assets[0].uri;
-                setSelectedImage(uri); // 선택된 이미지 URI 저장
-                onPhotoSelect(index, uri);
+                setSelectedImage(result.assets[0].uri); // 선택된 이미지 URI 저장
             } else {
                 console.log("Image selection canceled");
             }
@@ -124,7 +123,7 @@ export default function AddPhotoBox({ index, photo, onPhotoSelect }) {
     };
 
     return (
-        <MainLayout onPress={handleSelectPhoto}>
+        <MainLayout onPress={handleTakeChoosePhoto}>
             {selectedImage ? (
                 <PhotoImage source={{ uri: selectedImage }} />
             ) : (
@@ -142,7 +141,6 @@ background: #FFF;
 border-radius: 10px;
 justify-content: center;
 align-items: center;
-
 `;
 
 const PhotoImage = styled.Image`

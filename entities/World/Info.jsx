@@ -1,16 +1,23 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Animated, View } from 'react-native';
 
 // 이미지
 import ProfileImg from '../../assets/profileImg.png';
 import Puzzle from '../../assets/pinkpuzzle.png';
+import { getUserInfo } from '../SignUp/api/userApi';
 
-export default function Info({userInfo,countryCount,cityCount}) {
+export default function Info({countryCount,cityCount}) {
   const slideAnim = useRef(new Animated.Value(200)).current; // 시작 위치 설정
+  const [nickname, setNickname] = useState();
+  const [image, setImage] = useState();
 
   useEffect(() => {
-    console.log("count",countryCount)
+    getUserInfo().then((res) => {
+      console.log(res.user);
+      setNickname(res.user.nickname);
+      setImage(res.user.profile_img);
+    });
 
     // 애니메이션 실행
     Animated.timing(slideAnim, {
@@ -18,14 +25,14 @@ export default function Info({userInfo,countryCount,cityCount}) {
       duration: 400, // 지속 시간 (ms)
       useNativeDriver: true, // 네이티브 드라이버 사용
     }).start();
-  }, []);
+  }, [nickname,image]);
 
   return (
     <AnimatedContainer style={{ transform: [{ translateY: slideAnim }] }}>
       <View>
         <WrapProfile>
-          <StyledImg source={ProfileImg} />
-          <StyledText marginLeft="5px">여행자님</StyledText>
+          <StyledImg source={image} />
+          <StyledText marginLeft="5px">{nickname}</StyledText>
         </WrapProfile>
 
         <StyledText fontSize="19px" fontWeight="600" width="190px">

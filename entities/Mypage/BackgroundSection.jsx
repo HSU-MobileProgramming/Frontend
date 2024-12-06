@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigation } from '@react-navigation/native'
+import { getUserInfo } from '../SignUp/api/userApi'
 import profileImage from '../../assets/profileImg.png'
 import pen from '../../assets/pen.png'
 export default function BackgroundSection() {
+    const [image,setImage] = useState();
     const navigation = useNavigation()
     const onPressImage = () => {
         navigation.navigate("ProfileSetting")
     }
+    useEffect(()=>{
+        getUserInfo().then((res) => {
+            console.log(res.user);
+            setImage(res.user.profile_img)
+          });
+    },[])
     return (
         <Background>
             <SyledText>MY PAGE</SyledText>
 
             <WrapImage onPress={()=>onPressImage()}>
-                <StyledImg source={profileImage} />
+                <StyledImg source={image} />
                 {/* <ModifyButton source={pen} /> */}
             </WrapImage>
 

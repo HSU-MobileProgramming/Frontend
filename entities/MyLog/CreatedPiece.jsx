@@ -9,28 +9,33 @@ export default function CreatedPiece() {
     const tabList = ['전체', '📷 사진', '✍🏻 메모', '🎫 티켓'];
     const [selectedTab, setSelectedTab] = useState(0); // '전체'를 기본 선택 상태로 설정
     const [travelPiece, setTravelPiece] = useState([]);
+    const [category, setCategory] = useState('전체');
 
     const handleTab = (i) => {
         setSelectedTab(i); // 선택된 탭 인덱스 저장
         if (tabList[i] === '📷 사진') {
             getPhotoPieces().then((res) => {
+                setCategory("photo")
                 console.log("사진 조각 조회 성공!" + JSON.stringify(res.photos));
                 setTravelPiece(res.photos || []);
 
             })
         } else if (tabList[i] === '✍🏻 메모') {
+            setCategory("memo")
             getMemoPieces().then((res) => {
                 console.log("메모 조각 조회 성공!" + JSON.stringify(res.memos));
                 setTravelPiece(res.memos || []);
 
             })
         } else if (tabList[i] === '🎫 티켓') {
+            setCategory("ticket")
             getTicketPieces().then((res) => {
                 console.log("티켓 조각 조회 성공!" + JSON.stringify(res.tickets));
                 setTravelPiece(res.tickets || []);
             })
         } else {
             getAllTravelPiece().then((res) => {
+                setCategory(res.category)
                 console.log("전체 조각 조회 성공!" + JSON.stringify(res.pieces));
                 setTravelPiece(res.pieces || []);
             })
@@ -53,7 +58,7 @@ export default function CreatedPiece() {
                     travelPiece.map((piece, index) => (
                         <PieceInfo
                             key={index}
-                            category={piece.category}
+                            category={category}
                             createdAt={piece.created_at}
                         />
                     ))

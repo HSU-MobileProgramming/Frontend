@@ -21,7 +21,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MyLog" //초기 경로 설정
+        initialRouteName="World" //초기 경로 설정
 
         screenOptions={{ headerShown: false, animationEnabled: false }} //모든 스크린에서 헤더를 숨김
       >

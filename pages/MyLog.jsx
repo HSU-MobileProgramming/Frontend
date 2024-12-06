@@ -52,34 +52,8 @@ export default function MyLog() {
     return (
         <MainLayout>
             <MapViewContainer>
-                <MapView
-                    provider={PROVIDER_GOOGLE}
-                    initialRegion={{
-                        latitude: 34.0479,
-                        longitude: 100.6197,
-                        latitudeDelta: 70,
-                        longitudeDelta: 90,
-                    }}
-                    style={{ width: '100%', height: '100%' }}
-                >
-                    {allTravelLog.map((log, index) => {
-                        const cityIndex = countries.findIndex((item) => item.city === log.city_name); // 도시이름(city_name)으로 더미데이터의 인덱스 찾기
-                        return (
-                            <Marker
-                                key={index}
-                                coordinate={countries[cityIndex].coordinates}
-                                title={log.title}
-                                description={log.description}
-                                pinColor="blue"
-                            >
-                                {/* <CreatedLogMarker>
-                                    <MarkerView>{countries[cityIndex].thumnail}</MarkerView>
-                                    
-                                </CreatedLogMarker> */}
-                            </Marker>
-                        )
-                    })}
-                </MapView>
+                
+
             </MapViewContainer>
             <ScrollViewContainer>
                 <ContentContainer>

@@ -29,11 +29,9 @@ export default function TicketPiece() {
       const ticketDetails = await Promise.all(
         response.tickets.map(async (ticket) => {
           const detail = await getTicket(ticket.travel_record_id); // 각 travel_record_id로 getTicket 호출
-          //console.log(`getTicket(${ticket.travel_record_id}) 조회 성공:`, detail);
           return detail;
         })
       );
-
       setTickets((prevTickets) => [...prevTickets, ...ticketDetails]); // 기존 tickets에 새 데이터 추가
     } catch (error) {
       console.error('티켓 데이터 가져오기 오류:', error);
