@@ -36,7 +36,21 @@ export default function PhotoPiece({ travelId, setRecordId, setIsClickAddPiece }
             setRecordId(uploadedIds);
             setIsClickAddPiece(true);
         } else {
-            console.log("모든 사진이 선택되지 않았거나 메모가 없습니다.");
+            //console.log("모든 사진이 선택되지 않았거나 메모가 없습니다.");
+            // 선택된 모든 사진 업로드
+            selectedPhotos.forEach((uri) => {
+                if (uri) {
+                    postPhoto(travelId, uri, memo).then((res) => {
+                        console.log("사진 조각 통신 결과: ", res);
+                        uploadedIds.push(res.piece_id);
+
+                    }).catch((err) => {
+                        console.error("사진 업로드 실패: ", err);
+                    });
+                }
+            });
+            setRecordId(uploadedIds);
+            setIsClickAddPiece(true);
         }
         //setIsClickAddPiece(true);
 
