@@ -9,7 +9,7 @@ export default function AddTravelLog() {
     const [selectedCountryId, setSelectedCountryId] = useState(null);
     const [selectedCityId, setSelectedCityId] = useState(null);
     const route = useRoute();
-    const {travelId} = route.params;
+    // const {travelId} = route.params;
 
     useEffect(() => {
         //console.log("selectedCountryId: " + selectedCountryId);
@@ -19,7 +19,7 @@ export default function AddTravelLog() {
     return (
             <AddTravelLogLayout>
                 <AddTravelLogTop setSelectedCountryId={(countryId) => setSelectedCountryId(countryId)} setSelectedCityId={(index) => setSelectedCityId(index)}/>
-                <AddTravelLogBottom selectedCountryId={selectedCountryId} selectedCityId={selectedCityId} travel_id={travelId}/>
+                <AddTravelLogBottom selectedCountryId={selectedCountryId} selectedCityId={selectedCityId}/>
             </AddTravelLogLayout>
     )
 }

@@ -53,25 +53,25 @@ export default function MyLog() {
     const [recordCountArray, setRecordCountArray] = useState(null);
     const [travelId, setTravelId] = useState(null);
     const [count, setCount] = useState({
-        ticket : '',
-        memo : '',
-        photo : ''
+        ticket: '',
+        memo: '',
+        photo: ''
     })
 
-    useEffect(()=>{
-    getTicketCount().then((tc)=>{
-        getMemoCount().then((mc)=>{
-            getPhotoCount().then((pc)=>{
-                setCount({
-                    ticket : tc,
-                    memo : mc,
-                    photo : pc
+    useEffect(() => {
+        getTicketCount().then((tc) => {
+            getMemoCount().then((mc) => {
+                getPhotoCount().then((pc) => {
+                    setCount({
+                        ticket: tc,
+                        memo: mc,
+                        photo: pc
+                    })
+
                 })
-                
             })
         })
-    })
-    },[]);
+    }, []);
     useEffect(() => {
         setRecordCountArray(count);
     }, [count]);
@@ -79,112 +79,85 @@ export default function MyLog() {
     // 
     return (
         <MainLayout>
-           {!isClickCreatedLog ? (
-            <>
-             <MapViewContainer>
-                <MapView
-                    provider={PROVIDER_GOOGLE}
-                    initialRegion={{
-                        latitude: 34.0479,
-                        longitude: 100.6197,
-                        latitudeDelta: 70,
-                        longitudeDelta: 90,
-                    }}
-                    style={{ width: '100%', height: '100%' }}
-                >
-                    {allTravelLog.map((log, index) => {
-                        const cityIndex = countries.findIndex((item) => item.city === log.city_name); // 도시이름(city_name)으로 더미데이터의 인덱스 찾기
-                        return (
-                            <Marker
-                                key={index}
-                                coordinate={countries[cityIndex].coordinates}
-                                title={log.title}
-                                description={log.description}
-                                pinColor="blue"
-                            >
-                                {/* <CreatedLogMarker>
-                                    <MarkerView>{countries[cityIndex].thumnail}</MarkerView>
-                                    
-                                </CreatedLogMarker> */}
-                            </Marker>
-                        )
-                    })}
-                </MapView>
-            </MapViewContainer>
-            <ScrollViewContainer>
-                <ContentContainer>
-                    {currentTravelLog.length > 0 && (
-                        <>
-                            <TitleText>진행중인 여행</TitleText>
-                            <CurrentLog
-                                travel_id={currentTravelLog[0].travel_id}
-                                title={currentTravelLog[0].title}
-                                start_date={currentTravelLog[0].start_date}
-                                end_date={currentTravelLog[0].end_date}
-                                description={currentTravelLog[0].description}
-                                city_name={currentTravelLog[0].city_name}
-                                country_name={currentTravelLog[0].country_name}
-                                
-                            />
-                        </>
-                    )}
+            {!isClickCreatedLog ? (
+                <>
+                    <MapViewContainer>
 
-                    <RowView>
-                        <TitleText>생성된 여행기</TitleText>
-                        <AddLogButton onPress={() => handleTouchableBtn("addlog")}>
-                            {/* <Image source={ADD} style={{ width: '30', height: '30' }} /> */}
-                            <ADD width={30} height={30} marginBottom={6} />
-                        </AddLogButton>
-                    </RowView>
-                    {allTravelLog.length > 0 ? (
-                        <>
-                            <FlatList
-                                data={allTravelLog}
-                                horizontal
-                                renderItem={({ item }) => (
-                                    <CreatedLog
-                                        key={item.travel_id} // 고유 key 설정
-                                        travel_id={item.travel_id}
-                                        title={item.title}
-                                        start_date={item.start_date}
-                                        end_date={item.end_date}
-                                        description={item.description}
-                                        city_name={item.city_name}
-                                        country_name={item.country_name}
-                                        setIsClickCreatedLog={setIsClickCreatedLog}
-                                        setTravelId={setTravelId}
+                    </MapViewContainer>
+                    <ScrollViewContainer>
+                        <ContentContainer>
+                            {currentTravelLog.length > 0 && (
+                                <>
+                                    <TitleText>진행중인 여행</TitleText>
+                                    <CurrentLog
+                                        travel_id={currentTravelLog[0].travel_id}
+                                        title={currentTravelLog[0].title}
+                                        start_date={currentTravelLog[0].start_date}
+                                        end_date={currentTravelLog[0].end_date}
+                                        description={currentTravelLog[0].description}
+                                        city_name={currentTravelLog[0].city_name}
+                                        country_name={currentTravelLog[0].country_name}
+
                                     />
-                                )}
-                                keyExtractor={(item) => String(item.travel_id)}
-                                snapToOffsets={snapToOffsets}
-                                snapToAlignment="start"
-                                decelerationRate="fast"
-                                showsHorizontalScrollIndicator={false}
-                                contentContainerStyle={{ paddingHorizontal: 0 }}
-                                ItemSeparatorComponent={() => <View style={{ width: itemSpacing }} />}
+                                </>
+                            )}
 
-                            />
+                            <RowView>
+                                <TitleText>생성된 여행기</TitleText>
+                                <AddLogButton onPress={() => handleTouchableBtn("addlog")}>
+                                    {/* <Image source={ADD} style={{ width: '30', height: '30' }} /> */}
+                                    <ADD width={30} height={30} marginBottom={6} />
+                                </AddLogButton>
+                            </RowView>
+                            {allTravelLog.length > 0 ? (
+                                <>
+                                    <FlatList
+                                        data={allTravelLog}
+                                        horizontal
+                                        renderItem={({ item }) => (
+                                            <CreatedLog
+                                                key={item.travel_id} // 고유 key 설정
+                                                travel_id={item.travel_id}
+                                                title={item.title}
+                                                start_date={item.start_date}
+                                                end_date={item.end_date}
+                                                description={item.description}
+                                                city_name={item.city_name}
+                                                country_name={item.country_name}
+                                                setIsClickCreatedLog={setIsClickCreatedLog}
+                                                setTravelId={setTravelId}
+                                            />
+                                        )}
+                                        keyExtractor={(item) => String(item.travel_id)}
+                                        snapToOffsets={snapToOffsets}
+                                        snapToAlignment="start"
+                                        decelerationRate="fast"
+                                        showsHorizontalScrollIndicator={false}
+                                        contentContainerStyle={{ paddingHorizontal: 0 }}
+                                        ItemSeparatorComponent={() => <View style={{ width: itemSpacing }} />}
+
+                                    />
 
 
-                        </>
-                    ) : (
-                        <NullCreatedLogView>
-                            <Text style={{ textAlign: 'center' }}>앗, 생성된 여행기가 없어요 !</Text>
-                        </NullCreatedLogView>
-                    )}
-                    <TitleText>여행자님의 지난 여행 조각</TitleText>
-                    <CreatedPiece />
+                                </>
+                            ) : (
+                                <NullCreatedLogView>
+                                    <Text style={{ textAlign: 'center' }}>앗, 생성된 여행기가 없어요 !</Text>
+                                </NullCreatedLogView>
+                            )}
+                            <TitleText>여행자님의 지난 여행 조각</TitleText>
+                            <CreatedPiece />
 
 
-                </ContentContainer>
-            </ScrollViewContainer>
-            <NavigationBar mylog />
-            </>
-           ) : (
-            <>
-                <EndTravelLog travel_id={travelId} recordCountArray={recordCountArray} setIsClickCreatedLog={setIsClickCreatedLog}/>
-            </>
-           )}
+                        </ContentContainer>
+                    </ScrollViewContainer>
+                    <NavigationBar mylog />
+                </>
+            ) : (
+                <>
+                    <EndTravelLog travel_id={travelId} recordCountArray={recordCountArray} setIsClickCreatedLog={setIsClickCreatedLog} />
+                </>
+            )}
         </MainLayout>
     )
 }

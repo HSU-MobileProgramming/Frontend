@@ -8,7 +8,7 @@ import StandardButton from '../../shared/component/StandardButton';
 import { getTicket, getTicketList } from './api/ticketApi';
 import { useNavigation } from '@react-navigation/native';
 
-export default function TicketPiece() {
+export default function TicketPiece({travelId}) {
   const navigation = useNavigation()
   const [itemWidth, setItemWidth] = useState(0);
   const [isShowModal, setIsShowModal] = useState(false);
@@ -70,7 +70,7 @@ export default function TicketPiece() {
           </AddButton>
 
           {isShowModal && (
-            <Modal setIsShowModal={setIsShowModal} setTickets={setTickets} />
+            <Modal setIsShowModal={setIsShowModal} setTickets={setTickets} travelId={travelId} />
           )}
         </Container>
       </ScrollView>
@@ -80,7 +80,7 @@ export default function TicketPiece() {
         backgroundColor="#5C95FB"
         color="#FFF"
         marginTop="auto"
-        onPress={()=>navigation.navigate("DetailTravelLog")}
+        onPress={()=>navigation.navigate("DetailTravelLog",{travelId})}
       />
     </WrapCard>
   );

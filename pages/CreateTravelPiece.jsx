@@ -34,7 +34,7 @@ export default function CreateTravelPiece({ route }) {
                                 case "티켓":
                                     return (
                                         <>
-                                            <TicketPiece/>
+                                            <TicketPiece travelId={travelId}/>
                                         </>
                                     );
                                 default:
