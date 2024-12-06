@@ -6,7 +6,6 @@ export default function PieceInfo({ category, createdAt }) {
     const [type, setType] = useState();
     const [emoji,setEmoji] = useState('');
     const [backgroundColor, setBackgroundColor] = useState();
-
     const formatDateWithDay = (isoDateString) => {
         const date = new Date(isoDateString);
 
@@ -26,7 +25,6 @@ export default function PieceInfo({ category, createdAt }) {
     return (
         <MainLayout>
             <Image backgroundColor={backgroundColor}><Emoji>{emoji}</Emoji></Image>
-
             <WrapText>
                 <CategoryText>{type}</CategoryText>
                 <WrapDate>
@@ -34,7 +32,6 @@ export default function PieceInfo({ category, createdAt }) {
                     <CreatedAtText>{formatDateWithDay(createdAt)}</CreatedAtText>
                 </WrapDate>
             </WrapText>
-
         </MainLayout>
     )
 }

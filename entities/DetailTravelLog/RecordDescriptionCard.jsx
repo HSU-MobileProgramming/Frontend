@@ -78,4 +78,5 @@ const Ticket = styled.Text`
 position: absolute;
 right: 30px;
 bottom: 20px;
+font-size: 50px;
 `

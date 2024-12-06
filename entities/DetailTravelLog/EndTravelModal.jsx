@@ -1,7 +1,15 @@
 import styled from "styled-components/native";
 import { View, Text } from "react-native";
 import StandardButton from "../../shared/component/StandardButton";
-export default function EndTravelModal({onClose}) {
+import { useNavigation } from "@react-navigation/native";
+
+export default function EndTravelModal({onClose, travelId, recordCountArray, onEndTravelPress}) {
+    const navigation = useNavigation(); // useNavigation은 컴포넌트 본문에서 호출
+
+    const handleEndTravel = () => {
+        navigation.navigate("EndTravelLog", { travelId:travelId, recordCountArray:recordCountArray });
+    };
+
     return (
         <ModalOverlay>
             <ModalContainer>
@@ -10,7 +18,7 @@ export default function EndTravelModal({onClose}) {
                 <DescriptionText>여행을 종료하면 다시 시작할 수 없으며{"\n"}여행 조각들은 여행기에 모아져서 저장됩니다.</DescriptionText>
                 <ButtonContainer>
                     <StandardButton onPress={onClose} text='취소' backgroundColor='rgba(0, 0, 0, 0.10)' color='#A7A7A7' width='160px'/>
-                    <StandardButton text='여행 종료' backgroundColor='#739EF6' color='#FFF' width='160px'/>
+                    <StandardButton text='여행 종료' backgroundColor='#739EF6' color='#FFF' width='160px' onPress={onEndTravelPress}/>
                 </ButtonContainer>
             </ModalContainer>
         </ModalOverlay>

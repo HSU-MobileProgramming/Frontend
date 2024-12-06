@@ -77,7 +77,7 @@ gap: 10px;
 const RecordCountBox = styled.View`
 flex-direction: row;
 align-items: center;
-justify-contetn: center;
+justify-content: center;
 `;
 
 const RecordCountText = styled.Text`
@@ -89,3 +89,9 @@ const PuzzleImageBox = styled.View`
 width: 21px;
 height: 21px;
 `;
+
+const UnitText = styled.Text`
+    font-size: 14px;
+    margin-left: 2px;
+`;
+

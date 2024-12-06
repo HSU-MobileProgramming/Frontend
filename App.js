@@ -14,6 +14,7 @@ import MyPage from "./pages/MyPage";
 import MyLog from "./pages/MyLog";
 import AddTravelLog from "./pages/AddTravelLog";
 import CreateTravelPiece from "./pages/CreateTravelPiece";
+import EndTravelLog from "./entities/DetailTravelLog/EndTravelLog";
 
 
 function App() {

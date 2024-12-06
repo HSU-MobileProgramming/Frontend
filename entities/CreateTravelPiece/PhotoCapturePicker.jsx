@@ -22,6 +22,7 @@ export default function PhotoCapturePicker({ selectedPhotos, onPhotoSelect }) {
 }
 
 const MainLayout = styled.View`
+margin-top: 30px;
 margin-bottom: 30px;
 `;
 

@@ -1,4 +1,5 @@
-import JAPAN from '../../../assets/country/japan.svg';
+// import JAPAN from '../../../assets/country/japan.svg';
+import JAPAN from '../../../assets/country/japan.png';
 import VIETNAM from '../../../assets/country/vietnam.svg';
 
 export const countries = [
@@ -8,7 +9,7 @@ export const countries = [
     city: "하노이",
     country: "베트남",
     flagImage: "🇻🇳",
-    thumnail: <VIETNAM />,
+    thumnail: require('../../../assets/country/vietnam.png'),
     coordinates: { latitude: 21.0285, longitude: 105.8542 }
   },
   {
@@ -17,7 +18,7 @@ export const countries = [
     city: "다낭",
     country: "베트남",
     flagImage: "🇻🇳",  
-    thumnail: <VIETNAM />,
+    thumnail: require('../../../assets/country/vietnam.png'),
     coordinates: { latitude: 16.0544, longitude: 108.2022 }
   },
   {
@@ -26,7 +27,7 @@ export const countries = [
     city: "호치민",
     country: "베트남",
     flagImage: "🇻🇳",
-    thumnail: <VIETNAM />,
+    thumnail: require('../../../assets/country/vietnam.png'),
     coordinates: { latitude: 10.8231, longitude: 106.6297 }
   },
   {
@@ -35,7 +36,7 @@ export const countries = [
     city: "나트랑",
     country: "베트남",
     flagImage: "🇻🇳",
-    thumnail: <VIETNAM />,
+    thumnail: require('../../../assets/country/vietnam.png'),
     coordinates: { latitude: 12.2388, longitude: 109.1967 }
   },
   {
@@ -44,7 +45,7 @@ export const countries = [
     city: "오사카",
     country: "일본",
     flagImage: "🇯🇵",
-    thumnail: <JAPAN />,
+    thumnail: JAPAN,
     coordinates: { latitude: 34.6937, longitude: 135.5023 }
   },
   {
@@ -53,7 +54,7 @@ export const countries = [
     city: "후쿠오카",
     country: "일본",
     flagImage: "🇯🇵",
-    thumnail: <JAPAN />,
+    thumnail: JAPAN,
     coordinates: { latitude: 33.5904, longitude: 130.4017 }
   },
   {
@@ -62,7 +63,7 @@ export const countries = [
     city: "삿포로",
     country: "일본",
     flagImage: "🇯🇵",
-    thumnail: <JAPAN />,
+    thumnail: JAPAN,
     coordinates: { latitude: 43.0621, longitude: 141.3544 }
   },
   {
@@ -71,7 +72,7 @@ export const countries = [
     city: "도쿄",
     country: "일본",
     flagImage: "🇯🇵",
-    thumnail: <JAPAN />,
+    thumnail: JAPAN,
     coordinates: { latitude: 35.6895, longitude: 139.6917 }
   },
   {

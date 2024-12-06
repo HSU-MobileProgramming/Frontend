@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
-import { View, StyleSheet, Image } from "react-native";
-
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 
 import HEADERICON1 from '../../assets/detail-log-header-icon1.svg';
@@ -17,6 +17,11 @@ export default function DetailTravelLogHeader({ title, cityName, countryName, tr
         const day = String(date.getDate()).padStart(2, '0'); // 일
         return `${year}.${month}.${day}`;
     };
+    const navigation = useNavigation();
+    const handleLocation = () => {
+        navigation.navigate("AddTravelLog", {travelId:travelId});
+    }
+
     return (
         <MainLayout>
             <GradientBackground>
@@ -26,7 +31,9 @@ export default function DetailTravelLogHeader({ title, cityName, countryName, tr
                         <Nickname>여행자</Nickname>
                     </Wrap>
                     <Title>{title}</Title>
-                    <LocationText>{cityName}, {countryName}</LocationText>
+                    <TouchableOpacity onPress={handleLocation}>
+                        <LocationText>{cityName}, {countryName}</LocationText>
+                    </TouchableOpacity>
                     <TravelOpenText>오늘은 여행 {travelOpen}일차에요!</TravelOpenText>
                     <Wrap>
                         <CALENDAR />

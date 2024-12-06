@@ -13,6 +13,8 @@ import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { countries } from "../shared/component/db/CountryData";
 import CreatedPiece from "../entities/MyLog/CreatedPiece";
+import EndTravelLog from "../entities/DetailTravelLog/EndTravelLog";
+import { getTicketCount, getMemoCount, getPhotoCount } from "../entities/DetailTravelLog/api/pieceApi";
 
 export default function MyLog() {
     const [allTravelLog, setAllTravelLog] = useState([]); // 생성된 여행기 저장
@@ -21,6 +23,7 @@ export default function MyLog() {
     const itemWidth = 270; // CreatedLog의 너비와 동일
     const itemSpacing = 10; // 각 항목 사이의 간격
     const snapToOffsets = Array.from({ length: allTravelLog.length }, (_, i) => i * (itemWidth + itemSpacing));
+    const [isClickCreatedLog, setIsClickCreatedLog] = useState(false);
 
     const handleTouchableBtn = (name) => {
         if (name === "addlog") {
@@ -41,19 +44,73 @@ export default function MyLog() {
 
     useEffect(() => {
         saveAllTravelLogApi();
-    }, []);
+    }, [isClickCreatedLog]);
 
     useEffect(() => {
         //console.log("travel_id: " + currentTravelLog.travel_id);
         console.log("length: " + allTravelLog.length);
     }, [allTravelLog, currentTravelLog]);
+    const [recordCountArray, setRecordCountArray] = useState(null);
+    const [travelId, setTravelId] = useState(null);
+    const [count, setCount] = useState({
+        ticket : '',
+        memo : '',
+        photo : ''
+    })
+
+    useEffect(()=>{
+    getTicketCount().then((tc)=>{
+        getMemoCount().then((mc)=>{
+            getPhotoCount().then((pc)=>{
+                setCount({
+                    ticket : tc,
+                    memo : mc,
+                    photo : pc
+                })
+                
+            })
+        })
+    })
+    },[]);
+    useEffect(() => {
+        setRecordCountArray(count);
+    }, [count]);
 
     // 
     return (
         <MainLayout>
             <MapViewContainer>
-                
-
+           {!isClickCreatedLog ? (
+            <>
+             <MapViewContainer>
+                <MapView
+                    provider={PROVIDER_GOOGLE}
+                    initialRegion={{
+                        latitude: 34.0479,
+                        longitude: 100.6197,
+                        latitudeDelta: 70,
+                        longitudeDelta: 90,
+                    }}
+                    style={{ width: '100%', height: '100%' }}
+                >
+                    {allTravelLog.map((log, index) => {
+                        const cityIndex = countries.findIndex((item) => item.city === log.city_name); // 도시이름(city_name)으로 더미데이터의 인덱스 찾기
+                        return (
+                            <Marker
+                                key={index}
+                                coordinate={countries[cityIndex].coordinates}
+                                title={log.title}
+                                description={log.description}
+                                pinColor="blue"
+                            >
+                                {/* <CreatedLogMarker>
+                                    <MarkerView>{countries[cityIndex].thumnail}</MarkerView>
+                                    
+                                </CreatedLogMarker> */}
+                            </Marker>
+                        )
+                    })}
+                </MapView>
             </MapViewContainer>
             <ScrollViewContainer>
                 <ContentContainer>
@@ -68,6 +125,7 @@ export default function MyLog() {
                                 description={currentTravelLog[0].description}
                                 city_name={currentTravelLog[0].city_name}
                                 country_name={currentTravelLog[0].country_name}
+                                
                             />
                         </>
                     )}
@@ -94,6 +152,8 @@ export default function MyLog() {
                                         description={item.description}
                                         city_name={item.city_name}
                                         country_name={item.country_name}
+                                        setIsClickCreatedLog={setIsClickCreatedLog}
+                                        setTravelId={setTravelId}
                                     />
                                 )}
                                 keyExtractor={(item) => String(item.travel_id)}
@@ -120,6 +180,12 @@ export default function MyLog() {
                 </ContentContainer>
             </ScrollViewContainer>
             <NavigationBar mylog />
+            </>
+           ) : (
+            <>
+                <EndTravelLog travel_id={travelId} recordCountArray={recordCountArray} setIsClickCreatedLog={setIsClickCreatedLog}/>
+            </>
+           )}
         </MainLayout>
     )
 }
