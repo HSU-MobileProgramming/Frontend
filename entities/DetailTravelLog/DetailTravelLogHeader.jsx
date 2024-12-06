@@ -9,7 +9,7 @@ import HEADERPUZZLEICON from '../../assets/detail-log-header-puzzle.png';
 import CALENDAR from '../../assets/calendar-white.svg'
 import PROF from '../../assets/profileSvg.svg'
 
-export default function DetailTravelLogHeader({ travelId, title, cityName, countryName, travelOpen, startDate, endDate }) {
+export default function DetailTravelLogHeader({ title, cityName, countryName, travelOpen, startDate, endDate }) {
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const year = String(date.getFullYear()).slice(-2); // 연도 두 자리

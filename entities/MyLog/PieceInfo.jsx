@@ -4,6 +4,8 @@ import styled from "styled-components/native";
 import CLOCK from '../../assets/clock.svg'
 export default function PieceInfo({ category, createdAt }) {
     const [type, setType] = useState();
+    const [emoji,setEmoji] = useState('');
+    const [backgroundColor, setBackgroundColor] = useState();
     const formatDateWithDay = (isoDateString) => {
         const date = new Date(isoDateString);
 
@@ -15,15 +17,14 @@ export default function PieceInfo({ category, createdAt }) {
     };
     useEffect(() => {
         switch (category) {
-            case "ticket": setType("티켓"); break;
-            case "photo": setType("사진"); break;
-            case "memo": setType("메모"); break;
+            case "ticket": setEmoji('🎫'); setType("티켓"); setBackgroundColor('#FFDD92CC'); break;
+            case "photo": setEmoji('📷'); setType("사진"); setBackgroundColor('#5C95FBCC'); break;
+            case "memo": setEmoji('✍️'); setType("메모"); setBackgroundColor('#FAAEC4CC'); break;
         }
     })
     return (
         <MainLayout>
-            <Image />
-
+            <Image backgroundColor={backgroundColor}><Emoji>{emoji}</Emoji></Image>
             <WrapText>
                 <CategoryText>{type}</CategoryText>
                 <WrapDate>
@@ -31,7 +32,6 @@ export default function PieceInfo({ category, createdAt }) {
                     <CreatedAtText>{formatDateWithDay(createdAt)}</CreatedAtText>
                 </WrapDate>
             </WrapText>
-
         </MainLayout>
     )
 }
@@ -62,8 +62,10 @@ margin-left : 7px;
 const Image = styled.View`
 width: 93px;
 height: 93px;
+justify-content : center;
+align-items : center;
 border-radius: 10px 0px 0px 10px;
-background: #C6C6C6;
+background-color :${({ backgroundColor }) => backgroundColor || '#5C95FB'};
 `
 const WrapText = styled.View`
 margin-left : 13px;
@@ -71,4 +73,7 @@ margin-top : 20px
 `
 const WrapDate = styled.View`
 flex-direction : row;
+`
+const Emoji = styled.Text`
+font-size : 60px;
 `

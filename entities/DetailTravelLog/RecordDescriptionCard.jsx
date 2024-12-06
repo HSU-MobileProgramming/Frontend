@@ -12,7 +12,7 @@ export default function RecordDescriptionCard({recordType,recordImage, decoImage
             <DescriptionTextLight>{descriptionText2}</DescriptionTextLight>
             {
                     recordType === "티켓" ?
-                        <Ticket>{recordImage}</Ticket> :
+                        <Ticket style={{fontSize:"50"}}>{recordImage}</Ticket> :
                         <RecordImage>{recordImage}</RecordImage>
             }
             <DecoImage>{decoImage}</DecoImage>
