@@ -8,10 +8,10 @@ import StandardInput from '../../shared/component/StandardInput';
 import { setTicket } from './api/ticketApi';
 import SelectDate from '../AddLog/ui/SelectDate';
 
-export default function Modal({ setIsShowModal, setTickets }) {
+export default function Modal({ setIsShowModal, setTickets,travelId }) {
     const [date, setDate] = useState('날짜');
     const [ticketInfo, setTicketInfo] = useState({
-        travel_id: 11,
+        travel_id: travelId,
         city: '',
         ticket_date: '',
         place: '',
