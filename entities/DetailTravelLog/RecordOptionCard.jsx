@@ -14,7 +14,6 @@ export default function RecordOptionCard({ travelId, recordType, recordImage, bo
                 {
                     recordType === "티켓" ?
                         <Text style={{fontSize:"32"}}>{recordImage}</Text> :
-                        <TicketText >{recordImage}</TicketText> :
                         <RecordImage>{recordImage}</RecordImage>
                 }
                 <Text>{recordType}</Text>

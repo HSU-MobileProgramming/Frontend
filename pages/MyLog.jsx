@@ -79,7 +79,6 @@ export default function MyLog() {
     // 
     return (
         <MainLayout>
-            <MapViewContainer>
            {!isClickCreatedLog ? (
             <>
              <MapViewContainer>
