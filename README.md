@@ -1,77 +1,35 @@
-### 깃 컨벤션
+## 🧩 여행을 특별하게 기록하는 방법 ‘여행조각’
 
-<aside>
-💡 Title :  아이콘 + [커밋태그] + 내용
-
----
-
-ex) ✨[Feat] 깃허브 로그인/회원가입 API 구현
-
-</aside>
-
-→ Issue, Pr 템플릿 만들어놓음. 참고해주세요!
-
-<aside>
-💡 Git Rule
-
----
-
-1. 구현하고자 하는 것을 `issue` 로 만든다.
-2. `Github-Project` 에서 해당 `issue` 를 `In-progress` 로 변경한다.
-3. 이슈 번호와 수행 목표에 맞게 branch 생성
-4. `issue` 에 체크리스트를 채우며 개발을 진행한다. `commit은 자주!` 
-5. 개발이 끝났으면 `Pull&Rquest` 에서 PR을 진행 → PR Template에서 꼭!! 이슈 닫기
-6. PR이 끝났으면 작업한 **branch 삭제 (Local & Remote 모두!!)**
-7. 새로운 Branch 분기 전  `main branch` `pull` 받기!
+> 여행은 특별한 경험을 선사하지만, 소중한 순간들을 기억하고 공유하는 것은 쉽지 않습니다.
+> <br/> '여행조각'은 사진, 영상, 글, 음악 등 다양한 형태의 기록을 하나의 플랫폼에서 관리하고, 여행의 감동을 더욱 풍부하게 만들어줍니다.
 
 
-> Confilct를 줄이기 위해 가능한! 작업 영역이 안겹치게!
-`겹치게 된다면 서로 알려주기..!!`
-> 
-</aside>
+<img width="100%" src="https://github.com/user-attachments/assets/71813dca-f2e5-4aaa-baa8-ec517df44d2d">
 
-<aside>
-💡 Git Command
+<br/><br/>
 
----
+## 🚀 주요 기능
+<img width="100%" src="https://github.com/user-attachments/assets/e970ba0e-7036-459f-9d1b-68ffa776dcf8">
+<img width="100%" src="https://github.com/user-attachments/assets/edd05dcd-403c-42c1-8a3b-60ba9572dc11">
+<img width="100%" src="https://github.com/user-attachments/assets/1243ddd8-892d-4490-afd8-63ac1da46d2b">
+<img width="100%" src="https://github.com/user-attachments/assets/31502d4b-63bc-4fb7-9094-eaadb84dcd29" />
 
-1. branch 관련 명령어
-    
-    > **git branch** : branch 조회 및 현재 branch를 알 수 있다.
-    **git branch <만들 branch> : branch 생성**
-    **git checkout <이동할 branch>** : branch 이동 
-    **git branch -d <삭제할 branch>** : Local에서 branch 삭제
-    > 
-2. Push 관련 명령어
-    
-    > **git add . 
-    gitmoji -c
-    git push**
+## 🛠️ Frontend 주요 기술
+- **개발언어**: JavaScript
+- **개발환경**: React Native
+- **개발도구**: Visual Studio Code 
 
-</aside>
+## 🧑‍💻 시스템 아키텍쳐
+<img width="100%" src="https://github.com/user-attachments/assets/2b18fa02-1d9a-4f0a-9ee3-c3ecc9ebc8eb" />
 
-## **🎯 Commit Convention**
+## 👩🏻‍💻 Developers
+| FE | FE | 
+|:---:|:---:|
+| <img src="https://avatars.githubusercontent.com/u/104489022?v=4" width="150"/> | <img src="https://avatars.githubusercontent.com/u/122111459?v=4" width="150"/> |
+| 이주연 | 정예빈 |
+| 로그인, 회원가입 마이페이지 화면 구현<br/> 세계지도 색칠 기능 구현 <br/> 티켓 조각 생성 기능 구현 | 나의 여행 페이지 구현 <br/> 여행기 생성/조회/종료 화면 구현 <br/> 사진/메모 조각 생성 화면 구현|
+| [@Juye0nLee](https://github.com/Juye0nLee) | [@benniejung](https://github.com/benniejung) |
 
-- feat : 새로운 기능 추가
-- fix : 버그 수정
-- docs : 문서 수정
-- style : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
-- refactor: 코드 리펙토링
-- test: 테스트 코드, 리펙토링 테스트 코드 추가
-- chore : 빌드 업무 수정, 패키지 매니저 수정
+## 📹 시연
+🔗 https://youtube.com/shorts/Ufc04hH-Zi4?si=LL0FJQohjYgYyQ99
 
-## **💡 PR Convetion**
-
-| 아이콘 | 코드 | 설명 |
-| --- | --- | --- |
-| 🎨 | :art | 코드의 구조/형태 개선 |
-| ⚡️ | :zap | 성능 개선 |
-| 🔥 | :fire | 코드/파일 삭제 |
-| 🐛 | :bug | 버그 수정 |
-| 🚑 | :ambulance | 긴급 수정 |
-| ✨ | :sparkles | 새 기능 |
-| 💄 | :lipstick | UI/스타일 파일 추가/수정 |
-| ⏪ | :rewind | 변경 내용 되돌리기 |
-| 🔀 | :twisted_rightwards_arrows | 브랜치 합병 |
-| 💡 | :bulb | 주석 추가/수정 |
-| 🗃 | :card_file_box | 데이버베이스 관련 수정 |
